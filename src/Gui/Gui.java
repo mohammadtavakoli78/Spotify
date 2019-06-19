@@ -12,7 +12,9 @@ public class Gui extends JFrame {
         int width=(int)screenSize.getWidth();
         int height=(int)screenSize.getHeight();
         setLocation(width/2-800,height/2-500);
+        getContentPane().setBackground(new Color(0x040404));
         SouthPanel southPanel=new SouthPanel();
+        southPanel.setBackground(Color.gray);
         add(southPanel,BorderLayout.SOUTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);

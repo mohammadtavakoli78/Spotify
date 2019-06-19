@@ -10,9 +10,7 @@ public class SouthPanel extends JPanel {
 
         super();
         setLayout(new BorderLayout());
-        setForeground(new Color(0x41040304, true));
-//        setBackground(new Color(0x14000000, true));
-
+        
         JPanel playerButtons=new JPanel();
         JPanel soundManager=new JPanel();
         JPanel buttons=new JPanel();
@@ -22,8 +20,8 @@ public class SouthPanel extends JPanel {
         buttons.setLayout(new FlowLayout(FlowLayout.CENTER));
         JButton playMusic=new JButton();
         JButton nextMusic=new JButton();
-        playMusic.setIcon(new ImageIcon("C:\\Users\\Win 1809 UEFI\\Desktop\\play.png"));
-        nextMusic.setIcon(new ImageIcon("C:\\Users\\Win 1809 UEFI\\Desktop\\next.png"));
+        nextMusic.setIcon(new ImageIcon(getClass().getResource("Icons\\next.png")));
+        playMusic.setIcon(new ImageIcon(getClass().getResource("Icons\\play.png")));
         buttons.add(nextMusic);
         buttons.add(playMusic);
         playerButtons.add(buttons,BorderLayout.NORTH);
