@@ -8,13 +8,16 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.File;
 import java.io.IOException;
 
 public class SouthPanel extends JPanel {
     public SouthPanel(){
 
         super();
-        setLayout(new FlowLayout());
+        setLayout(new GridLayout(0,3,10,10));
 
         setOpaque(true);
         setBackground(Color.gray);
@@ -22,7 +25,7 @@ public class SouthPanel extends JPanel {
         JPanel playerButtons=new JPanel();
         JPanel soundManager=new JPanel();
         JPanel buttons=new JPanel();
-        JPanel progressBar=new JPanel();
+        JPanel musicImage=new JPanel();
 
         playerButtons.setLayout(new BorderLayout());
         buttons.setOpaque(true);
@@ -35,36 +38,51 @@ public class SouthPanel extends JPanel {
         JButton repeatMusic=new JButton();
         Image img = null;
         try {
-            img = ImageIO.read(getClass().getResource("Icons\\next.png"));
+            img = ImageIO.read(getClass().getResource("Icons\\next.png")).getScaledInstance(50,50,Image.SCALE_SMOOTH);
         } catch (IOException e) {
             e.printStackTrace();
         }
         nextMusic.setIcon(new ImageIcon(img));
-//        nextMusic.setIcon(new ImageIcon(getClass().getResource("Icons\\next.png")));
-        playMusic.setIcon(new ImageIcon(getClass().getResource("Icons\\play.png")));
-        previousMusic.setIcon(new ImageIcon(getClass().getResource("Icons\\previous.png")));
-        shuffle.setIcon(new ImageIcon(getClass().getResource("Icons\\shuffle.png")));
-        repeatMusic.setIcon(new ImageIcon(getClass().getResource("Icons\\repeat.png")));
-//        nextMusic.setBorder(null);
-//        nextMusic.setMargin(new Insets(0, 0, 0, 0));
-        nextMusic.setBorderPainted(false);
-        nextMusic.setFocusPainted(false);
+        nextMusic.setRolloverIcon(new ImageIcon(img));
+        try {
+            img = ImageIO.read(getClass().getResource("Icons\\play.png")).getScaledInstance(75,75,Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        playMusic.setIcon(new ImageIcon(img));
+        try {
+            img = ImageIO.read(getClass().getResource("Icons\\previous.png")).getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        previousMusic.setIcon(new ImageIcon(img));
+        try {
+            img = ImageIO.read(getClass().getResource("Icons\\shuffle.png")).getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        shuffle.setIcon(new ImageIcon(img));
+        try {
+            img = ImageIO.read(getClass().getResource("Icons\\repeat.png")).getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        repeatMusic.setIcon(new ImageIcon(img));
+
         nextMusic.setContentAreaFilled(false);
-//        nextMusic.setPreferredSize(new Dimension(50,50));
-//        playMusic.setBorder(null);
-//        playMusic.setMargin(new Insets(0, 0, 0, 0));
+        nextMusic.setFocusPainted(false);
+        nextMusic.setBorderPainted(false);
         playMusic.setBorderPainted(false);
         playMusic.setFocusPainted(false);
         playMusic.setContentAreaFilled(false);
-//        playMusic.setPreferredSize(new Dimension(100,100));
-//        previousMusic.setBorder(null);
-//        previousMusic.setMargin(new Insets(0, 0, 0, 0));
+        previousMusic.setBorderPainted(false);
+        previousMusic.setFocusPainted(false);
         previousMusic.setContentAreaFilled(false);
-        shuffle.setBorder(null);
-        shuffle.setMargin(new Insets(0, 0, 0, 0));
+        shuffle.setBorderPainted(false);
+        shuffle.setFocusPainted(false);
         shuffle.setContentAreaFilled(false);
-        repeatMusic.setBorder(null);
-        repeatMusic.setMargin(new Insets(0, 0, 0, 0));
+        repeatMusic.setBorderPainted(false);
+        repeatMusic.setFocusPainted(false);
         repeatMusic.setContentAreaFilled(false);
         buttons.add(shuffle);
         buttons.add(previousMusic);
@@ -72,8 +90,63 @@ public class SouthPanel extends JPanel {
         buttons.add(nextMusic);
         buttons.add(repeatMusic);
         JSlider musicSlider=new JSlider(JSlider.HORIZONTAL,0,100,0);
+        musicSlider.setOpaque(true);
+        musicSlider.setBackground(Color.gray);
         playerButtons.add(buttons,BorderLayout.NORTH);
         playerButtons.add(musicSlider,BorderLayout.SOUTH);
+
+        soundManager.setLayout(new BorderLayout());
+        JPanel sound=new JPanel();
+        sound.setOpaque(true);
+        sound.setBackground(Color.gray);
+        soundManager.setOpaque(true);
+        soundManager.setBackground(Color.gray);
+        JButton music=new JButton();
+        JButton devices=new JButton();
+        JButton queue=new JButton();
+        try {
+            img = ImageIO.read(getClass().getResource("Icons\\sound.png")).getScaledInstance(20,20,Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        music.setIcon(new ImageIcon(img));
+        try {
+            img = ImageIO.read(getClass().getResource("Icons\\devices.png")).getScaledInstance(20,20,Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        devices.setIcon(new ImageIcon(img));
+        try {
+            img = ImageIO.read(getClass().getResource("Icons\\queue.png")).getScaledInstance(20,20,Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        queue.setIcon(new ImageIcon(img));
+
+        music.setBorderPainted(false);
+        music.setFocusPainted(false);
+        music.setContentAreaFilled(false);
+        devices.setBorderPainted(false);
+        devices.setFocusPainted(false);
+        devices.setContentAreaFilled(false);
+        queue.setBorderPainted(false);
+        queue.setFocusPainted(false);
+        queue.setContentAreaFilled(false);
+        JSlider volumeSlider=new JSlider(JSlider.HORIZONTAL,0,100,0);
+        volumeSlider.setOpaque(true);
+        volumeSlider.setBackground(Color.gray);
+        sound.add(queue);
+        sound.add(devices);
+        sound.add(music);
+        sound.add(volumeSlider);
+        soundManager.add(sound,BorderLayout.SOUTH);
+
+        musicImage.setLayout(null);
+        musicImage.setOpaque(true);
+        musicImage.setBackground(Color.gray);
+
+        add(musicImage);
         add(playerButtons);
+        add(soundManager);
     }
 }

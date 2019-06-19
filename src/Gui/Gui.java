@@ -7,6 +7,7 @@ public class Gui extends JFrame {
     public Gui(){
         super();
         setSize(1600,1000);
+
         Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("Icons\\spotify.png"));
         setIconImage(icon);
         setLayout(new BorderLayout());
