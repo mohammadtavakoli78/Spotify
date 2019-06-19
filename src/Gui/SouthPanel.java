@@ -1,6 +1,8 @@
 package Gui;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +11,7 @@ public class SouthPanel extends JPanel {
     public SouthPanel(){
 
         super();
-        setLayout(new BorderLayout());
+        setLayout(new FlowLayout());
 
         JPanel playerButtons=new JPanel();
         JPanel soundManager=new JPanel();
@@ -48,7 +50,9 @@ public class SouthPanel extends JPanel {
         buttons.add(playMusic);
         buttons.add(nextMusic);
         buttons.add(repeatMusic);
+        JSlider musicSlider=new JSlider(JSlider.HORIZONTAL,0,100,0);
         playerButtons.add(buttons,BorderLayout.NORTH);
-        add(playerButtons,BorderLayout.CENTER);
+        playerButtons.add(musicSlider,BorderLayout.SOUTH);
+        add(playerButtons);
     }
 }
