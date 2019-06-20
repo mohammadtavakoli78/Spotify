@@ -17,7 +17,9 @@ public class Gui extends JFrame {
         setLocation(width/2-800,height/2-500);
         getContentPane().setBackground(new Color(0xC2000000, true));
         SouthPanel southPanel=new SouthPanel();
+        WestPanel westPanel=new WestPanel();
         add(southPanel,BorderLayout.SOUTH);
+        add(westPanel,BorderLayout.WEST);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
