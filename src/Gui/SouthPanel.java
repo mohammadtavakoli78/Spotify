@@ -141,11 +141,22 @@ public class SouthPanel extends JPanel {
         sound.add(volumeSlider);
         soundManager.add(sound,BorderLayout.SOUTH);
 
-        musicImage.setLayout(null);
+        musicImage.setLayout(new BorderLayout());
         musicImage.setOpaque(true);
         musicImage.setBackground(Color.gray);
+        JButton musicButton=new JButton();
+        musicButton.setContentAreaFilled(false);
+        musicButton.setBorderPainted(false);
+        musicButton.setFocusPainted(false);
+        try {
+            img = ImageIO.read(getClass().getResource("Icons\\mohammad.jpg")).getScaledInstance(85,85,Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        musicButton.setIcon(new ImageIcon(img));
+        musicImage.add(musicButton,BorderLayout.WEST);
 
-        add(musicImage);
+        add(musicImage,BorderLayout.WEST);
         add(playerButtons);
         add(soundManager);
     }
