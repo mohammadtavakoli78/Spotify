@@ -87,16 +87,13 @@ public class WestPanel extends JPanel {
         homePanel.setBackground(Color.BLACK);
         southPanel.setBackground(Color.BLACK);
 
-        add(homePanel);
-        add(albumPanel);
-        add(playListPanel);
-        add(southPanel);
+
 
         //////////////////////////////////////////////////
 
         ///  home panel
 
-        homePanel.setLayout(new GridLayout(2,1,0,0));
+        homePanel.setLayout(new GridLayout(2,1));
 
         homePanel.add(homeButton);
 
@@ -106,7 +103,7 @@ public class WestPanel extends JPanel {
 /////////////////////////////////////////////////
         //// album panel
 
-        albumPanel.setLayout(new GridLayout(4,1));
+        albumPanel.setLayout(new GridLayout(5,1));
 
 
 
@@ -126,13 +123,7 @@ public class WestPanel extends JPanel {
         {
 
 
-            playListPanel.setLayout(new GridLayout(8, 1));
-
-            JScrollPane jScrollPane = new JScrollPane(this);
-
-            jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-            jScrollPane.setSize(new Dimension(10,100));
-
+            playListPanel.setLayout(new GridLayout(20, 1));
 
 
             // labael
@@ -152,11 +143,58 @@ public class WestPanel extends JPanel {
 
 // add new play list button
 
-
+            JButton b1=new JButton();
+            JButton b2=new JButton();
+            JButton b3=new JButton();
+            JButton b4=new JButton();
+            JButton b5=new JButton();
+            JButton b6=new JButton();
+            JButton b7=new JButton();
+            JButton b8=new JButton();
+            b1.setText("ali");
+            b1.setContentAreaFilled(false);
+            b1.setFocusPainted(false);
+            b1.setBorderPainted(false);
+            playListPanel.add(b1);
+            b2.setText("mohammad");
+            b2.setContentAreaFilled(false);
+            b2.setFocusPainted(false);
+            b2.setBorderPainted(false);
+            b3.setText("hasan");
+            b3.setContentAreaFilled(false);
+            b3.setFocusPainted(false);
+            b3.setBorderPainted(false);
+            b4.setText("reza");
+            b4.setContentAreaFilled(false);
+            b4.setFocusPainted(false);
+            b4.setBorderPainted(false);
+            b5.setText("alireza");
+            b5.setContentAreaFilled(false);
+            b5.setFocusPainted(false);
+            b5.setBorderPainted(false);
+            b6.setText("aliali");
+            b6.setContentAreaFilled(false);
+            b6.setFocusPainted(false);
+            b6.setBorderPainted(false);
+            b7.setText("alialiali");
+            b7.setContentAreaFilled(false);
+            b7.setFocusPainted(false);
+            b7.setBorderPainted(false);
+            b8.setText("alialiali");
+            b8.setContentAreaFilled(false);
+            b8.setFocusPainted(false);
+            b8.setBorderPainted(false);
+            playListPanel.add(b1);
+            playListPanel.add(b2);
+            playListPanel.add(b3);
+            playListPanel.add(b4);
+            playListPanel.add(b5);
+            playListPanel.add(b6);
+            playListPanel.add(b7);
+            playListPanel.add(b8);
             addPlayListButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    System.out.println("clicked");
                 }
             });
 
@@ -179,6 +217,18 @@ public class WestPanel extends JPanel {
 
         }
 
+    JScrollPane jScrollPane = new JScrollPane(playListPanel);
+//      jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+       jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+       jScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+       jScrollPane.setOpaque(true);
+//       jScrollPane.setPreferredSize(new Dimension(0,10));
+       jScrollPane.setBackground(Color.black);
+        add(homePanel);
+        add(albumPanel);
+//     add(playListPanel);
+        add(jScrollPane);
+        add(southPanel);
 
 
 
