@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class SouthPanel extends JPanel {
+    private int heartButtonCounter=0;
     public SouthPanel(){
 
         super();
@@ -169,8 +170,16 @@ public class SouthPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    ++heartButtonCounter;
                     Image img = null;
-                    img = ImageIO.read(getClass().getResource("Icons\\like.png")).getScaledInstance(35,35,Image.SCALE_SMOOTH);
+                    if(heartButtonCounter%2==0){
+                        img = ImageIO.read(getClass().getResource("Icons\\like1.png")).getScaledInstance(35,35,Image.SCALE_SMOOTH);
+                    }
+                    else{
+                        img = ImageIO.read(getClass().getResource("Icons\\like.png")).getScaledInstance(35,35,Image.SCALE_SMOOTH);
+                    }
+                    heartButton.setIcon(new ImageIcon(img));
+//                    GuiController.gui.setVisible(true);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }

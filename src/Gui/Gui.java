@@ -25,6 +25,7 @@ public class Gui extends JFrame {
     }
 
     public static void main(String[] args) {
+//        GuiController guiController=new GuiController();
         Gui gui=new Gui();
     }
 }
