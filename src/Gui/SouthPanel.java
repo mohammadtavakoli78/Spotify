@@ -141,13 +141,17 @@ public class SouthPanel extends JPanel {
         sound.add(volumeSlider);
         soundManager.add(sound,BorderLayout.SOUTH);
 
-        musicImage.setLayout(new BorderLayout());
+        musicImage.setLayout(new FlowLayout(FlowLayout.LEFT));
         musicImage.setOpaque(true);
         musicImage.setBackground(Color.gray);
         JButton musicButton=new JButton();
         musicButton.setContentAreaFilled(false);
         musicButton.setBorderPainted(false);
         musicButton.setFocusPainted(false);
+        JButton heartButton=new JButton();
+        heartButton.setContentAreaFilled(false);
+        heartButton.setBorderPainted(false);
+        heartButton.setFocusPainted(false);
         try {
             img = ImageIO.read(getClass().getResource("Icons\\mohammad.jpg")).getScaledInstance(85,85,Image.SCALE_SMOOTH);
         } catch (IOException e) {
@@ -155,8 +159,25 @@ public class SouthPanel extends JPanel {
         }
         musicButton.setIcon(new ImageIcon(img));
         musicImage.add(musicButton,BorderLayout.WEST);
-
-        add(musicImage,BorderLayout.WEST);
+        try {
+            img = ImageIO.read(getClass().getResource("Icons\\like1.png")).getScaledInstance(35,35,Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        heartButton.setIcon(new ImageIcon(img));
+        heartButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Image img = null;
+                    img = ImageIO.read(getClass().getResource("Icons\\like.png")).getScaledInstance(35,35,Image.SCALE_SMOOTH);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        musicImage.add(heartButton);
+        add(musicImage);
         add(playerButtons);
         add(soundManager);
     }
