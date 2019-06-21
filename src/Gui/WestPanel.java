@@ -279,7 +279,7 @@ public class WestPanel extends JPanel {
 
 
 
-        libraryLabel.setFont(new Font("     Italic",Font.BOLD,20));
+        libraryLabel.setFont(new Font("     Italic",Font.BOLD,25));
 
 
 
@@ -300,7 +300,7 @@ public class WestPanel extends JPanel {
             // labael
             JLabel label = new JLabel("      playLists  ");
 
-            label.setFont(new Font("Italic", Font.BOLD, 18));
+            label.setFont(new Font("Italic", Font.BOLD, 25));
 
             playListPanel.add(label, BorderLayout.CENTER);
 
@@ -426,8 +426,6 @@ class MyButton extends JButton {
         setFont(new Font("Italic", Font.ITALIC, 15));
         if(image!=null)
             setIcon(new ImageIcon(image));
-
-
     }
 
 
