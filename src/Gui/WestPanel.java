@@ -3,10 +3,7 @@ package Gui;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.IOException;
 
 public class WestPanel extends JPanel {
@@ -73,6 +70,180 @@ public class WestPanel extends JPanel {
         JButton songsButton     = new MyButton("Songs         " , Color.black,"Songs",null);
         JButton albumsButton    = new MyButton("Albums       ",Color.BLACK,"Albums",null);
 
+        homeButton.addMouseListener(new MouseListener() {
+            Color color=homeButton.getForeground();
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                homeButton.setForeground(Color.green);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                homeButton.setForeground(color);
+            }
+        });
+
+        browseButton.addMouseListener(new MouseListener() {
+            Color color=browseButton.getForeground();
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                browseButton.setForeground(Color.green);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                browseButton.setForeground(color);
+            }
+        });
+
+        favoritButton.addMouseListener(new MouseListener() {
+            Color color=favoritButton.getForeground();
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                favoritButton.setForeground(Color.green);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                favoritButton.setForeground(color);
+            }
+        });
+
+        addLibraryButton.addMouseListener(new MouseListener() {
+            Color color=addLibraryButton.getForeground();
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                addLibraryButton.setForeground(Color.green);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                addLibraryButton.setForeground(color);
+            }
+        });
+
+        songsButton.addMouseListener(new MouseListener() {
+            Color color=songsButton.getForeground();
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                songsButton.setForeground(Color.green);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                songsButton.setForeground(color);
+            }
+        });
+
+        addPlayListButton.addMouseListener(new MouseListener() {
+            Color color=addPlayListButton.getForeground();
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                addPlayListButton.setForeground(Color.green);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                addPlayListButton.setForeground(color);
+            }
+        });
+
+        albumsButton.addMouseListener(new MouseListener() {
+            Color color=albumsButton.getForeground();
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                albumsButton.setForeground(Color.green);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                albumsButton.setForeground(color);
+            }
+        });
 
         JLabel libraryLabel = new JLabel("      Library");
 
@@ -224,13 +395,12 @@ public class WestPanel extends JPanel {
        jScrollPane.setOpaque(true);
 //       jScrollPane.setPreferredSize(new Dimension(0,10));
        jScrollPane.setBackground(Color.black);
+        jScrollPane.setBorder(BorderFactory.createEmptyBorder());
         add(homePanel);
         add(albumPanel);
 //     add(playListPanel);
         add(jScrollPane);
         add(southPanel);
-
-
 
     }
 
