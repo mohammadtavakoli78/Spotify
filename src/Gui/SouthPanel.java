@@ -179,7 +179,7 @@ public class SouthPanel extends JPanel {
                         img = ImageIO.read(getClass().getResource("Icons\\like.png")).getScaledInstance(35,35,Image.SCALE_SMOOTH);
                     }
                     heartButton.setIcon(new ImageIcon(img));
-//                    GuiController.gui.setVisible(true);
+                    GuiController.gui.setVisible(true);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }

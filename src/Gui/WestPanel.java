@@ -45,7 +45,7 @@ public class WestPanel extends JPanel {
 
         Image favorite = null;
         try {
-            favorite = ImageIO.read(getClass().getResource("Icons\\favorite.png")).getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+            favorite = ImageIO.read(getClass().getResource("Icons\\favorite.png")).getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         } catch (IOException e) {
 
             e.printStackTrace();
@@ -382,15 +382,95 @@ public class WestPanel extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     JFrame frame=new JFrame();
+//                    frame.setLayout(new BorderLayout());
                     frame.setSize(800,400);
+                    frame.setLayout(new GridLayout(2,1));
                     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                     int width=(int)screenSize.getWidth();
                     int height=(int)screenSize.getHeight();
                     frame.setLocation(width/2-400,height/2-200);
-                    frame.getContentPane().setBackground(Color.BLACK);
+                    frame.getContentPane().setBackground(Color.gray);
                     Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("Icons\\spotify.png"));
                     frame.setIconImage(icon);
-                    JLabel playListLable;
+                    JTextField textField=new JTextField();
+                    textField.setText("Enter your playlist name");
+                    textField.setFont(new Font("Italic",Font.ITALIC,25));
+//                    textField.setEnabled(true);
+//                    textField.setEditable(true);
+//                    textField.setOpaque(true);
+                    textField.setBackground(Color.gray);
+                    textField.setPreferredSize(new Dimension(100,20));
+                    textField.addKeyListener(new KeyListener() {
+//                        String text1="";
+                        int counter=0;
+                        @Override
+                        public void keyTyped(KeyEvent e) {
+                        }
+
+                        @Override
+                        public void keyPressed(KeyEvent e) {
+                            ++counter;
+                            if(counter==1){
+                                textField.setText(null);
+//                                text1+=e.getKeyChar();
+                            }
+                            else{
+//                                text1+=e.getKeyChar();
+                            }
+                        }
+
+                        @Override
+                        public void keyReleased(KeyEvent e) {
+                        }
+                    });
+                    JButton click=new JButton();
+                    click.setContentAreaFilled(false);
+                    click.setBorderPainted(false);
+                    click.setFocusPainted(false);
+                    click.setText("ok");
+                    click.setFont(new Font("Italic",Font.ITALIC,18));
+                    click.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            frame.dispose();
+                            JButton newButton=new JButton();
+                            newButton.setContentAreaFilled(false);
+                            newButton.setBorderPainted(false);
+                            newButton.setFocusPainted(false);
+                            newButton.setText(textField.getText());
+                            newButton.setOpaque(true);
+                            newButton.setBackground(Color.BLACK);
+                            newButton.addMouseListener(new MouseListener() {
+                                Color color=newButton.getForeground();
+                                @Override
+                                public void mouseClicked(MouseEvent e) {
+                                }
+
+                                @Override
+                                public void mousePressed(MouseEvent e) {
+                                }
+
+                                @Override
+                                public void mouseReleased(MouseEvent e) {
+                                }
+
+                                @Override
+                                public void mouseEntered(MouseEvent e) {
+                                    newButton.setForeground(Color.green);
+                                }
+
+                                @Override
+                                public void mouseExited(MouseEvent e) {
+                                    newButton.setForeground(color);
+                                }
+                            });
+                            playListPanel.add(newButton);
+                            playLists.put(newButton.getText(),newButton);
+                            GuiController.gui.setVisible(true);
+                        }
+                    });
+                    frame.add(textField);
+                    frame.add(click);
                     frame.setVisible(true);
                 }
             });
