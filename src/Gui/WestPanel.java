@@ -5,9 +5,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class WestPanel extends JPanel {
-
+    private int numberButton=0;
+    private HashMap<String,JButton> playLists=new HashMap<String,JButton>();
     public WestPanel() {
         super();
 
@@ -20,10 +23,8 @@ public class WestPanel extends JPanel {
         try {
             homeimage = ImageIO.read(getClass().getResource("Icons\\HomeIcon.png")).getScaledInstance(40, 40, Image.SCALE_SMOOTH);
         } catch (IOException e) {
-            System.out.println("harer");
             e.printStackTrace();
         }
-
 
         Image addimg = null;
         try {
@@ -314,58 +315,60 @@ public class WestPanel extends JPanel {
 
 // add new play list button
 
-            JButton b1=new JButton();
-            JButton b2=new JButton();
-            JButton b3=new JButton();
-            JButton b4=new JButton();
-            JButton b5=new JButton();
-            JButton b6=new JButton();
-            JButton b7=new JButton();
-            JButton b8=new JButton();
-            b1.setText("ali");
-            b1.setContentAreaFilled(false);
-            b1.setFocusPainted(false);
-            b1.setBorderPainted(false);
-            playListPanel.add(b1);
-            b2.setText("mohammad");
-            b2.setContentAreaFilled(false);
-            b2.setFocusPainted(false);
-            b2.setBorderPainted(false);
-            b3.setText("hasan");
-            b3.setContentAreaFilled(false);
-            b3.setFocusPainted(false);
-            b3.setBorderPainted(false);
-            b4.setText("reza");
-            b4.setContentAreaFilled(false);
-            b4.setFocusPainted(false);
-            b4.setBorderPainted(false);
-            b5.setText("alireza");
-            b5.setContentAreaFilled(false);
-            b5.setFocusPainted(false);
-            b5.setBorderPainted(false);
-            b6.setText("aliali");
-            b6.setContentAreaFilled(false);
-            b6.setFocusPainted(false);
-            b6.setBorderPainted(false);
-            b7.setText("alialiali");
-            b7.setContentAreaFilled(false);
-            b7.setFocusPainted(false);
-            b7.setBorderPainted(false);
-            b8.setText("alialiali");
-            b8.setContentAreaFilled(false);
-            b8.setFocusPainted(false);
-            b8.setBorderPainted(false);
-            playListPanel.add(b1);
-            playListPanel.add(b2);
-            playListPanel.add(b3);
-            playListPanel.add(b4);
-            playListPanel.add(b5);
-            playListPanel.add(b6);
-            playListPanel.add(b7);
-            playListPanel.add(b8);
+//            JButton b1=new JButton();
+//            JButton b2=new JButton();
+//            JButton b3=new JButton();
+//            JButton b4=new JButton();
+//            JButton b5=new JButton();
+//            JButton b6=new JButton();
+//            JButton b7=new JButton();
+//            JButton b8=new JButton();
+//            b1.setText("ali");
+//            b1.setContentAreaFilled(false);
+//            b1.setFocusPainted(false);
+//            b1.setBorderPainted(false);
+//            playListPanel.add(b1);
+//            b2.setText("mohammad");
+//            b2.setContentAreaFilled(false);
+//            b2.setFocusPainted(false);
+//            b2.setBorderPainted(false);
+//            b3.setText("hasan");
+//            b3.setContentAreaFilled(false);
+//            b3.setFocusPainted(false);
+//            b3.setBorderPainted(false);
+//            b4.setText("reza");
+//            b4.setContentAreaFilled(false);
+//            b4.setFocusPainted(false);
+//            b4.setBorderPainted(false);
+//            b5.setText("alireza");
+//            b5.setContentAreaFilled(false);
+//            b5.setFocusPainted(false);
+//            b5.setBorderPainted(false);
+//            b6.setText("aliali");
+//            b6.setContentAreaFilled(false);
+//            b6.setFocusPainted(false);
+//            b6.setBorderPainted(false);
+//            b7.setText("alialiali");
+//            b7.setContentAreaFilled(false);
+//            b7.setFocusPainted(false);
+//            b7.setBorderPainted(false);
+//            b8.setText("alialiali");
+//            b8.setContentAreaFilled(false);
+//            b8.setFocusPainted(false);
+//            b8.setBorderPainted(false);
+//            playListPanel.add(b1);
+//            playListPanel.add(b2);
+//            playListPanel.add(b3);
+//            playListPanel.add(b4);
+//            playListPanel.add(b5);
+//            playListPanel.add(b6);
+//            playListPanel.add(b7);
+//            playListPanel.add(b8);
+
             addPlayListButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
+
                 }
             });
 
@@ -375,17 +378,22 @@ public class WestPanel extends JPanel {
             // south panel
             southPanel.add(addPlayListButton);
 
-
-            southPanel.addMouseListener(new MouseAdapter() {
+            addPlayListButton.addActionListener(new ActionListener() {
                 @Override
-                public void mouseClicked(MouseEvent e) {
-                    super.mouseEntered(e);
-                    System.out.println("entered here");
-                    playListPanel.add(new MyButton("another playlist", Color.red, null, null));
+                public void actionPerformed(ActionEvent e) {
+                    JFrame frame=new JFrame();
+                    frame.setSize(800,400);
+                    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                    int width=(int)screenSize.getWidth();
+                    int height=(int)screenSize.getHeight();
+                    frame.setLocation(width/2-400,height/2-200);
+                    frame.getContentPane().setBackground(Color.BLACK);
+                    Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("Icons\\spotify.png"));
+                    frame.setIconImage(icon);
+                    JLabel playListLable;
+                    frame.setVisible(true);
                 }
             });
-
-
         }
 
     JScrollPane jScrollPane = new JScrollPane(playListPanel);
