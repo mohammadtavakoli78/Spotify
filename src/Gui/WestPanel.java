@@ -7,9 +7,9 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class WestPanel extends JPanel {
-    private int numberButton=0;
     private HashMap<String,JButton> playLists=new HashMap<String,JButton>();
     public WestPanel() {
         super();
@@ -295,7 +295,7 @@ public class WestPanel extends JPanel {
         {
 
 
-            playListPanel.setLayout(new GridLayout(20, 1));
+            playListPanel.setLayout(new GridLayout(100, 1));
 
 
             // labael
@@ -307,70 +307,161 @@ public class WestPanel extends JPanel {
 
             playListPanel.add(favoritButton);
 
+            for(String i : playLists.keySet()){
+                    JButton newButton=playLists.get(i);
+                    newButton.setContentAreaFilled(false);
+                    newButton.setBorderPainted(false);
+                    newButton.setFocusPainted(false);
+                    newButton.setText(i);
+                    newButton.setOpaque(true);
+                    newButton.setBackground(Color.BLACK);
+                    newButton.addMouseListener(new MouseListener() {
+                        Color color=newButton.getForeground();
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            if(e.getButton()==1){
 
 
-//            JButton button=new MyButton("amir",Color.BLACK," ",null);
 
-            //   playListPanel.add(button,BorderLayout.SOUTH);
+                                //show playlist here........
 
+
+                            }
+                            else if(e.getButton()==3){
+                                JFrame frame1=new JFrame();
+                                frame1.setSize(400,200);
+                                frame1.setLayout(new GridLayout(2,1));
+                                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                                int width=(int)screenSize.getWidth();
+                                int height=(int)screenSize.getHeight();
+                                frame1.setLocation(width/2-200,height/2-100);
+                                frame1.getContentPane().setBackground(Color.gray);
+                                Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("Icons\\spotify.png"));
+                                frame1.setIconImage(icon);
+
+                                JButton rename=new JButton();
+                                rename.setContentAreaFilled(false);
+                                rename.setBorderPainted(false);
+                                rename.setFocusPainted(false);
+                                rename.setText("rename");
+                                rename.setFont(new Font("Italic",Font.ITALIC,18));
+
+                                JButton delete=new JButton();
+                                delete.setContentAreaFilled(false);
+                                delete.setBorderPainted(false);
+                                delete.setFocusPainted(false);
+                                delete.setText("delete");
+                                delete.setFont(new Font("Italic",Font.ITALIC,18));
+
+                                rename.addActionListener(new ActionListener() {
+                                    @Override
+                                    public void actionPerformed(ActionEvent e) {
+                                        frame1.dispose();
+                                        JFrame frame2=new JFrame();
+                                        frame2.setSize(400,200);
+                                        frame2.setLayout(new GridLayout(2,1));
+                                        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                                        int width=(int)screenSize.getWidth();
+                                        int height=(int)screenSize.getHeight();
+                                        frame2.setLocation(width/2-200,height/2-100);
+                                        frame2.getContentPane().setBackground(Color.gray);
+                                        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("Icons\\spotify.png"));
+                                        frame2.setIconImage(icon);
+
+                                        JTextField textField1=new JTextField();
+                                        textField1.setText("Enter your new playlist name");
+                                        textField1.setFont(new Font("Italic",Font.ITALIC,25));
+                                        textField1.setBackground(Color.gray);
+                                        textField1.setPreferredSize(new Dimension(100,20));
+                                        textField1.addKeyListener(new KeyListener() {
+                                            int counter=0;
+                                            @Override
+                                            public void keyTyped(KeyEvent e) {
+                                            }
+
+                                            @Override
+                                            public void keyPressed(KeyEvent e) {
+                                                ++counter;
+                                                if(counter==1){
+                                                    textField1.setText(null);
+                                                }
+                                            }
+
+                                            @Override
+                                            public void keyReleased(KeyEvent e) {
+                                            }
+                                        });
+                                        JButton ok1=new JButton();
+                                        ok1.setContentAreaFilled(false);
+                                        ok1.setBorderPainted(false);
+                                        ok1.setFocusPainted(false);
+                                        ok1.setText("ok");
+                                        ok1.setFont(new Font("Italic",Font.ITALIC,18));
+                                        ok1.addActionListener(new ActionListener() {
+                                            @Override
+                                            public void actionPerformed(ActionEvent e) {
+                                                Iterator<String> it=playLists.keySet().iterator();
+                                                while(it.hasNext()){
+                                                    String buttonName=it.next();
+                                                    if(buttonName.equals(newButton.getText())){
+                                                        it.remove();
+                                                    }
+                                                }
+                                                playLists.put(textField1.getText(),newButton);
+                                                newButton.setText(textField1.getText());
+                                                playLists.replace(textField1.getText(),newButton);
+                                                frame2.dispose();
+                                            }
+                                        });
+                                        frame2.add(textField1);
+                                        frame2.add(ok1);
+                                        frame2.setVisible(true);
+                                    }
+                                });
+
+                                delete.addActionListener(new ActionListener() {
+                                    @Override
+                                    public void actionPerformed(ActionEvent e) {
+                                        Iterator<String> it=playLists.keySet().iterator();
+                                        while(it.hasNext()){
+                                            String buttonName=it.next();
+                                            if(buttonName.equals(newButton.getText())){
+                                                it.remove();
+                                            }
+                                        }
+                                        playListPanel.remove(newButton);
+                                        GuiController.gui.setVisible(true);
+                                    }
+                                });
+
+                                frame1.add(rename);
+                                frame1.add(delete);
+                                frame1.setVisible(true);
+                            }
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+                            newButton.setForeground(Color.green);
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+                            newButton.setForeground(color);
+                        }
+                    });
+                    playListPanel.add(newButton);
+                    GuiController.gui.setVisible(true);
+            }
 // add new play list button
-
-//            JButton b1=new JButton();
-//            JButton b2=new JButton();
-//            JButton b3=new JButton();
-//            JButton b4=new JButton();
-//            JButton b5=new JButton();
-//            JButton b6=new JButton();
-//            JButton b7=new JButton();
-//            JButton b8=new JButton();
-//            b1.setText("ali");
-//            b1.setContentAreaFilled(false);
-//            b1.setFocusPainted(false);
-//            b1.setBorderPainted(false);
-//            playListPanel.add(b1);
-//            b2.setText("mohammad");
-//            b2.setContentAreaFilled(false);
-//            b2.setFocusPainted(false);
-//            b2.setBorderPainted(false);
-//            b3.setText("hasan");
-//            b3.setContentAreaFilled(false);
-//            b3.setFocusPainted(false);
-//            b3.setBorderPainted(false);
-//            b4.setText("reza");
-//            b4.setContentAreaFilled(false);
-//            b4.setFocusPainted(false);
-//            b4.setBorderPainted(false);
-//            b5.setText("alireza");
-//            b5.setContentAreaFilled(false);
-//            b5.setFocusPainted(false);
-//            b5.setBorderPainted(false);
-//            b6.setText("aliali");
-//            b6.setContentAreaFilled(false);
-//            b6.setFocusPainted(false);
-//            b6.setBorderPainted(false);
-//            b7.setText("alialiali");
-//            b7.setContentAreaFilled(false);
-//            b7.setFocusPainted(false);
-//            b7.setBorderPainted(false);
-//            b8.setText("alialiali");
-//            b8.setContentAreaFilled(false);
-//            b8.setFocusPainted(false);
-//            b8.setBorderPainted(false);
-//            playListPanel.add(b1);
-//            playListPanel.add(b2);
-//            playListPanel.add(b3);
-//            playListPanel.add(b4);
-//            playListPanel.add(b5);
-//            playListPanel.add(b6);
-//            playListPanel.add(b7);
-//            playListPanel.add(b8);
-
-            addPlayListButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) {
-
-                }
-            });
 
 
             // /////////////////////////////////////////////////////////////////////////
@@ -382,26 +473,21 @@ public class WestPanel extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     JFrame frame=new JFrame();
-//                    frame.setLayout(new BorderLayout());
-                    frame.setSize(800,400);
+                    frame.setSize(400,200);
                     frame.setLayout(new GridLayout(2,1));
                     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                     int width=(int)screenSize.getWidth();
                     int height=(int)screenSize.getHeight();
-                    frame.setLocation(width/2-400,height/2-200);
+                    frame.setLocation(width/2-200,height/2-100);
                     frame.getContentPane().setBackground(Color.gray);
                     Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("Icons\\spotify.png"));
                     frame.setIconImage(icon);
                     JTextField textField=new JTextField();
                     textField.setText("Enter your playlist name");
                     textField.setFont(new Font("Italic",Font.ITALIC,25));
-//                    textField.setEnabled(true);
-//                    textField.setEditable(true);
-//                    textField.setOpaque(true);
                     textField.setBackground(Color.gray);
                     textField.setPreferredSize(new Dimension(100,20));
                     textField.addKeyListener(new KeyListener() {
-//                        String text1="";
                         int counter=0;
                         @Override
                         public void keyTyped(KeyEvent e) {
@@ -412,10 +498,6 @@ public class WestPanel extends JPanel {
                             ++counter;
                             if(counter==1){
                                 textField.setText(null);
-//                                text1+=e.getKeyChar();
-                            }
-                            else{
-//                                text1+=e.getKeyChar();
                             }
                         }
 
@@ -444,6 +526,125 @@ public class WestPanel extends JPanel {
                                 Color color=newButton.getForeground();
                                 @Override
                                 public void mouseClicked(MouseEvent e) {
+                                    if(e.getButton()==1){
+
+
+
+                                        //show playlist here........
+
+
+                                    }
+                                    else if(e.getButton()==3){
+                                        JFrame frame1=new JFrame();
+                                        frame1.setSize(400,200);
+                                        frame1.setLayout(new GridLayout(2,1));
+                                        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                                        int width=(int)screenSize.getWidth();
+                                        int height=(int)screenSize.getHeight();
+                                        frame1.setLocation(width/2-200,height/2-100);
+                                        frame1.getContentPane().setBackground(Color.gray);
+                                        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("Icons\\spotify.png"));
+                                        frame1.setIconImage(icon);
+
+                                        JButton rename=new JButton();
+                                        rename.setContentAreaFilled(false);
+                                        rename.setBorderPainted(false);
+                                        rename.setFocusPainted(false);
+                                        rename.setText("rename");
+                                        rename.setFont(new Font("Italic",Font.ITALIC,18));
+
+                                        JButton delete=new JButton();
+                                        delete.setContentAreaFilled(false);
+                                        delete.setBorderPainted(false);
+                                        delete.setFocusPainted(false);
+                                        delete.setText("delete");
+                                        delete.setFont(new Font("Italic",Font.ITALIC,18));
+
+                                        rename.addActionListener(new ActionListener() {
+                                            @Override
+                                            public void actionPerformed(ActionEvent e) {
+                                                frame1.dispose();
+                                                JFrame frame2=new JFrame();
+                                                frame2.setSize(400,200);
+                                                frame2.setLayout(new GridLayout(2,1));
+                                                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                                                int width=(int)screenSize.getWidth();
+                                                int height=(int)screenSize.getHeight();
+                                                frame2.setLocation(width/2-200,height/2-100);
+                                                frame2.getContentPane().setBackground(Color.gray);
+                                                Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("Icons\\spotify.png"));
+                                                frame2.setIconImage(icon);
+
+                                                JTextField textField1=new JTextField();
+                                                textField1.setText("Enter your new playlist name");
+                                                textField1.setFont(new Font("Italic",Font.ITALIC,25));
+                                                textField1.setBackground(Color.gray);
+                                                textField1.setPreferredSize(new Dimension(100,20));
+                                                textField1.addKeyListener(new KeyListener() {
+                                                    int counter=0;
+                                                    @Override
+                                                    public void keyTyped(KeyEvent e) {
+                                                    }
+
+                                                    @Override
+                                                    public void keyPressed(KeyEvent e) {
+                                                        ++counter;
+                                                        if(counter==1){
+                                                            textField1.setText(null);
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void keyReleased(KeyEvent e) {
+                                                    }
+                                                });
+                                                JButton ok1=new JButton();
+                                                ok1.setContentAreaFilled(false);
+                                                ok1.setBorderPainted(false);
+                                                ok1.setFocusPainted(false);
+                                                ok1.setText("ok");
+                                                ok1.setFont(new Font("Italic",Font.ITALIC,18));
+                                                ok1.addActionListener(new ActionListener() {
+                                                    @Override
+                                                    public void actionPerformed(ActionEvent e) {
+                                                        Iterator<String> it=playLists.keySet().iterator();
+                                                        while(it.hasNext()){
+                                                            String buttonName=it.next();
+                                                            if(buttonName.equals(newButton.getText())){
+                                                                it.remove();
+                                                            }
+                                                        }
+                                                        playLists.put(textField1.getText(),newButton);
+                                                        newButton.setText(textField1.getText());
+                                                        playLists.replace(textField1.getText(),newButton);
+                                                        frame2.dispose();
+                                                    }
+                                                });
+                                                frame2.add(textField1);
+                                                frame2.add(ok1);
+                                                frame2.setVisible(true);
+                                            }
+                                        });
+
+                                        delete.addActionListener(new ActionListener() {
+                                            @Override
+                                            public void actionPerformed(ActionEvent e) {
+                                                Iterator<String> it=playLists.keySet().iterator();
+                                                while(it.hasNext()){
+                                                    String buttonName=it.next();
+                                                    if(buttonName.equals(newButton.getText())){
+                                                        it.remove();
+                                                    }
+                                                }
+                                                playListPanel.remove(newButton);
+                                                GuiController.gui.setVisible(true);
+                                            }
+                                        });
+
+                                        frame1.add(rename);
+                                        frame1.add(delete);
+                                        frame1.setVisible(true);
+                                    }
                                 }
 
                                 @Override
@@ -472,6 +673,9 @@ public class WestPanel extends JPanel {
                     frame.add(textField);
                     frame.add(click);
                     frame.setVisible(true);
+                    for(String i : playLists.keySet()){
+                        System.out.println(i);
+                    }
                 }
             });
         }
