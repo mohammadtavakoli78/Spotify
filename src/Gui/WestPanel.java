@@ -1,15 +1,25 @@
 package Gui;
 
+import Files.AllSongsAdresses;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
 public class WestPanel extends JPanel {
+
+
+    JFileChooser jFileChooser = new JFileChooser();
+
+    AllSongsAdresses  allSongsAdresses = new AllSongsAdresses("songs");
+
+    File newSong = null;
     private HashMap<String,JButton> playLists=new HashMap<String,JButton>();
     public WestPanel() {
         super();
@@ -168,6 +178,27 @@ public class WestPanel extends JPanel {
             @Override
             public void mouseExited(MouseEvent e) {
                 addLibraryButton.setForeground(color);
+            }
+        });
+        addLibraryButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                jFileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+
+                // i dont know
+                int res = jFileChooser.showOpenDialog(addPlayListButton);
+
+                newSong = jFileChooser.getSelectedFile();
+
+                String songPath = newSong.getAbsolutePath();
+
+                allSongsAdresses.addSong(songPath);
+
+
+
+
+
             }
         });
 
