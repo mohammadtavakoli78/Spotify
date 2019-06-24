@@ -673,24 +673,18 @@ public class WestPanel extends JPanel {
                     frame.add(textField);
                     frame.add(click);
                     frame.setVisible(true);
-                    for(String i : playLists.keySet()){
-                        System.out.println(i);
-                    }
                 }
             });
         }
 
     JScrollPane jScrollPane = new JScrollPane(playListPanel);
-//      jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
        jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
        jScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
        jScrollPane.setOpaque(true);
-//       jScrollPane.setPreferredSize(new Dimension(0,10));
        jScrollPane.setBackground(Color.black);
         jScrollPane.setBorder(BorderFactory.createEmptyBorder());
         add(homePanel);
         add(albumPanel);
-//     add(playListPanel);
         add(jScrollPane);
         add(southPanel);
 

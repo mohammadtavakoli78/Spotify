@@ -17,9 +17,11 @@ import java.util.HashMap;
 
 public class CenterPanel extends JPanel {
     private int choose;
+    // object of files class
     private ArrayList<String> song;
     private HashMap<String,ArrayList<String>> albums;
     private HashMap<String,ArrayList<String>> playLists;
+    // object of player class
     public CenterPanel(int choose){
         this.choose=choose;
         if(choose==1){
@@ -28,10 +30,9 @@ public class CenterPanel extends JPanel {
             ArrayList<JButton> buttons=new ArrayList<JButton>();
             setOpaque(true);
             setBackground(Color.DARK_GRAY);
+            setLayout(new GridLayout(size/4+1,4));
 
             for(int i=0; i<=size-1; ++i){
-
-                setLayout(new GridLayout(size/4+1,4));
 
                 JButton button=new JButton();
                 button.setContentAreaFilled(false);
@@ -56,7 +57,14 @@ public class CenterPanel extends JPanel {
                 button.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-
+                        int counter=0;
+                        for(String i : song){
+                            if(i.equals(button.getText())){
+                                // pass array of song to th player class
+                                //pass the start int to the player class
+                            }
+                            ++counter;
+                        }
                     }
                 });
 
@@ -66,7 +74,7 @@ public class CenterPanel extends JPanel {
             }
         }
         if(choose==2){
-
+            
         }
         if(choose==3){
 
