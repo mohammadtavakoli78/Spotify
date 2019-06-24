@@ -123,7 +123,7 @@ public class CenterPanel extends JPanel {
 
         }
         if(choose==3){
-
+            
         }
     }
 }
