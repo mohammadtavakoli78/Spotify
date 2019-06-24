@@ -42,6 +42,11 @@ public class CenterPanel extends JPanel {
                 panel.setLayout(new GridLayout((size/4)+1,4));
                 for(int i=0; i<=size-1; ++i){
 
+                    JPanel panel1=new JPanel();
+                    panel1.setPreferredSize(new Dimension(400,400));
+                    panel1.setOpaque(true);
+                    panel1.setBackground(Color.DARK_GRAY);
+                    panel1.setLayout(new GridLayout(2,1));
                     JButton button=new JButton();
                     button.setContentAreaFilled(false);
                     button.setFocusPainted(false);
@@ -49,6 +54,7 @@ public class CenterPanel extends JPanel {
                     button.setLayout(new BorderLayout());
 //                    button.setOpaque(true);
                     button.setBackground(Color.darkGray);
+                    JLabel label=new JLabel();
                     try {
                         Mp3File mp3File=new Mp3File(song.get(i));
                         ID3v2 id3v2Tag = mp3File.getId3v2Tag();
@@ -58,7 +64,8 @@ public class CenterPanel extends JPanel {
                         Image image = imageIcon.getImage();
                         Image newimg = image.getScaledInstance(200, 200,  java.awt.Image.SCALE_SMOOTH);
                         button.setIcon(new ImageIcon(newimg));
-                        button.setText(id3v2Tag.getTitle());
+                        label.setText(id3v2Tag.getTitle());
+//                        button.setText(id3v2Tag.getTitle());
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (UnsupportedTagException e) {
@@ -81,7 +88,10 @@ public class CenterPanel extends JPanel {
                     });
 
                     buttons.add(button);
-                    panel.add(button);
+                    panel1.add(button);
+                    panel1.add(label);
+                    panel.add(panel1);
+//                    panel.add(button);
 //                GuiController.gui.setVisible(true);
                 }
                 add(panel);
