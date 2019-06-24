@@ -232,6 +232,7 @@ public class WestPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Gui.choice=1;
+                Gui.removeCenter();
                 Gui.centerPanel=new CenterPanel(1);
                 Gui.update();
                 Gui.frame.setVisible(true);
@@ -288,6 +289,17 @@ public class WestPanel extends JPanel {
             @Override
             public void mouseExited(MouseEvent e) {
                 albumsButton.setForeground(color);
+            }
+        });
+
+        albumsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Gui.choice=2;
+                Gui.removeCenter();
+                Gui.centerPanel=new CenterPanel(2);
+                Gui.update();
+                Gui.frame.setVisible(true);
             }
         });
 

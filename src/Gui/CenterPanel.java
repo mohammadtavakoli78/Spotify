@@ -1,5 +1,6 @@
 package Gui;
 
+import Files.Albums;
 import Files.AllSongsAdresses;
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
@@ -44,7 +45,7 @@ public class CenterPanel extends JPanel {
 
                     JPanel panel1=new JPanel();
                     panel1.setPreferredSize(new Dimension(400,400));
-                    panel1.setOpaque(true);
+//                    panel1.setOpaque(true);
                     panel1.setBackground(Color.DARK_GRAY);
                     panel1.setLayout(new GridLayout(2,1));
                     JButton button=new JButton();
@@ -99,52 +100,58 @@ public class CenterPanel extends JPanel {
         }
         if(choose==2){
 
-            int size=albums.size();
-            ArrayList<JButton> buttons=new ArrayList<JButton>();
-            setOpaque(true);
+            File file=new File("allSongs");
             setBackground(Color.DARK_GRAY);
-            setLayout(new GridLayout(size/4+1,4));
+            if(file.exists()){
+                AllSongsAdresses allSongsAdresses=new AllSongsAdresses("allSongs");
+                song=allSongsAdresses.getAllSongs();
+                Albums allAlbums=new Albums(song);
+                albums=allAlbums.getAllAlbums();
+                int size=albums.size();
+                ArrayList<JButton> buttons=new ArrayList<JButton>();
+//                setOpaque(true);
+                setBackground(Color.DARK_GRAY);
+                setLayout(new GridLayout(size/4+1,4));
 
-            for(String i : albums.keySet()){
+                for(String i : albums.keySet()){
 
                     JButton button=new JButton();
                     button.setContentAreaFilled(false);
                     button.setFocusPainted(false);
                     button.setBorderPainted(false);
                     button.setLayout(new GridLayout(2,1));
-                    button.setOpaque(true);
+//                    button.setOpaque(true);
                     button.setBackground(Color.darkGray);
-                try {
-                    Mp3File mp3File=new Mp3File(albums.get(i).get(0));
-                    ID3v2 id3v2Tag = mp3File.getId3v2Tag();
-                    button.setText(i);
-                    byte[] songImage=id3v2Tag.getAlbumImage();
-                    button.setIcon(new ImageIcon(songImage));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (UnsupportedTagException e) {
-                    e.printStackTrace();
-                } catch (InvalidDataException e) {
-                    e.printStackTrace();
-                }
-                button.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        int counter=0;
-                        for(String i : albums.keySet()){
-                            if(i.equals(button.getText())){
-                                //pass array of selected album to the player class
-                            }
-                            ++counter;
-                        }
+                    try {
+                        Mp3File mp3File=new Mp3File(albums.get(i).get(0));
+                        ID3v2 id3v2Tag = mp3File.getId3v2Tag();
+                        button.setText(i);
+                        byte[] songImage=id3v2Tag.getAlbumImage();
+                        button.setIcon(new ImageIcon(songImage));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (UnsupportedTagException e) {
+                        e.printStackTrace();
+                    } catch (InvalidDataException e) {
+                        e.printStackTrace();
                     }
-                });
+                    button.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            int counter=0;
+                            for(String i : albums.keySet()){
+                                if(i.equals(button.getText())){
+                                    //pass array of selected album to the player class
+                                }
+                                ++counter;
+                            }
+                        }
+                    });
 
-                buttons.add(button);
-                add(button);
-                GuiController.gui.setVisible(true);
+                    buttons.add(button);
+                    add(button);
+                }
             }
-
         }
         if(choose==3){
 

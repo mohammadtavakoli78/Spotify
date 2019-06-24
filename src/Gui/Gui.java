@@ -28,8 +28,14 @@ public class Gui extends JFrame {
         frame.setVisible(true);
     }
 
+    static void removeCenter(){
+        if(centerPanel!=null){
+            frame.remove(centerPanel);
+        }
+    }
+
     static void update(){
-        centerPanel=new CenterPanel(choice);
+//        centerPanel=new CenterPanel(choice);
         frame.add(centerPanel,BorderLayout.CENTER);
     }
     public static void main(String[] args) {

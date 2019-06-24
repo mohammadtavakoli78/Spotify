@@ -31,7 +31,7 @@ public class Albums {
         return songAdresses;
     }
 
-    public static HashMap<String, ArrayList<String>> makeAlbums(ArrayList<String> songAdresses) {
+    public HashMap<String, ArrayList<String>> makeAlbums(ArrayList<String> songAdresses) {
 
         Mp3File mp3File = null;
 
