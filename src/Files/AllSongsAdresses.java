@@ -10,7 +10,7 @@ import java.util.*;
 
 public class AllSongsAdresses implements Serializable {
 
-    private ArrayList< String > songsAdress ;
+    static ArrayList< String > songsAdress ;
     private String filename;
     File file;
     FileInputStream fileInputStream = null;
@@ -32,7 +32,7 @@ public class AllSongsAdresses implements Serializable {
             }
             songsAdress = new ArrayList<String>();
         }
-        else
+        else if( file.exists() )
         {
             // if file exists we must read the previous songs's address;
             try {
@@ -80,9 +80,38 @@ public class AllSongsAdresses implements Serializable {
 
     public ArrayList<String> getSongsAdress()
     {
+        try {
+            FileInputStream fileInputStream=new FileInputStream("allSongs");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         lastAccessSorting();
         return songsAdress;
     }
+
+    public ArrayList<String> getAllSongs(){
+        try {
+            File file=new File("allSongs");
+            if(file.exists()){
+                FileInputStream fileInputStream=new FileInputStream(file);
+                try {
+                    ObjectInputStream objectInputStream=new ObjectInputStream(fileInputStream);
+                    try {
+                        songsAdress =(ArrayList<String>) objectInputStream.readObject();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        lastAccessSorting();
+        return songsAdress;
+    }
+
     public void addSong(String filePath)
     {
         songsAdress.add(filePath);

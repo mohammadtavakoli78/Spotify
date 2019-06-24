@@ -1,5 +1,6 @@
 package Gui;
 
+import Files.AllSongsAdresses;
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
@@ -14,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import Files.AllSongsAdresses;
 
 public class CenterPanel extends JPanel {
     private int choose;
@@ -26,51 +28,63 @@ public class CenterPanel extends JPanel {
         this.choose=choose;
         if(choose==1){
 
-            int size=song.size();
-            ArrayList<JButton> buttons=new ArrayList<JButton>();
-            setOpaque(true);
+            File file=new File("allSongs");
+//            setOpaque(true);
             setBackground(Color.DARK_GRAY);
-            setLayout(new GridLayout(size/4+1,4));
+            if(file.exists()){
+                AllSongsAdresses allSongsAdresses=new AllSongsAdresses("allSongs");
+                song=allSongsAdresses.getAllSongs();
+                int size=song.size();
+                ArrayList<JButton> buttons=new ArrayList<JButton>();
+                JPanel panel=new JPanel();
+//                panel.setOpaque(true);
+                panel.setBackground(Color.DARK_GRAY);
+                panel.setLayout(new GridLayout((size/4)+1,4));
+                for(int i=0; i<=size-1; ++i){
 
-            for(int i=0; i<=size-1; ++i){
+                    JButton button=new JButton();
+                    button.setContentAreaFilled(false);
+                    button.setFocusPainted(false);
+                    button.setBorderPainted(false);
+                    button.setLayout(new BorderLayout());
+//                    button.setOpaque(true);
+                    button.setBackground(Color.darkGray);
+                    try {
+                        Mp3File mp3File=new Mp3File(song.get(i));
+                        ID3v2 id3v2Tag = mp3File.getId3v2Tag();
+                        byte[] songImage=id3v2Tag.getAlbumImage();
 
-                JButton button=new JButton();
-                button.setContentAreaFilled(false);
-                button.setFocusPainted(false);
-                button.setBorderPainted(false);
-                button.setLayout(new GridLayout(2,1));
-                button.setOpaque(true);
-                button.setBackground(Color.darkGray);
-                try {
-                    Mp3File mp3File=new Mp3File(song.get(i));
-                    ID3v2 id3v2Tag = mp3File.getId3v2Tag();
-                    button.setText(id3v2Tag.getTitle());
-                    byte[] songImage=id3v2Tag.getAlbumImage();
-                    button.setIcon(new ImageIcon(songImage));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (UnsupportedTagException e) {
-                    e.printStackTrace();
-                } catch (InvalidDataException e) {
-                    e.printStackTrace();
-                }
-                button.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        int counter=0;
-                        for(String i : song){
-                            if(i.equals(button.getText())){
-                                // pass array of song to th player class
-                                //pass the start int to the player class
-                            }
-                            ++counter;
-                        }
+                        ImageIcon imageIcon = new ImageIcon(songImage);
+                        Image image = imageIcon.getImage();
+                        Image newimg = image.getScaledInstance(200, 200,  java.awt.Image.SCALE_SMOOTH);
+                        button.setIcon(new ImageIcon(newimg));
+                        button.setText(id3v2Tag.getTitle());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (UnsupportedTagException e) {
+                        e.printStackTrace();
+                    } catch (InvalidDataException e) {
+                        e.printStackTrace();
                     }
-                });
+                    button.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            int counter=0;
+                            for(String i : song){
+                                if(i.equals(button.getText())){
+                                    // pass array of song to th player class
+                                    //pass the start int to the player class
+                                }
+                                ++counter;
+                            }
+                        }
+                    });
 
-                buttons.add(button);
-                add(button);
-                GuiController.gui.setVisible(true);
+                    buttons.add(button);
+                    panel.add(button);
+//                GuiController.gui.setVisible(true);
+                }
+                add(panel);
             }
         }
         if(choose==2){

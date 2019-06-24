@@ -15,9 +15,11 @@ import java.util.Iterator;
 public class WestPanel extends JPanel {
 
 
-    JFileChooser jFileChooser = new JFileChooser();
+    private JFileChooser jFileChooser = new JFileChooser();
 
-    AllSongsAdresses  allSongsAdresses = new AllSongsAdresses("songs");
+    static int counter = 0;
+
+    AllSongsAdresses  allSongsAdresses = null;
 
     File newSong = null;
     private HashMap<String,JButton> playLists=new HashMap<String,JButton>();
@@ -184,21 +186,20 @@ public class WestPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                if( counter == 0)
+                {
+                    allSongsAdresses =  new AllSongsAdresses("allSongs");
+                    counter++;
+                }
                 jFileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-
                 // i dont know
                 int res = jFileChooser.showOpenDialog(addPlayListButton);
-
-                newSong = jFileChooser.getSelectedFile();
-
-                String songPath = newSong.getAbsolutePath();
-
-                allSongsAdresses.addSong(songPath);
-
-
-
-
-
+                if( res == JFileChooser.CANCEL_OPTION);
+                if( res == JFileChooser.APPROVE_OPTION){
+                    newSong = jFileChooser.getSelectedFile();
+                    String songPath = newSong.getAbsolutePath();
+                    allSongsAdresses.addSong(songPath);
+                }
             }
         });
 
@@ -224,6 +225,19 @@ public class WestPanel extends JPanel {
             @Override
             public void mouseExited(MouseEvent e) {
                 songsButton.setForeground(color);
+            }
+        });
+
+        songsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Gui.choice=1;
+                Gui.centerPanel=new CenterPanel(1);
+                Gui.update();
+                Gui.frame.setVisible(true);
+//                allSongsAdresses.getSongsAdress();
+//                Gui.centerPanel=new CenterPanel(1);
+//                GuiController.gui.setVisible(true);
             }
         });
 
@@ -461,7 +475,7 @@ public class WestPanel extends JPanel {
                                             }
                                         }
                                         playListPanel.remove(newButton);
-                                        GuiController.gui.setVisible(true);
+                                        Gui.frame.setVisible(true);
                                     }
                                 });
 
@@ -490,7 +504,7 @@ public class WestPanel extends JPanel {
                         }
                     });
                     playListPanel.add(newButton);
-                    GuiController.gui.setVisible(true);
+                    Gui.frame.setVisible(true);
             }
 // add new play list button
 
@@ -668,7 +682,7 @@ public class WestPanel extends JPanel {
                                                     }
                                                 }
                                                 playListPanel.remove(newButton);
-                                                GuiController.gui.setVisible(true);
+                                                Gui.frame.setVisible(true);
                                             }
                                         });
 
@@ -698,7 +712,8 @@ public class WestPanel extends JPanel {
                             });
                             playListPanel.add(newButton);
                             playLists.put(newButton.getText(),newButton);
-                            GuiController.gui.setVisible(true);
+                            Gui.frame.setVisible(true);
+//                            GuiController.gui.setVisible(true);
                         }
                     });
                     frame.add(textField);
