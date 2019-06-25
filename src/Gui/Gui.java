@@ -34,9 +34,17 @@ public class Gui extends JFrame {
         }
     }
 
+    static void addComponent(Component component){
+        removeCenter();
+        centerPanel.add(component);
+        frame.add(centerPanel);
+        frame.setVisible(true);
+    }
+
     static void update(){
 //        centerPanel=new CenterPanel(choice);
-        frame.add(centerPanel,BorderLayout.CENTER);
+        JScrollPane jScrollPane = new JScrollPane(centerPanel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        frame.add(jScrollPane,BorderLayout.CENTER);
     }
     public static void main(String[] args) {
 //        GuiController guiController=new GuiController();

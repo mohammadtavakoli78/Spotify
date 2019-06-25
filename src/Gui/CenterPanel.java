@@ -39,14 +39,14 @@ public class CenterPanel extends JPanel {
                 JPanel panel=new JPanel();
                 panel.setOpaque(true);
                 panel.setBackground(Color.DARK_GRAY);
-                panel.setLayout(new GridLayout((size/4)+1,4));
+                panel.setLayout(new WrapLayout(WrapLayout.LEFT));
                 for(int i=0; i<=size-1; ++i){
 
                     JPanel panel1=new JPanel();
-                    panel1.setPreferredSize(new Dimension(400,400));
+//                    panel1.setPreferredSize(new Dimension(300,300));
                     panel1.setOpaque(true);
                     panel1.setBackground(Color.DARK_GRAY);
-                    panel1.setLayout(new GridLayout(2,1));
+                    panel1.setLayout(new BorderLayout());
                     JButton button=new JButton();
                     button.setContentAreaFilled(false);
                     button.setFocusPainted(false);
@@ -88,12 +88,17 @@ public class CenterPanel extends JPanel {
                     });
 
                     buttons.add(button);
-                    panel1.add(button);
-                    panel1.add(label);
+                    panel1.add(button,BorderLayout.NORTH);
+                    panel1.add(label,BorderLayout.SOUTH);
                     panel.add(panel1);
 //                    panel.add(button);
 //                GuiController.gui.setVisible(true);
                 }
+//                jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+//                jScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+//                jScrollPane.setOpaque(true);
+//                jScrollPane.setBackground(Color.black);
+//                jScrollPane.setBorder(BorderFactory.createEmptyBorder());
                 add(panel);
             }
         }
@@ -110,7 +115,7 @@ public class CenterPanel extends JPanel {
                 ArrayList<JButton> buttons=new ArrayList<JButton>();
                 setOpaque(true);
                 setBackground(Color.DARK_GRAY);
-                setLayout(new GridLayout(size/4+1,4));
+                setLayout(new WrapLayout(WrapLayout.LEFT));
 
                 for(String i : albums.keySet()){
 
