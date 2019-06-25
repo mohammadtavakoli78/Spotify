@@ -17,6 +17,10 @@ public class WestPanel extends JPanel {
 
     static int counter = 0;
 
+    static Thread t1;
+
+    static Player player;
+
     AllSongsAdresses  allSongsAdresses = null;
 
     File newSong = null;

@@ -7,6 +7,8 @@ import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
+import javazoom.jl.decoder.JavaLayerException;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +32,7 @@ public class CenterPanel extends JPanel {
         if(choose==1){
 
             File file=new File("allSongs");
-            setOpaque(true);
+//            setOpaque(true);
             setBackground(Color.DARK_GRAY);
             if(file.exists()){
                 AllSongsAdresses allSongsAdresses=new AllSongsAdresses("allSongs");
@@ -37,14 +40,14 @@ public class CenterPanel extends JPanel {
                 int size=song.size();
                 ArrayList<JButton> buttons=new ArrayList<JButton>();
                 JPanel panel=new JPanel();
-                panel.setOpaque(true);
+//                panel.setOpaque(true);
                 panel.setBackground(Color.DARK_GRAY);
                 panel.setLayout(new WrapLayout(WrapLayout.LEFT));
-                for(int i=0; i<=size-1; ++i){
-
+                for(int i=size-1; i>=0; --i){
+                    int counter=i;
                     JPanel panel1=new JPanel();
 //                    panel1.setPreferredSize(new Dimension(300,300));
-                    panel1.setOpaque(true);
+//                    panel1.setOpaque(true);
                     panel1.setBackground(Color.DARK_GRAY);
                     panel1.setLayout(new BorderLayout());
                     JButton button=new JButton();
@@ -52,7 +55,7 @@ public class CenterPanel extends JPanel {
                     button.setFocusPainted(false);
                     button.setBorderPainted(false);
                     button.setLayout(new BorderLayout());
-                    button.setOpaque(true);
+//                    button.setOpaque(true);
                     button.setBackground(Color.darkGray);
                     JLabel label=new JLabel();
                     try {
@@ -76,13 +79,33 @@ public class CenterPanel extends JPanel {
                     button.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            int counter=0;
-                            for(String i : song){
-                                if(i.equals(button.getText())){
-                                    // pass array of song to th player class
-                                    //pass the start int to the player class
+                            try {
+//                                if(WestPanel.player!=null){
+//                                    if(WestPanel.player.getIsPlayed()){
+//                                        WestPanel.player.close();
+//                                        WestPanel.player=null;
+//                                        WestPanel.player=new Player(song,counter);
+//                                        WestPanel.player.start();
+//                                    }
+//                                }
+//                                else{
+                                if(WestPanel.t1==null){
+                                    WestPanel.player=new Player(song,counter);
+                                    WestPanel.t1=new Thread(WestPanel.player);
+                                    WestPanel.t1.start();
                                 }
-                                ++counter;
+                                else{
+                                    WestPanel.t1.stop();
+                                    WestPanel.player=new Player(song,counter);
+                                    WestPanel.t1=new Thread(WestPanel.player);
+                                    WestPanel.t1.start();
+                                }
+//                                    WestPanel.player.setIsPlayed();
+//                                }
+                            } catch (JavaLayerException e1) {
+                                e1.printStackTrace();
+                            } catch (FileNotFoundException e1) {
+                                e1.printStackTrace();
                             }
                         }
                     });

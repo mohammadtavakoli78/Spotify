@@ -139,6 +139,7 @@ public class AllSongsAdresses implements Serializable {
             e.printStackTrace();
         }
         try {
+            lastAccessSorting();
             objectOutputStream.writeObject(songsAdress);
         } catch (IOException e) {
             e.printStackTrace();

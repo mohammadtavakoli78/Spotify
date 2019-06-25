@@ -1,20 +1,24 @@
 package Gui;
 
+import javazoom.jl.decoder.JavaLayerException;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class SouthPanel extends JPanel {
     private int heartButtonCounter=0;
+    JButton playMusic;
+    JButton nextMusic;
+    JButton previousMusic;
+    JButton shuffle;
+    JButton repeatMusic;
     public SouthPanel(){
 
         super();
@@ -32,11 +36,11 @@ public class SouthPanel extends JPanel {
         buttons.setOpaque(true);
         buttons.setBackground(Color.gray);
         buttons.setLayout(new FlowLayout(FlowLayout.CENTER));
-        JButton playMusic=new JButton();
-        JButton nextMusic=new JButton();
-        JButton previousMusic=new JButton();
-        JButton shuffle=new JButton();
-        JButton repeatMusic=new JButton();
+        playMusic=new JButton(); /////////
+        nextMusic=new JButton(); ////////
+        previousMusic=new JButton(); /////////
+        shuffle=new JButton();  ///////////
+        repeatMusic=new JButton(); //////////
         Image img = null;
         try {
             img = ImageIO.read(getClass().getResource("Icons\\next.png")).getScaledInstance(50,50,Image.SCALE_SMOOTH);
@@ -90,13 +94,13 @@ public class SouthPanel extends JPanel {
         buttons.add(playMusic);
         buttons.add(nextMusic);
         buttons.add(repeatMusic);
-        JSlider musicSlider=new JSlider(JSlider.HORIZONTAL,0,100,0);
+        JSlider musicSlider=new JSlider(JSlider.HORIZONTAL,0,100,0); /////////////
         musicSlider.setOpaque(true);
         musicSlider.setBackground(Color.gray);
         musicSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-               //
+                ////////
             }
         });
         playerButtons.add(buttons,BorderLayout.NORTH);
@@ -207,6 +211,46 @@ public class SouthPanel extends JPanel {
                 }
             }
         });
+        nextMusic.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(WestPanel.t1!=null){
+                    WestPanel.t1.stop();
+                    try {
+                        WestPanel.player=new Player(WestPanel.player.getSongsAdresses(),WestPanel.player.getCounter()+1);
+                    } catch (JavaLayerException e1) {
+                        e1.printStackTrace();
+                    } catch (FileNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
+                    WestPanel.t1=new Thread(WestPanel.player);
+                    WestPanel.t1.start();
+                }
+            }
+        });
+        previousMusic.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(WestPanel.t1!=null){
+                    WestPanel.t1.stop();
+                    try {
+                        WestPanel.player=new Player(WestPanel.player.getSongsAdresses(),WestPanel.player.getCounter()-1);
+                    } catch (JavaLayerException e1) {
+                        e1.printStackTrace();
+                    } catch (FileNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
+                    WestPanel.t1=new Thread(WestPanel.player);
+                    WestPanel.t1.start();
+                }
+            }
+        });
+        playMusic.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
         songNamePanel.add(artist,BorderLayout.NORTH);
         songNamePanel.add(songName,BorderLayout.CENTER);
         songNamePanel.add(albumName,BorderLayout.SOUTH);
@@ -216,4 +260,12 @@ public class SouthPanel extends JPanel {
         add(playerButtons);
         add(soundManager);
     }
+//    public void nextMusicButtonAcitonListener(){
+//        nextMusic.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//
+//            }
+//        });
+//    }
 }
