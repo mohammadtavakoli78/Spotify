@@ -158,6 +158,13 @@ public class WestPanel extends JPanel {
             }
         });
 
+        favoritButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
         addLibraryButton.addMouseListener(new MouseListener() {
             Color color=addLibraryButton.getForeground();
             @Override
