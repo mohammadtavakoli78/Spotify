@@ -161,7 +161,17 @@ public class WestPanel extends JPanel {
         favoritButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Gui.choice=3;
+                Gui.removeCenter();
+                try {
+                    Gui.centerPanel=new CenterPanel(3);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                } catch (ClassNotFoundException e1) {
+                    e1.printStackTrace();
+                }
+                Gui.update();
+                Gui.frame.setVisible(true);
             }
         });
 
@@ -240,7 +250,13 @@ public class WestPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 Gui.choice=1;
                 Gui.removeCenter();
-                Gui.centerPanel=new CenterPanel(1);
+                try {
+                    Gui.centerPanel=new CenterPanel(1);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                } catch (ClassNotFoundException e1) {
+                    e1.printStackTrace();
+                }
                 Gui.update();
                 Gui.frame.setVisible(true);
 //                allSongsAdresses.getSongsAdress();
@@ -304,7 +320,13 @@ public class WestPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 Gui.choice=2;
                 Gui.removeCenter();
-                Gui.centerPanel=new CenterPanel(2);
+                try {
+                    Gui.centerPanel=new CenterPanel(2);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                } catch (ClassNotFoundException e1) {
+                    e1.printStackTrace();
+                }
                 Gui.update();
                 Gui.frame.setVisible(true);
             }
