@@ -12,7 +12,7 @@ public class Player implements Runnable{
     static ArrayList<String> songsAdresses = new ArrayList<String>();
     static int start;
     static int counter;
-    static boolean isPaused = false;
+    static volatile boolean isPaused = false;
     static boolean seek=false;
     static boolean stop=false;
     static int frame;
@@ -111,7 +111,7 @@ public class Player implements Runnable{
                 }
                 if(!isPaused){
                     synchronized (player) {
-                        player.notifyAll();
+                       player.notifyAll();
                     }
                 }
                 if(seek){
@@ -133,11 +133,6 @@ public class Player implements Runnable{
 
                     }
                 }
-                if(stop){
-                    synchronized (player){
-                        break;
-                    }
-                }
             }
             if (counter != i && counter >= 0) {
                 i = counter - 1;
@@ -152,11 +147,11 @@ public class Player implements Runnable{
     }
 
     public void mp3Pause() {
-        this.isPaused = true;
+        Player.isPaused = true;
     }
 
     public void mp3Resume() {
-        this.isPaused = false;
+        Player.isPaused = false;
     }
 
     public void seekTo(int frame) {

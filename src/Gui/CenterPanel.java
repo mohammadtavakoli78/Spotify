@@ -9,6 +9,7 @@ import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 import javazoom.jl.decoder.JavaLayerException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -80,28 +81,37 @@ public class CenterPanel extends JPanel {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             try {
-//                                if(WestPanel.player!=null){
-//                                    if(WestPanel.player.getIsPlayed()){
-//                                        WestPanel.player.close();
-//                                        WestPanel.player=null;
-//                                        WestPanel.player=new Player(song,counter);
-//                                        WestPanel.player.start();
-//                                    }
-//                                }
-//                                else{
                                 if(WestPanel.t1==null){
+                                    Image img = null;
+                                    try {
+                                        img = ImageIO.read(getClass().getResource("Icons\\pause.png")).getScaledInstance(75,75,Image.SCALE_SMOOTH);
+                                    } catch (IOException ex) {
+                                        ex.printStackTrace();
+                                    }
+                                    SouthPanel.playMusic.setIcon(new ImageIcon(img));
+                                    Gui.frame.setVisible(true);
+//                                    SouthPanel.playButton=0;
+//                                    SouthPanel.playMusicButtonActitonListener();
                                     WestPanel.player=new Player(song,counter);
                                     WestPanel.t1=new Thread(WestPanel.player);
                                     WestPanel.t1.start();
                                 }
                                 else{
+                                    Image img = null;
+                                    try {
+                                        img = ImageIO.read(getClass().getResource("Icons\\pause.png")).getScaledInstance(75,75,Image.SCALE_SMOOTH);
+                                    } catch (IOException ex) {
+                                        ex.printStackTrace();
+                                    }
+                                    SouthPanel.playMusic.setIcon(new ImageIcon(img));
+                                    Gui.frame.setVisible(true);
+//                                    SouthPanel.playButton=0;
+//                                    SouthPanel.playMusicButtonActitonListener();
                                     WestPanel.t1.stop();
                                     WestPanel.player=new Player(song,counter);
                                     WestPanel.t1=new Thread(WestPanel.player);
                                     WestPanel.t1.start();
                                 }
-//                                    WestPanel.player.setIsPlayed();
-//                                }
                             } catch (JavaLayerException e1) {
                                 e1.printStackTrace();
                             } catch (FileNotFoundException e1) {

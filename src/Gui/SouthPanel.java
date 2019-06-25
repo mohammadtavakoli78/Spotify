@@ -11,10 +11,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.concurrent.locks.LockSupport;
 
 public class SouthPanel extends JPanel {
     private int heartButtonCounter=0;
-    JButton playMusic;
+    static int playButton=0;
+    static JButton playMusic;
     JButton nextMusic;
     JButton previousMusic;
     JButton shuffle;
@@ -248,9 +250,52 @@ public class SouthPanel extends JPanel {
         playMusic.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                ++playButton;
+                if(WestPanel.t1==null){
+                    if(playButton%2==0){
+                        Image img = null;
+                        try {
+                            img = ImageIO.read(getClass().getResource("Icons\\play.png")).getScaledInstance(75,75,Image.SCALE_SMOOTH);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                        playMusic.setIcon(new ImageIcon(img));
+                    }
+                    else{
+                        Image img = null;
+                        try {
+                            img = ImageIO.read(getClass().getResource("Icons\\pause.png")).getScaledInstance(75,75,Image.SCALE_SMOOTH);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                        playMusic.setIcon(new ImageIcon(img));
+                    }
+                }
+                else{
+                    if(WestPanel.player.isPaused()){
+                        Image img = null;
+                        try {
+                            img = ImageIO.read(getClass().getResource("Icons\\pause.png")).getScaledInstance(75,75,Image.SCALE_SMOOTH);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                        playMusic.setIcon(new ImageIcon(img));
+                        WestPanel.player.mp3Resume();
+                    }
+                    else{
+                        Image img = null;
+                        try {
+                            img = ImageIO.read(getClass().getResource("Icons\\play.png")).getScaledInstance(75,75,Image.SCALE_SMOOTH);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                        playMusic.setIcon(new ImageIcon(img));
+                        WestPanel.player.mp3Pause();
+                    }
+                }
             }
         });
+//        playMusicButtonActitonListener();
         songNamePanel.add(artist,BorderLayout.NORTH);
         songNamePanel.add(songName,BorderLayout.CENTER);
         songNamePanel.add(albumName,BorderLayout.SOUTH);
@@ -260,11 +305,37 @@ public class SouthPanel extends JPanel {
         add(playerButtons);
         add(soundManager);
     }
-//    public void nextMusicButtonAcitonListener(){
-//        nextMusic.addActionListener(new ActionListener() {
+//    static void playMusicButtonActitonListener(){
+//        playMusic.addActionListener(new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent e) {
-//
+//                ++playButton;
+//                if(WestPanel.t1!=null){
+//                    if(playButton%2==0){
+//                        Image img = null;
+//                        try {
+//                            img = ImageIO.read(getClass().getResource("Icons\\play.png")).getScaledInstance(75,75,Image.SCALE_SMOOTH);
+//                        } catch (IOException ex) {
+//                            ex.printStackTrace();
+//                        }
+//                        playMusic.setIcon(new ImageIcon(img));
+//                        Gui.frame.setVisible(true);
+//                        WestPanel.player.mp3Pause();
+//                    }
+//                    else{
+//                        Image img = null;
+//                        try {
+//                            img = ImageIO.read(getClass().getResource("Icons\\pause.png")).getScaledInstance(75,75,Image.SCALE_SMOOTH);
+//                        } catch (IOException ex) {
+//                            ex.printStackTrace();
+//                        }
+//                        playMusic.setIcon(new ImageIcon(img));
+//                        Gui.frame.setVisible(true);
+//                        if(playButton!=1){
+//                            WestPanel.player.mp3Resume();
+//                        }
+//                    }
+//                }
 //            }
 //        });
 //    }
