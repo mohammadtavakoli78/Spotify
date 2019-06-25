@@ -7,26 +7,23 @@ import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import Files.AllSongsAdresses;
 
 public class CenterPanel extends JPanel {
     private int choose;
-    // object of files class
     private ArrayList<String> song;
     private ArrayList<String> favourite;
     private HashMap<String,ArrayList<String>> albums;
     private HashMap<String,ArrayList<String>> playLists;
-    // object of player class
     public CenterPanel(int choose) throws IOException, ClassNotFoundException {
         this.choose=choose;
         if(choose==1){

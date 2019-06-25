@@ -216,6 +216,19 @@ public class WestPanel extends JPanel {
                     newSong = jFileChooser.getSelectedFile();
                     String songPath = newSong.getAbsolutePath();
                     allSongsAdresses.addSong(songPath);
+
+                    Gui.choice=1;
+                    Gui.removeCenter();
+                    try {
+                        Gui.centerPanel=new CenterPanel(1);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (ClassNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
+                    Gui.update();
+                    Gui.frame.setVisible(true);
+
                 }
             }
         });
