@@ -30,6 +30,7 @@ public class Gui extends JFrame {
 
     static void removeCenter(){
         if(centerPanel!=null){
+            CenterPanel.panel=null;
             frame.remove(centerPanel);
         }
     }
@@ -42,12 +43,11 @@ public class Gui extends JFrame {
     }
 
     static void update(){
-//        centerPanel=new CenterPanel(choice);
+
         JScrollPane jScrollPane = new JScrollPane(centerPanel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         frame.add(jScrollPane,BorderLayout.CENTER);
     }
     public static void main(String[] args) {
-//        GuiController guiController=new GuiController();
         Gui gui=new Gui();
     }
 }

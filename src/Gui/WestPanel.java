@@ -263,10 +263,12 @@ public class WestPanel extends JPanel {
         songsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CenterPanel.panel=null;
                 Gui.choice=1;
                 Gui.removeCenter();
-                try {
+                if(CenterPanel.panel!=null){
+                    CenterPanel.panel.removeAll();
+                }
+               try {
                     Gui.centerPanel=new CenterPanel(1);
                 } catch (IOException e1) {
                     e1.printStackTrace();
@@ -275,9 +277,6 @@ public class WestPanel extends JPanel {
                 }
                 Gui.update();
                 Gui.frame.setVisible(true);
-//                allSongsAdresses.getSongsAdress();
-//                Gui.centerPanel=new CenterPanel(1);
-//                GuiController.gui.setVisible(true);
             }
         });
 
@@ -334,7 +333,6 @@ public class WestPanel extends JPanel {
         albumsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CenterPanel.panel=null;
                 Gui.choice=2;
                 Gui.removeCenter();
                 try {
