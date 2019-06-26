@@ -15,6 +15,7 @@ import java.util.concurrent.locks.LockSupport;
 
 public class SouthPanel extends JPanel {
     private int heartButtonCounter=0;
+    static int max;
     static int playButton=0;
     static JButton playMusic;
     static JSlider musicSlider;
@@ -31,6 +32,9 @@ public class SouthPanel extends JPanel {
     static JLabel songName;
     static JLabel albumName;
     static JButton heartButton;
+    static JPanel p1;
+    static JLabel l1;
+    static JLabel l2;
     public SouthPanel(){
 
         super();
@@ -106,7 +110,7 @@ public class SouthPanel extends JPanel {
         buttons.add(playMusic);
         buttons.add(nextMusic);
         buttons.add(repeatMusic);
-        musicSlider=new JSlider(JSlider.HORIZONTAL,0,100,0); /////////////
+        musicSlider=new JSlider(JSlider.HORIZONTAL,0,100,0);
         musicSlider.setOpaque(true);
         musicSlider.setBackground(Color.gray);
         musicSlider.addChangeListener(new ChangeListener() {
@@ -115,8 +119,20 @@ public class SouthPanel extends JPanel {
                 ////////
             }
         });
+        p1=new JPanel();
+        p1.setLayout(new FlowLayout());
+        p1.setOpaque(true);
+        p1.setBackground(Color.gray);
+        l1=new JLabel("");
+        l2=new JLabel("");
+        p1.add(l2);
+        p1.add(musicSlider);
+        p1.add(l1);
         playerButtons.add(buttons,BorderLayout.NORTH);
-        playerButtons.add(musicSlider,BorderLayout.SOUTH);
+        playerButtons.add(p1,BorderLayout.SOUTH);
+//        playerButtons.add(l1,BorderLayout.EAST);
+//        playerButtons.add(l2,BorderLayout.WEST);
+//        playerButtons.add(musicSlider,BorderLayout.SOUTH);
 
         soundManager.setLayout(new BorderLayout());
         JPanel sound=new JPanel();

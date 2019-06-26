@@ -8,7 +8,10 @@ import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 
 import javax.swing.*;
+import javax.swing.plaf.SpinnerUI;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -109,6 +112,16 @@ public class Player implements Runnable{
             SouthPanel.artist.setText(id3v2Tag.getArtist());
             SouthPanel.songName.setText(id3v2Tag.getTitle());
             SouthPanel.musicImage.add(SouthPanel.heartButton);
+            SouthPanel.musicSlider.setMaximum((int)mp3File.getLengthInSeconds());
+            SouthPanel.l1.setText("0:49");
+            SouthPanel.l2.setText("3:49");
+//            SouthPanel.musicSlider.setMinorTickSpacing(1);
+            ActionListener l=new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    SouthPanel.musicSlider.setValue(SouthPanel.musicSlider.getValue()+1);
+                }
+            };
             Gui.frame.setVisible(true);
 
             counter = i;
