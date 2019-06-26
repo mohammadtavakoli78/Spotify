@@ -263,6 +263,7 @@ public class WestPanel extends JPanel {
         songsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                CenterPanel.panel=null;
                 Gui.choice=1;
                 Gui.removeCenter();
                 try {
@@ -333,6 +334,7 @@ public class WestPanel extends JPanel {
         albumsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                CenterPanel.panel=null;
                 Gui.choice=2;
                 Gui.removeCenter();
                 try {

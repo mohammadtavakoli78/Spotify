@@ -28,6 +28,9 @@ public class CenterPanel extends JPanel {
     private ArrayList<String> favourite;
     private HashMap<String,ArrayList<String>> albums;
     private HashMap<String,ArrayList<String>> playLists;
+    static Player player;
+    static Thread t1;
+    static JPanel panel;
     public CenterPanel(int choose) throws IOException, ClassNotFoundException {
         this.choose=choose;
         if(choose==1){
@@ -40,7 +43,7 @@ public class CenterPanel extends JPanel {
                 song=allSongsAdresses.getAllSongs();
                 int size=song.size();
                 ArrayList<JButton> buttons=new ArrayList<JButton>();
-                JPanel panel=new JPanel();
+                panel=new JPanel();
 //                panel.setOpaque(true);
                 panel.setBackground(Color.DARK_GRAY);
                 panel.setLayout(new WrapLayout(WrapLayout.LEFT));
@@ -81,7 +84,7 @@ public class CenterPanel extends JPanel {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             try {
-                                if(WestPanel.t1==null){
+                                if(t1==null){
                                     Image img = null;
                                     try {
                                         img = ImageIO.read(getClass().getResource("Icons\\pause.png")).getScaledInstance(75,75,Image.SCALE_SMOOTH);
@@ -92,9 +95,9 @@ public class CenterPanel extends JPanel {
                                     Gui.frame.setVisible(true);
 //                                    SouthPanel.playButton=0;
 //                                    SouthPanel.playMusicButtonActitonListener();
-                                    WestPanel.player=new Player(song,counter);
-                                    WestPanel.t1=new Thread(WestPanel.player);
-                                    WestPanel.t1.start();
+                                    player=new Player(song,counter);
+                                    t1=new Thread(player);
+                                    t1.start();
                                 }
                                 else{
                                     Image img = null;
@@ -107,10 +110,10 @@ public class CenterPanel extends JPanel {
                                     Gui.frame.setVisible(true);
 //                                    SouthPanel.playButton=0;
 //                                    SouthPanel.playMusicButtonActitonListener();
-                                    WestPanel.t1.stop();
-                                    WestPanel.player=new Player(song,counter);
-                                    WestPanel.t1=new Thread(WestPanel.player);
-                                    WestPanel.t1.start();
+                                    t1.stop();
+                                    player=new Player(song,counter);
+                                    t1=new Thread(player);
+                                    t1.start();
                                 }
                             } catch (JavaLayerException e1) {
                                 e1.printStackTrace();
@@ -146,25 +149,33 @@ public class CenterPanel extends JPanel {
                 albums=allAlbums.getAllAlbums();
                 int size=albums.size();
                 ArrayList<JButton> buttons=new ArrayList<JButton>();
-                setOpaque(true);
-                setBackground(Color.DARK_GRAY);
-                setLayout(new WrapLayout(WrapLayout.LEFT));
+//                setOpaque(true);
+                panel=new JPanel();
+                panel.setBackground(Color.DARK_GRAY);
+                panel.setLayout(new WrapLayout(WrapLayout.LEFT));
 
                 for(String i : albums.keySet()){
 
+                    JPanel panel1=new JPanel();
+                    panel1.setBackground(Color.DARK_GRAY);
+                    JLabel label=new JLabel();
                     JButton button=new JButton();
                     button.setContentAreaFilled(false);
                     button.setFocusPainted(false);
                     button.setBorderPainted(false);
                     button.setLayout(new GridLayout(2,1));
-                    button.setOpaque(true);
+//                    button.setOpaque(true);
                     button.setBackground(Color.darkGray);
                     try {
                         Mp3File mp3File=new Mp3File(albums.get(i).get(0));
                         ID3v2 id3v2Tag = mp3File.getId3v2Tag();
-                        button.setText(i);
                         byte[] songImage=id3v2Tag.getAlbumImage();
-                        button.setIcon(new ImageIcon(songImage));
+                        ImageIcon imageIcon = new ImageIcon(songImage);
+                        Image image = imageIcon.getImage();
+                        Image newimg = image.getScaledInstance(200, 200,  java.awt.Image.SCALE_SMOOTH);
+                        button.setIcon(new ImageIcon(newimg));
+                        label.setText(id3v2Tag.getTitle());
+//                        button.setIcon(new ImageIcon(songImage));
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (UnsupportedTagException e) {
@@ -184,10 +195,12 @@ public class CenterPanel extends JPanel {
                             }
                         }
                     });
-
                     buttons.add(button);
-                    add(button);
+                    panel1.add(button);
+                    panel1.add(label);
+                    add(panel1);
                 }
+                add(panel);
             }
         }
         if(choose==3){

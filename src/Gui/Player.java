@@ -1,11 +1,19 @@
 package Gui;
 
+import com.mpatric.mp3agic.ID3v2;
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.Mp3File;
+import com.mpatric.mp3agic.UnsupportedTagException;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Timer;
 
 public class Player implements Runnable{
 
@@ -79,6 +87,30 @@ public class Player implements Runnable{
     public void run() {
 
         for (int i = start; i < songsAdresses.size(); i++) {
+            Mp3File mp3File= null;
+            try {
+                mp3File = new Mp3File(songsAdresses.get(i));
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (UnsupportedTagException e) {
+                e.printStackTrace();
+            } catch (InvalidDataException e) {
+                e.printStackTrace();
+            }
+            ID3v2 id3v2Tag = mp3File.getId3v2Tag();
+            byte[] songImage=id3v2Tag.getAlbumImage();
+
+            ImageIcon imageIcon = new ImageIcon(songImage);
+            Image image = imageIcon.getImage();
+            Image newimg = image.getScaledInstance(85, 85,  java.awt.Image.SCALE_SMOOTH);
+
+            SouthPanel.musicButton.setIcon(new ImageIcon(newimg));
+            SouthPanel.albumName.setText(id3v2Tag.getAlbumArtist());
+            SouthPanel.artist.setText(id3v2Tag.getArtist());
+            SouthPanel.songName.setText(id3v2Tag.getTitle());
+            SouthPanel.musicImage.add(SouthPanel.heartButton);
+            Gui.frame.setVisible(true);
+
             counter = i;
             String path = songsAdresses.get(i);
             try {
@@ -109,11 +141,11 @@ public class Player implements Runnable{
                         }
                     }
                 }
-                if(!isPaused){
-                    synchronized (player) {
-                       player.notifyAll();
-                    }
-                }
+//                if(!isPaused){
+//                    synchronized (player) {
+//                       player.notifyAll();
+//                    }
+//                }
                 if(seek){
                     synchronized (player) {
                         player.close();
@@ -152,6 +184,9 @@ public class Player implements Runnable{
 
     public void mp3Resume() {
         Player.isPaused = false;
+        synchronized (player) {
+            player.notifyAll();
+        }
     }
 
     public void seekTo(int frame) {

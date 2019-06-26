@@ -17,10 +17,20 @@ public class SouthPanel extends JPanel {
     private int heartButtonCounter=0;
     static int playButton=0;
     static JButton playMusic;
+    static JSlider musicSlider;
     JButton nextMusic;
     JButton previousMusic;
     JButton shuffle;
     JButton repeatMusic;
+    static String artistString=null;
+    static String songNameString=null;
+    static String albumNameString=null;
+    static JButton musicButton=null;
+    static JPanel musicImage;
+    static JLabel artist;
+    static JLabel songName;
+    static JLabel albumName;
+    static JButton heartButton;
     public SouthPanel(){
 
         super();
@@ -32,7 +42,7 @@ public class SouthPanel extends JPanel {
         JPanel playerButtons=new JPanel();
         JPanel soundManager=new JPanel();
         JPanel buttons=new JPanel();
-        JPanel musicImage=new JPanel();
+        musicImage=new JPanel();
 
         playerButtons.setLayout(new BorderLayout());
         buttons.setOpaque(true);
@@ -96,7 +106,7 @@ public class SouthPanel extends JPanel {
         buttons.add(playMusic);
         buttons.add(nextMusic);
         buttons.add(repeatMusic);
-        JSlider musicSlider=new JSlider(JSlider.HORIZONTAL,0,100,0); /////////////
+        musicSlider=new JSlider(JSlider.HORIZONTAL,0,100,0); /////////////
         musicSlider.setOpaque(true);
         musicSlider.setBackground(Color.gray);
         musicSlider.addChangeListener(new ChangeListener() {
@@ -157,7 +167,7 @@ public class SouthPanel extends JPanel {
         musicImage.setLayout(new FlowLayout(FlowLayout.LEFT));
         musicImage.setOpaque(true);
         musicImage.setBackground(Color.gray);
-        JButton musicButton=new JButton();
+        musicButton=new JButton();
         musicButton.setContentAreaFilled(false);
         musicButton.setBorderPainted(false);
         musicButton.setFocusPainted(false);
@@ -165,28 +175,25 @@ public class SouthPanel extends JPanel {
         songNamePanel.setOpaque(true);
         songNamePanel.setBackground(Color.gray);
         songNamePanel.setLayout(new BorderLayout());
-        JLabel artist=new JLabel();
-        JLabel songName=new JLabel();
-        JLabel albumName=new JLabel();
-        String artistString;
-        String songNameString;
-        String albumNameString;
-        songName.setText("darAstane piri");
+        artist=new JLabel();
+        songName=new JLabel();
+        albumName=new JLabel();
+        songName.setText(songNameString);
         songName.setFont(new Font("Italic",Font.ITALIC,18));
-        albumName.setText("abraham");
+        albumName.setText(albumNameString);
         albumName.setFont(new Font("Italic",Font.ITALIC,18));
-        artist.setText("mohsen chavoshi mohsen chavoshi sgd");
+        artist.setText(artistString);
         artist.setFont(new Font("Italic",Font.ITALIC,18));
-        JButton heartButton=new JButton();
+        heartButton=new JButton();
         heartButton.setContentAreaFilled(false);
         heartButton.setBorderPainted(false);
         heartButton.setFocusPainted(false);
-        try {
-            img = ImageIO.read(getClass().getResource("Icons\\mohammad.jpg")).getScaledInstance(85,85,Image.SCALE_SMOOTH);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        musicButton.setIcon(new ImageIcon(img));
+//        try {
+//            img = ImageIO.read(getClass().getResource("Icons\\mohammad.jpg")).getScaledInstance(85,85,Image.SCALE_SMOOTH);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        musicButton.setIcon(new ImageIcon(img));
         musicImage.add(musicButton,BorderLayout.WEST);
         try {
             img = ImageIO.read(getClass().getResource("Icons\\like1.png")).getScaledInstance(30,30,Image.SCALE_SMOOTH);
@@ -216,34 +223,34 @@ public class SouthPanel extends JPanel {
         nextMusic.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(WestPanel.t1!=null){
-                    WestPanel.t1.stop();
+                if(CenterPanel.t1!=null){
+                    CenterPanel.t1.stop();
                     try {
-                        WestPanel.player=new Player(WestPanel.player.getSongsAdresses(),WestPanel.player.getCounter()+1);
+                        CenterPanel.player=new Player(CenterPanel.player.getSongsAdresses(),CenterPanel.player.getCounter()+1);
                     } catch (JavaLayerException e1) {
                         e1.printStackTrace();
                     } catch (FileNotFoundException e1) {
                         e1.printStackTrace();
                     }
-                    WestPanel.t1=new Thread(WestPanel.player);
-                    WestPanel.t1.start();
+                    CenterPanel.t1=new Thread(CenterPanel.player);
+                    CenterPanel.t1.start();
                 }
             }
         });
         previousMusic.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(WestPanel.t1!=null){
-                    WestPanel.t1.stop();
+                if(CenterPanel.t1!=null){
+                    CenterPanel.t1.stop();
                     try {
-                        WestPanel.player=new Player(WestPanel.player.getSongsAdresses(),WestPanel.player.getCounter()-1);
+                        CenterPanel.player=new Player(CenterPanel.player.getSongsAdresses(),CenterPanel.player.getCounter()-1);
                     } catch (JavaLayerException e1) {
                         e1.printStackTrace();
                     } catch (FileNotFoundException e1) {
                         e1.printStackTrace();
                     }
-                    WestPanel.t1=new Thread(WestPanel.player);
-                    WestPanel.t1.start();
+                    CenterPanel.t1=new Thread(CenterPanel.player);
+                    CenterPanel.t1.start();
                 }
             }
         });
@@ -251,7 +258,7 @@ public class SouthPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ++playButton;
-                if(WestPanel.t1==null){
+                if(CenterPanel.t1==null){
                     if(playButton%2==0){
                         Image img = null;
                         try {
@@ -272,7 +279,7 @@ public class SouthPanel extends JPanel {
                     }
                 }
                 else{
-                    if(WestPanel.player.isPaused()){
+                    if(CenterPanel.player.isPaused()){
                         Image img = null;
                         try {
                             img = ImageIO.read(getClass().getResource("Icons\\pause.png")).getScaledInstance(75,75,Image.SCALE_SMOOTH);
@@ -280,7 +287,8 @@ public class SouthPanel extends JPanel {
                             ex.printStackTrace();
                         }
                         playMusic.setIcon(new ImageIcon(img));
-                        WestPanel.player.mp3Resume();
+                        CenterPanel.player.mp3Resume();
+
                     }
                     else{
                         Image img = null;
@@ -290,7 +298,7 @@ public class SouthPanel extends JPanel {
                             ex.printStackTrace();
                         }
                         playMusic.setIcon(new ImageIcon(img));
-                        WestPanel.player.mp3Pause();
+                        CenterPanel.player.mp3Pause();
                     }
                 }
             }
@@ -300,7 +308,9 @@ public class SouthPanel extends JPanel {
         songNamePanel.add(songName,BorderLayout.CENTER);
         songNamePanel.add(albumName,BorderLayout.SOUTH);
         musicImage.add(songNamePanel);
-        musicImage.add(heartButton);
+        if(CenterPanel.player!=null){
+            musicImage.add(heartButton);
+        }
         add(musicImage);
         add(playerButtons);
         add(soundManager);
