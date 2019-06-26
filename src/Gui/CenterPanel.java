@@ -213,7 +213,7 @@ public class CenterPanel extends JPanel {
                     panel1.add(label,BorderLayout.CENTER);
                     panel.add(panel1);
                 }
-               this.add(panel);
+               add(panel);
                 Gui.frame.setVisible(true);
             }
         }

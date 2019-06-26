@@ -8,6 +8,8 @@ import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.plaf.SpinnerUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -29,6 +31,7 @@ public class Player implements Runnable{
     static int frame;
     static FileInputStream fileInputStream;
     static AdvancedPlayer player;
+    static int framse;
     static boolean isPlayed=false;
 
     public Player(ArrayList<String> songsAdresses) throws JavaLayerException, FileNotFoundException {
@@ -107,21 +110,33 @@ public class Player implements Runnable{
             Image image = imageIcon.getImage();
             Image newimg = image.getScaledInstance(85, 85,  java.awt.Image.SCALE_SMOOTH);
 
+            Player.framse=mp3File.getFrameCount();
             SouthPanel.musicButton.setIcon(new ImageIcon(newimg));
             SouthPanel.albumName.setText(id3v2Tag.getAlbumArtist());
             SouthPanel.artist.setText(id3v2Tag.getArtist());
             SouthPanel.songName.setText(id3v2Tag.getTitle());
             SouthPanel.musicImage.add(SouthPanel.heartButton);
             SouthPanel.musicSlider.setMaximum((int)mp3File.getLengthInSeconds());
-            SouthPanel.l1.setText("0:49");
-            SouthPanel.l2.setText("3:49");
+            Mp3File finalMp3File = mp3File;
+//            SouthPanel.musicSlider.addChangeListener(new ChangeListener() {
+//                @Override
+//                public void stateChanged(ChangeEvent e) {
+////                    seekTo((SouthPanel.musicSlider.getValue()/(int) finalMp3File.getLengthInSeconds())*framse);
+////                    System.out.println((SouthPanel.musicSlider.getValue()/(int) finalMp3File.getLengthInSeconds())*framse);
+//                    seekTo(5000);
+//                }
+//            });
+            System.out.println(SouthPanel.musicSlider.getMaximum());
+            System.out.println(framse);
+            ToDigital toDigital=new ToDigital();
+            SouthPanel.l1.setText(toDigital.toDigital((int)mp3File.getLengthInSeconds()));
 //            SouthPanel.musicSlider.setMinorTickSpacing(1);
-            ActionListener l=new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    SouthPanel.musicSlider.setValue(SouthPanel.musicSlider.getValue()+1);
-                }
-            };
+//            ActionListener l=new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent e) {
+//                    SouthPanel.musicSlider.setValue(SouthPanel.musicSlider.getValue()+1);
+//                }
+//            };
             Gui.frame.setVisible(true);
 
             counter = i;
@@ -141,6 +156,19 @@ public class Player implements Runnable{
                     break;
                 }
                 try {
+                    new Thread(){
+                        int counter=0;
+                        @Override
+                        public void run(){
+                            SouthPanel.l2.setText(toDigital.toDigital(counter));
+                            try {
+                                sleep(1000);
+                                ++counter;
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }.start();
                     if (!player.play(1)) break;
                 } catch (JavaLayerException e) {
                     e.printStackTrace();

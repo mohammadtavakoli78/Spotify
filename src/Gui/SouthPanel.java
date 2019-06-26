@@ -113,12 +113,12 @@ public class SouthPanel extends JPanel {
         musicSlider=new JSlider(JSlider.HORIZONTAL,0,100,0);
         musicSlider.setOpaque(true);
         musicSlider.setBackground(Color.gray);
-        musicSlider.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                ////////
-            }
-        });
+//        musicSlider.addChangeListener(new ChangeListener() {
+//            @Override
+//            public void stateChanged(ChangeEvent e) {
+//                CenterPanel.player.seekTo((musicSlider.getValue()/100)*Player.framse);
+//            }
+//        });
         p1=new JPanel();
         p1.setLayout(new FlowLayout());
         p1.setOpaque(true);

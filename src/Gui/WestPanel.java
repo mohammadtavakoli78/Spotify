@@ -265,9 +265,9 @@ public class WestPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 Gui.choice=1;
                 Gui.removeCenter();
-                if(CenterPanel.panel!=null){
-                    CenterPanel.panel.removeAll();
-                }
+//                if(CenterPanel.panel!=null){
+//                    CenterPanel.panel.removeAll();
+//                }
                try {
                     Gui.centerPanel=new CenterPanel(1);
                 } catch (IOException e1) {

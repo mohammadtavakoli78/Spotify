@@ -1,8 +1,8 @@
-package File;
+package Gui;
 
 public class ToDigital {
 
-    public static String toDigital(int seconds)
+    public  String toDigital(int seconds)
     {
 
         int min = seconds/60;

@@ -7,6 +7,7 @@ public class Gui extends JFrame {
     static CenterPanel centerPanel;
     static int choice;
     static JFrame frame;
+    static JScrollPane jScrollPane;
     public Gui(){
         super();
         frame=new JFrame();
@@ -42,7 +43,10 @@ public class Gui extends JFrame {
     }
 
     static void update(){
-        JScrollPane jScrollPane = new JScrollPane(centerPanel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        if(jScrollPane!=null){
+            frame.remove(jScrollPane);
+        }
+        jScrollPane = new JScrollPane(centerPanel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         frame.add(jScrollPane,BorderLayout.CENTER);
     }
     public static void main(String[] args) {
