@@ -43,7 +43,7 @@ public class CenterPanel extends JPanel {
                 panel=new JPanel();
                 panel.setBackground(Color.DARK_GRAY);
                 panel.setLayout(new WrapLayout(WrapLayout.LEFT));
-                for(int i=size-1; i>=0; --i){
+                for(int i=0; i<=size-1; ++i){
                     int counter=i;
                     JPanel panel1=new JPanel();
                     panel1.setPreferredSize(new Dimension(300,300));
@@ -171,10 +171,22 @@ public class CenterPanel extends JPanel {
                     } catch (InvalidDataException e) {
                         e.printStackTrace();
                     }
+                    int finalI = i;
                     button.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                                 try {
+                                    int counter=0;
+                                    String str1="";
+                                    for(String string : albums.keySet()){
+                                        if(counter== finalI){
+                                            str1=string;
+                                            break;
+                                        }
+                                        else{
+                                            ++counter;
+                                        }
+                                    }
                                     if(t1==null){
                                         Image img = null;
                                         try {
@@ -184,7 +196,7 @@ public class CenterPanel extends JPanel {
                                         }
                                         SouthPanel.playMusic.setIcon(new ImageIcon(img));
                                         Gui.frame.setVisible(true);
-                                        player=new Player(albums.get(str));
+                                        player=new Player(albums.get(str1));
                                         t1=new Thread(player);
                                         t1.start();
                                     }
@@ -198,7 +210,7 @@ public class CenterPanel extends JPanel {
                                         SouthPanel.playMusic.setIcon(new ImageIcon(img));
                                         Gui.frame.setVisible(true);
                                         t1.stop();
-                                        player=new Player(albums.get(str));
+                                        player=new Player(albums.get(str1));
                                         t1=new Thread(player);
                                         t1.start();
                                     }
