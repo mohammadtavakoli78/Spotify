@@ -403,8 +403,10 @@ public class WestPanel extends JPanel {
 
             playListPanel.add(favoritButton);
 
-            for(String i : playLists.keySet()){
-                    JButton newButton=playLists.get(i);
+            allPlaylist=new AllPlaylist();
+            ArrayList<String> playlists=allPlaylist.playlistNames();
+            for(String i : playlists){
+                    JButton newButton=new JButton();
                     newButton.setContentAreaFilled(false);
                     newButton.setBorderPainted(false);
                     newButton.setFocusPainted(false);
@@ -416,17 +418,26 @@ public class WestPanel extends JPanel {
                         @Override
                         public void mouseClicked(MouseEvent e) {
                             if(e.getButton()==1){
-
-
-
-                                //show playlist here........
-
-
+                                allPlaylist=new AllPlaylist();
+                                ArrayList<String> songs;
+                                songs=allPlaylist.getSongsOfaPlaylist(newButton.getText());
+                                CenterPanel.playLists=songs;
+                                Gui.choice=4;
+                                Gui.removeCenter();
+                                try {
+                                    Gui.centerPanel=new CenterPanel(4);
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                } catch (ClassNotFoundException e1) {
+                                    e1.printStackTrace();
+                                }
+                                Gui.update();
+                                Gui.frame.setVisible(true);
                             }
                             else if(e.getButton()==3){
                                 JFrame frame1=new JFrame();
                                 frame1.setSize(400,200);
-                                frame1.setLayout(new GridLayout(2,1));
+                                frame1.setLayout(new GridLayout(3,1));
                                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                                 int width=(int)screenSize.getWidth();
                                 int height=(int)screenSize.getHeight();
@@ -448,6 +459,13 @@ public class WestPanel extends JPanel {
                                 delete.setFocusPainted(false);
                                 delete.setText("delete");
                                 delete.setFont(new Font("Italic",Font.ITALIC,18));
+
+                                JButton change=new JButton();
+                                change.setContentAreaFilled(false);
+                                change.setBorderPainted(false);
+                                change.setFocusPainted(false);
+                                change.setText("change");
+                                change.setFont(new Font("Italic",Font.ITALIC,18));
 
                                 rename.addActionListener(new ActionListener() {
                                     @Override
@@ -496,14 +514,7 @@ public class WestPanel extends JPanel {
                                         ok1.addActionListener(new ActionListener() {
                                             @Override
                                             public void actionPerformed(ActionEvent e) {
-                                                Iterator<String> it=playLists.keySet().iterator();
-                                                while(it.hasNext()){
-                                                    String buttonName=it.next();
-                                                    if(buttonName.equals(newButton.getText())){
-                                                        it.remove();
-                                                    }
-                                                }
-                                                playLists.put(textField1.getText(),newButton);
+                                                allPlaylist.changePlaylistName(textField1.getText(),newButton.getText());
                                                 newButton.setText(textField1.getText());
                                                 playLists.replace(textField1.getText(),newButton);
                                                 frame2.dispose();
@@ -518,20 +529,22 @@ public class WestPanel extends JPanel {
                                 delete.addActionListener(new ActionListener() {
                                     @Override
                                     public void actionPerformed(ActionEvent e) {
-                                        Iterator<String> it=playLists.keySet().iterator();
-                                        while(it.hasNext()){
-                                            String buttonName=it.next();
-                                            if(buttonName.equals(newButton.getText())){
-                                                it.remove();
-                                            }
-                                        }
+                                        allPlaylist.removePlaylist(newButton.getText());
                                         playListPanel.remove(newButton);
                                         Gui.frame.setVisible(true);
                                     }
                                 });
 
+                                change.addActionListener(new ActionListener() {
+                                    @Override
+                                    public void actionPerformed(ActionEvent e) {
+
+                                    }
+                                });
+
                                 frame1.add(rename);
                                 frame1.add(delete);
+                                frame1.add(change);
                                 frame1.setVisible(true);
                             }
                         }
@@ -642,7 +655,7 @@ public class WestPanel extends JPanel {
                                     else if(e.getButton()==3){
                                         JFrame frame1=new JFrame();
                                         frame1.setSize(400,200);
-                                        frame1.setLayout(new GridLayout(2,1));
+                                        frame1.setLayout(new GridLayout(3,1));
                                         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                                         int width=(int)screenSize.getWidth();
                                         int height=(int)screenSize.getHeight();
@@ -664,6 +677,13 @@ public class WestPanel extends JPanel {
                                         delete.setFocusPainted(false);
                                         delete.setText("delete");
                                         delete.setFont(new Font("Italic",Font.ITALIC,18));
+
+                                        JButton change=new JButton();
+                                        change.setContentAreaFilled(false);
+                                        change.setBorderPainted(false);
+                                        change.setFocusPainted(false);
+                                        change.setText("change");
+                                        change.setFont(new Font("Italic",Font.ITALIC,18));
 
                                         rename.addActionListener(new ActionListener() {
                                             @Override
@@ -712,14 +732,7 @@ public class WestPanel extends JPanel {
                                                 ok1.addActionListener(new ActionListener() {
                                                     @Override
                                                     public void actionPerformed(ActionEvent e) {
-                                                        Iterator<String> it=playLists.keySet().iterator();
-                                                        while(it.hasNext()){
-                                                            String buttonName=it.next();
-                                                            if(buttonName.equals(newButton.getText())){
-                                                                it.remove();
-                                                            }
-                                                        }
-                                                        playLists.put(textField1.getText(),newButton);
+                                                        allPlaylist.changePlaylistName(textField1.getText(),newButton.getText());
                                                         newButton.setText(textField1.getText());
                                                         playLists.replace(textField1.getText(),newButton);
                                                         frame2.dispose();
@@ -734,20 +747,22 @@ public class WestPanel extends JPanel {
                                         delete.addActionListener(new ActionListener() {
                                             @Override
                                             public void actionPerformed(ActionEvent e) {
-                                                Iterator<String> it=playLists.keySet().iterator();
-                                                while(it.hasNext()){
-                                                    String buttonName=it.next();
-                                                    if(buttonName.equals(newButton.getText())){
-                                                        it.remove();
-                                                    }
-                                                }
+                                                allPlaylist.removePlaylist(newButton.getText());
                                                 playListPanel.remove(newButton);
                                                 Gui.frame.setVisible(true);
                                             }
                                         });
 
+                                        change.addActionListener(new ActionListener() {
+                                            @Override
+                                            public void actionPerformed(ActionEvent e) {
+                                                
+                                            }
+                                        });
+
                                         frame1.add(rename);
                                         frame1.add(delete);
+                                        frame1.add(change);
                                         frame1.setVisible(true);
                                     }
                                 }
@@ -771,9 +786,9 @@ public class WestPanel extends JPanel {
                                 }
                             });
                             playListPanel.add(newButton);
+                            allPlaylist.addNewPlayList(newButton.getText());
                             playLists.put(newButton.getText(),newButton);
                             Gui.frame.setVisible(true);
-//                            GuiController.gui.setVisible(true);
                         }
                     });
                     frame.add(textField);

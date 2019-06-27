@@ -103,24 +103,14 @@ public class AllPlaylist implements Serializable
 
     public void removePlaylist(String playlistname)
     {
-        int res = 0;
         for (String s: playlists.keySet())
         {
             if (s.equals(playlistname))
             {
                 playlists.remove(playlistname);
+                changeFile();
                 break;
             }
-            else
-            {
-                res++;
-            }
-        }
-        if(res == 0 ) return;
-        else
-        {
-            changeFile();
-            return;
         }
     }
     public void changePlaylistSongs(String playListname,ArrayList<String > newsongs)
