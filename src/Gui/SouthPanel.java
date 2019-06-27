@@ -2,11 +2,8 @@ package Gui;
 
 import Files.FavoritPlaylist;
 import javazoom.jl.decoder.JavaLayerException;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -56,9 +53,9 @@ public class SouthPanel extends JPanel {
         buttons.setOpaque(true);
         buttons.setBackground(Color.gray);
         buttons.setLayout(new FlowLayout(FlowLayout.CENTER));
-        playMusic=new JButton(); /////////
-        nextMusic=new JButton(); ////////
-        previousMusic=new JButton(); /////////
+        playMusic=new JButton(); 
+        nextMusic=new JButton();
+        previousMusic=new JButton();
         shuffle=new JButton();  ///////////
         repeatMusic=new JButton(); //////////
         Image img = null;
