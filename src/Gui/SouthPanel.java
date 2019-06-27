@@ -5,9 +5,13 @@ import javazoom.jl.decoder.JavaLayerException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,7 +22,7 @@ public class SouthPanel extends JPanel {
     static int max;
     static int playButton=0;
     static JButton playMusic;
-    static JSlider musicSlider;
+    static JProgressBar musicSlider;
     JButton nextMusic;
     JButton previousMusic;
     JButton shuffle;
@@ -110,15 +114,41 @@ public class SouthPanel extends JPanel {
         buttons.add(playMusic);
         buttons.add(nextMusic);
         buttons.add(repeatMusic);
-        musicSlider=new JSlider(JSlider.HORIZONTAL,0,100,0);
+        musicSlider=new JProgressBar(0,0,100);
         musicSlider.setOpaque(true);
         musicSlider.setBackground(Color.gray);
-//        musicSlider.addChangeListener(new ChangeListener() {
-//            @Override
-//            public void stateChanged(ChangeEvent e) {
-//                CenterPanel.player.seekTo((musicSlider.getValue()/100)*Player.framse);
-//            }
-//        });
+        musicSlider.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                CenterPanel.player.setSeek(false);
+//                CenterPanel.player.seekTo(musicSlider.getValue()*1000/26);
+//                System.out.println(musicSlider.getValue());
+                int mouseX = e.getX();
+                //Computes how far along the mouse is relative to the component width then multiply it by the progress bar's maximum value.
+                int progressBarVal = (int)Math.round(((double)mouseX / (double)musicSlider.getWidth()) * musicSlider.getMaximum());
+                musicSlider.setValue(progressBarVal);
+//                CenterPanel.player.seekTo(musicSlider.getValue()*1000/26);
+                CenterPanel.player.seekTo(musicSlider.getValue()*1000/26);
+            }
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
+        musicSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+//                musicSlider.setValue(musicSlider.getValue());
+            }
+        });
         p1=new JPanel();
         p1.setLayout(new FlowLayout());
         p1.setOpaque(true);

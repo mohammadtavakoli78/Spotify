@@ -18,7 +18,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Timer;
 
 public class Player implements Runnable{
 
@@ -87,7 +86,6 @@ public class Player implements Runnable{
     public void setPaused(boolean paused) {
         isPaused = paused;
     }
-    // public String
 
     @Override
     public void run() {
@@ -110,38 +108,24 @@ public class Player implements Runnable{
             Image image = imageIcon.getImage();
             Image newimg = image.getScaledInstance(85, 85,  java.awt.Image.SCALE_SMOOTH);
 
+            ToDigital toDigital=new ToDigital();
+            javax.swing.Timer t=new Timer(1000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    SouthPanel.musicSlider.setValue(SouthPanel.musicSlider.getValue()+1);
+                    SouthPanel.l2.setText(toDigital.toDigital(SouthPanel.musicSlider.getValue()));
+                }
+            });
             Player.framse=mp3File.getFrameCount();
             SouthPanel.musicButton.setIcon(new ImageIcon(newimg));
             SouthPanel.albumName.setText(id3v2Tag.getAlbumArtist());
             SouthPanel.artist.setText(id3v2Tag.getArtist());
             SouthPanel.songName.setText(id3v2Tag.getTitle());
             SouthPanel.musicImage.add(SouthPanel.heartButton);
+            SouthPanel.musicSlider.setValue(0);
             SouthPanel.musicSlider.setMaximum((int)mp3File.getLengthInSeconds());
             Mp3File finalMp3File = mp3File;
-//            SouthPanel.musicSlider.addChangeListener(new ChangeListener() {
-//                @Override
-//                public void stateChanged(ChangeEvent e) {
-////                    seekTo((SouthPanel.musicSlider.getValue()/(int) finalMp3File.getLengthInSeconds())*framse);
-////                    System.out.println((SouthPanel.musicSlider.getValue()/(int) finalMp3File.getLengthInSeconds())*framse);
-//                    seekTo(5000);
-//                }
-//            });
-            Mp3File finalMp3File1 = mp3File;
-//            SouthPanel.musicSlider.addChangeListener(new ChangeListener() {
-//                @Override
-//                public void stateChanged(ChangeEvent e) {
-//                    seekTo(SouthPanel.musicSlider.getValue()*finalMp3File1.getFrameCount()/(int) finalMp3File1.getLengthInSeconds());
-//                }
-//            });
-            ToDigital toDigital=new ToDigital();
             SouthPanel.l1.setText(toDigital.toDigital((int)mp3File.getLengthInSeconds()));
-//            SouthPanel.musicSlider.setMinorTickSpacing(1);
-//            ActionListener l=new ActionListener() {
-//                @Override
-//                public void actionPerformed(ActionEvent e) {
-//                    SouthPanel.musicSlider.setValue(SouthPanel.musicSlider.getValue()+1);
-//                }
-//            };
             Gui.frame.setVisible(true);
 
             counter = i;
@@ -162,23 +146,20 @@ public class Player implements Runnable{
                 }
                 try {
                     if (!player.play(1)) break;
+                    t.start();
                 } catch (JavaLayerException e) {
                     e.printStackTrace();
                 }
                 if (isPaused) {
                     synchronized (player) {
                         try {
+                            t.stop();
                             player.wait();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
                 }
-//                if(!isPaused){
-//                    synchronized (player) {
-//                       player.notifyAll();
-//                    }
-//                }
                 if(seek){
                     synchronized (player) {
                         player.close();
@@ -190,7 +171,7 @@ public class Player implements Runnable{
                             e.printStackTrace();
                         }
                         try {
-                            player.play(frame,frame+100000);
+                            player.play(frame,frame+1);
                             seek=false;
                         } catch (JavaLayerException e) {
                             e.printStackTrace();
@@ -225,5 +206,8 @@ public class Player implements Runnable{
     public void seekTo(int frame) {
         this.seek=true;
         this.frame=frame;
+    }
+    public void setSeek(boolean b){
+        seek=b;
     }
 }
