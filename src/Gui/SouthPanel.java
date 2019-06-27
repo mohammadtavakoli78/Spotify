@@ -244,6 +244,7 @@ public class SouthPanel extends JPanel {
                             try {
                                 FavoritPlaylist favoritPlaylist=new FavoritPlaylist();
                                 favoritPlaylist.removeSong(song);
+                                Gui.frame.setVisible(true);
                             } catch (ClassNotFoundException e1) {
                                 e1.printStackTrace();
                             }
@@ -269,6 +270,7 @@ public class SouthPanel extends JPanel {
                             try {
                                 FavoritPlaylist favoritPlaylist=new FavoritPlaylist();
                                 favoritPlaylist.addsong(song);
+                                Gui.frame.setVisible(true);
                             } catch (ClassNotFoundException e1) {
                                 e1.printStackTrace();
                             }

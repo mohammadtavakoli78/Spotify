@@ -46,9 +46,8 @@ public class NorthPanel extends JPanel
 
         Image filseMenu = null;
         try {
-            filseMenu = ImageIO.read(getClass().getResource("Icons//menu.png")).getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+            filseMenu = ImageIO.read(getClass().getResource("Icons//menu2.png")).getScaledInstance(40, 40, Image.SCALE_SMOOTH);
         } catch (IOException e) {
-            System.out.println("harer");
             e.printStackTrace();
         }
 
@@ -57,7 +56,6 @@ public class NorthPanel extends JPanel
         try {
             undo = ImageIO.read(getClass().getResource("Icons//undo.png")).getScaledInstance(25, 25, Image.SCALE_SMOOTH);
         } catch (IOException e) {
-            System.out.println("harer");
             e.printStackTrace();
         }
 
@@ -66,7 +64,6 @@ public class NorthPanel extends JPanel
         try {
             redo = ImageIO.read(getClass().getResource("Icons//redo.png")).getScaledInstance(25, 25, Image.SCALE_SMOOTH);
         } catch (IOException e) {
-            System.out.println("harer");
             e.printStackTrace();
         }
 
@@ -74,7 +71,6 @@ public class NorthPanel extends JPanel
         try {
             browse = ImageIO.read(getClass().getResource("Icons//Browse.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         } catch (IOException e) {
-
             e.printStackTrace();
         }
         searchField = new JTextField();
@@ -88,14 +84,18 @@ public class NorthPanel extends JPanel
         undoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                undoManager.undo();
+                if(undoManager.canUndo()){
+                    undoManager.undo();
+                }
             }
         });
         redoButton = new MyButton("",Color.BLACK,"Redo",redo);
         redoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                undoManager.redo();
+                if(undoManager.canRedo()){
+                    undoManager.redo();
+                }
             }
         });
         fileMenu   = new JMenu();
@@ -117,6 +117,11 @@ public class NorthPanel extends JPanel
         });
         fileMenu.add(helpMenuItem);
         fileMenu.add(exitMenuItem);
+
+        JMenuBar menuBar=new JMenuBar();
+        menuBar.setOpaque(true);
+        menuBar.setBackground(Color.gray);
+        menuBar.add(fileMenu);
 
         controlpanel = new JPanel();
         innerPanel = new JPanel();
@@ -145,20 +150,17 @@ public class NorthPanel extends JPanel
 
 
 
+        innerPanel.setLayout(new WrapLayout(WrapLayout.RIGHT));
         innerPanel.setOpaque(true);
         innerPanel.setBackground(Color.black);
-        innerPanel.setLayout(new GridLayout(1,3,0,0));
         innerPanel.add(undoButton);
         innerPanel.add(redoButton);
         innerPanel.add(searchButton);
-
-
+        
         JPanel inpanel = new JPanel();
         inpanel.setLayout(new GridLayout(1,2));
         inpanel.setOpaque(true);
         inpanel.setBackground(Color.black);
-
-
 
         controlpanel.setOpaque(true);
         controlpanel.setBackground(Color.black);
@@ -167,22 +169,9 @@ public class NorthPanel extends JPanel
         controlpanel.add(new JLabel("                         "),BorderLayout.CENTER);
         controlpanel.add(inpanel,BorderLayout.EAST);
 
-
-
-
-
-
-
-
-
-        add(fileMenu,BorderLayout.WEST);
+        add(menuBar,BorderLayout.WEST);
         add(controlpanel,BorderLayout.CENTER);
         add(namebar,BorderLayout.EAST);
-
-
-
-
-
 
     }
     public void setName(String name)

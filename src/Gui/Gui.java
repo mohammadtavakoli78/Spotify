@@ -23,8 +23,10 @@ public class Gui extends JFrame {
         frame.getContentPane().setBackground(Color.DARK_GRAY);
         SouthPanel southPanel=new SouthPanel();
         WestPanel westPanel=new WestPanel();
+        NorthPanel northPanel=new NorthPanel();
         frame.add(southPanel,BorderLayout.SOUTH);
         frame.add(westPanel,BorderLayout.WEST);
+        frame.add(northPanel,BorderLayout.NORTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
