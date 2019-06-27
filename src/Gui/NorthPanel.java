@@ -156,7 +156,7 @@ public class NorthPanel extends JPanel
         innerPanel.add(undoButton);
         innerPanel.add(redoButton);
         innerPanel.add(searchButton);
-        
+
         JPanel inpanel = new JPanel();
         inpanel.setLayout(new GridLayout(1,2));
         inpanel.setOpaque(true);
