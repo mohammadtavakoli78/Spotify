@@ -143,12 +143,12 @@ public class SouthPanel extends JPanel {
             public void mouseExited(MouseEvent e) {
             }
         });
-        musicSlider.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-//                musicSlider.setValue(musicSlider.getValue());
-            }
-        });
+//        musicSlider.addChangeListener(new ChangeListener() {
+//            @Override
+//            public void stateChanged(ChangeEvent e) {
+////                musicSlider.setValue(musicSlider.getValue());
+//            }
+//        });
         p1=new JPanel();
         p1.setLayout(new FlowLayout());
         p1.setOpaque(true);
@@ -160,9 +160,6 @@ public class SouthPanel extends JPanel {
         p1.add(l1);
         playerButtons.add(buttons,BorderLayout.NORTH);
         playerButtons.add(p1,BorderLayout.SOUTH);
-//        playerButtons.add(l1,BorderLayout.EAST);
-//        playerButtons.add(l2,BorderLayout.WEST);
-//        playerButtons.add(musicSlider,BorderLayout.SOUTH);
 
         soundManager.setLayout(new BorderLayout());
         JPanel sound=new JPanel();
@@ -318,6 +315,9 @@ public class SouthPanel extends JPanel {
                 if(CenterPanel.t1!=null){
                     CenterPanel.t1.stop();
                     try {
+                        if(Player.t!=null){
+                            Player.t.stop();
+                        }
                         CenterPanel.player=new Player(CenterPanel.player.getSongsAdresses(),CenterPanel.player.getCounter()+1);
                     } catch (JavaLayerException e1) {
                         e1.printStackTrace();
@@ -335,6 +335,9 @@ public class SouthPanel extends JPanel {
                 if(CenterPanel.t1!=null){
                     CenterPanel.t1.stop();
                     try {
+                        if(Player.t!=null){
+                            Player.t.stop();
+                        }
                         CenterPanel.player=new Player(CenterPanel.player.getSongsAdresses(),CenterPanel.player.getCounter()-1);
                     } catch (JavaLayerException e1) {
                         e1.printStackTrace();

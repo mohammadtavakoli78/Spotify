@@ -84,6 +84,9 @@ public class CenterPanel extends JPanel {
                                     } catch (IOException ex) {
                                         ex.printStackTrace();
                                     }
+                                    if(Player.t!=null){
+                                        Player.t.stop();
+                                    }
                                     SouthPanel.playMusic.setIcon(new ImageIcon(img));
                                     Gui.frame.setVisible(true);
                                     player=new Player(song,counter);
@@ -97,6 +100,7 @@ public class CenterPanel extends JPanel {
                                     } catch (IOException ex) {
                                         ex.printStackTrace();
                                     }
+                                    Player.t.stop();
                                     SouthPanel.playMusic.setIcon(new ImageIcon(img));
                                     Gui.frame.setVisible(true);
                                     t1.stop();
@@ -194,6 +198,9 @@ public class CenterPanel extends JPanel {
                                         } catch (IOException ex) {
                                             ex.printStackTrace();
                                         }
+                                        if(Player.t!=null){
+                                            Player.t.stop();
+                                        }
                                         SouthPanel.playMusic.setIcon(new ImageIcon(img));
                                         Gui.frame.setVisible(true);
                                         player=new Player(albums.get(str1));
@@ -207,6 +214,7 @@ public class CenterPanel extends JPanel {
                                         } catch (IOException ex) {
                                             ex.printStackTrace();
                                         }
+                                        Player.t.stop();
                                         SouthPanel.playMusic.setIcon(new ImageIcon(img));
                                         Gui.frame.setVisible(true);
                                         t1.stop();
@@ -277,6 +285,9 @@ public class CenterPanel extends JPanel {
                                     } catch (IOException ex) {
                                         ex.printStackTrace();
                                     }
+                                    if(Player.t!=null){
+                                        Player.t.stop();
+                                    }
                                     SouthPanel.playMusic.setIcon(new ImageIcon(img));
                                     Gui.frame.setVisible(true);
                                     player=new Player(favourite,counter);
@@ -290,6 +301,7 @@ public class CenterPanel extends JPanel {
                                     } catch (IOException ex) {
                                         ex.printStackTrace();
                                     }
+                                    Player.t.stop();
                                     SouthPanel.playMusic.setIcon(new ImageIcon(img));
                                     Gui.frame.setVisible(true);
                                     t1.stop();
@@ -358,6 +370,9 @@ public class CenterPanel extends JPanel {
                                     } catch (IOException ex) {
                                         ex.printStackTrace();
                                     }
+                                    if(Player.t!=null){
+                                        Player.t.stop();
+                                    }
                                     SouthPanel.playMusic.setIcon(new ImageIcon(img));
                                     Gui.frame.setVisible(true);
                                     player=new Player(playLists,counter);
@@ -371,6 +386,7 @@ public class CenterPanel extends JPanel {
                                     } catch (IOException ex) {
                                         ex.printStackTrace();
                                     }
+                                    Player.t.stop();
                                     SouthPanel.playMusic.setIcon(new ImageIcon(img));
                                     Gui.frame.setVisible(true);
                                     t1.stop();

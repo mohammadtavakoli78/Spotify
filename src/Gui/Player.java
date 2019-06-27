@@ -32,6 +32,7 @@ public class Player implements Runnable{
     static AdvancedPlayer player;
     static int framse;
     static boolean isPlayed=false;
+    static  javax.swing.Timer t;
 
     public Player(ArrayList<String> songsAdresses) throws JavaLayerException, FileNotFoundException {
         this(songsAdresses, 0);
@@ -109,7 +110,10 @@ public class Player implements Runnable{
             Image newimg = image.getScaledInstance(85, 85,  java.awt.Image.SCALE_SMOOTH);
 
             ToDigital toDigital=new ToDigital();
-            javax.swing.Timer t=new Timer(1000, new ActionListener() {
+            if(t!=null){
+                t.stop();
+            }
+            t=new Timer(1000, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     SouthPanel.musicSlider.setValue(SouthPanel.musicSlider.getValue()+1);
