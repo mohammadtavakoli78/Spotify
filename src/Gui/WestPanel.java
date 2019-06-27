@@ -1,5 +1,6 @@
 package Gui;
 
+import Files.AllPlaylist;
 import Files.AllSongsAdresses;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -7,24 +8,21 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
 public class WestPanel extends JPanel {
 
-
     private JFileChooser jFileChooser = new JFileChooser();
-
     static int counter = 0;
-
     static Thread t1;
-
     static Player player;
-
     AllSongsAdresses  allSongsAdresses = null;
-
     File newSong = null;
     private HashMap<String,JButton> playLists=new HashMap<String,JButton>();
+    AllPlaylist allPlaylist;
+
     public WestPanel() {
         super();
 
@@ -625,12 +623,21 @@ public class WestPanel extends JPanel {
                                 @Override
                                 public void mouseClicked(MouseEvent e) {
                                     if(e.getButton()==1){
-
-
-
-                                        //show playlist here........
-
-
+                                        allPlaylist=new AllPlaylist();
+                                        ArrayList<String> songs;
+                                        songs=allPlaylist.getSongsOfaPlaylist(newButton.getText());
+                                        CenterPanel.playLists=songs;
+                                        Gui.choice=4;
+                                        Gui.removeCenter();
+                                        try {
+                                            Gui.centerPanel=new CenterPanel(4);
+                                        } catch (IOException e1) {
+                                            e1.printStackTrace();
+                                        } catch (ClassNotFoundException e1) {
+                                            e1.printStackTrace();
+                                        }
+                                        Gui.update();
+                                        Gui.frame.setVisible(true);
                                     }
                                     else if(e.getButton()==3){
                                         JFrame frame1=new JFrame();

@@ -77,9 +77,8 @@ public class AllPlaylist implements Serializable
     {
         ArrayList<String > out = playlists.get(name);
         return out;
-
     }
-    
+
     public void addNewPlayList(String playlistName)
     {
         playlists.put(playlistName,new ArrayList<String>());

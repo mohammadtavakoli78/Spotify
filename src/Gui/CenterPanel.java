@@ -26,8 +26,8 @@ public class CenterPanel extends JPanel {
     private String str;
     private ArrayList<String> song;
     private ArrayList<String> favourite;
+    static ArrayList<String> playLists;
     private HashMap<String,ArrayList<String>> albums;
-    private HashMap<String,ArrayList<String>> playLists;
     static Player player;
     static Thread t1;
     static JPanel panel;
@@ -313,6 +313,87 @@ public class CenterPanel extends JPanel {
             }
         }
         if(choose==4){
+            File file=new File("PlayLists");
+            setBackground(Color.DARK_GRAY);
+            if(file.exists() && playLists!=null){
+                int size=playLists.size();
+                panel=new JPanel();
+                panel.setBackground(Color.DARK_GRAY);
+                panel.setLayout(new WrapLayout(WrapLayout.LEFT));
+                for(int i=0; i<=size-1; ++i){
+                    int counter=i;
+                    JPanel panel1=new JPanel();
+                    panel1.setPreferredSize(new Dimension(300,300));
+                    panel1.setBackground(Color.DARK_GRAY);
+                    JButton button=new JButton();
+                    button.setContentAreaFilled(false);
+                    button.setFocusPainted(false);
+                    button.setBorderPainted(false);
+                    button.setBackground(Color.darkGray);
+                    JLabel label=new JLabel();
+                    try {
+                        Mp3File mp3File=new Mp3File(playLists.get(i));
+                        ID3v2 id3v2Tag = mp3File.getId3v2Tag();
+                        byte[] songImage=id3v2Tag.getAlbumImage();
+                        ImageIcon imageIcon = new ImageIcon(songImage);
+                        Image image = imageIcon.getImage();
+                        Image newimg = image.getScaledInstance(260, 260,  java.awt.Image.SCALE_SMOOTH);
+                        button.setIcon(new ImageIcon(newimg));
+                        label.setText("            "+id3v2Tag.getTitle());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (UnsupportedTagException e) {
+                        e.printStackTrace();
+                    } catch (InvalidDataException e) {
+                        e.printStackTrace();
+                    }
+                    button.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            try {
+                                if(t1==null){
+                                    Image img = null;
+                                    try {
+                                        img = ImageIO.read(getClass().getResource("Icons\\pause.png")).getScaledInstance(75,75,Image.SCALE_SMOOTH);
+                                    } catch (IOException ex) {
+                                        ex.printStackTrace();
+                                    }
+                                    SouthPanel.playMusic.setIcon(new ImageIcon(img));
+                                    Gui.frame.setVisible(true);
+                                    player=new Player(playLists,counter);
+                                    t1=new Thread(player);
+                                    t1.start();
+                                }
+                                else{
+                                    Image img = null;
+                                    try {
+                                        img = ImageIO.read(getClass().getResource("Icons\\pause.png")).getScaledInstance(75,75,Image.SCALE_SMOOTH);
+                                    } catch (IOException ex) {
+                                        ex.printStackTrace();
+                                    }
+                                    SouthPanel.playMusic.setIcon(new ImageIcon(img));
+                                    Gui.frame.setVisible(true);
+                                    t1.stop();
+                                    player=new Player(playLists,counter);
+                                    t1=new Thread(player);
+                                    t1.start();
+                                }
+                            } catch (JavaLayerException e1) {
+                                e1.printStackTrace();
+                            } catch (FileNotFoundException e1) {
+                                e1.printStackTrace();
+                            }
+                        }
+                    });
+                    panel1.add(button,BorderLayout.NORTH);
+                    panel1.add(label,BorderLayout.SOUTH);
+                    panel.add(panel1);
+                }
+                add(panel);
+                Gui.frame.setVisible(true);
+            }
+        }
+        if(choose==5){
 
         }
     }
