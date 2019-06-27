@@ -82,23 +82,7 @@ public class AllPlaylist implements Serializable
     public void addNewPlayList(String playlistName)
     {
         playlists.put(playlistName,new ArrayList<String>());
-        file.delete();
-        file = new File("PlayLists");
-        try {
-            fileOutputStream = new FileOutputStream(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            objectOutputStream = new ObjectOutputStream(fileOutputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            objectOutputStream.writeObject(playlists);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        changeFile();
     }
 
     public void removePlaylist(String playlistname)
@@ -115,12 +99,7 @@ public class AllPlaylist implements Serializable
     }
     public void changePlaylistSongs(String playListname,ArrayList<String > newsongs)
     {
-        for (String s: playlists.keySet()) {
-            if( s.equals(playListname))
-            {
-                playlists.replace(playListname,newsongs);
-            }
-        }
+        playlists.replace(playListname,newsongs);
         changeFile();
     }
 

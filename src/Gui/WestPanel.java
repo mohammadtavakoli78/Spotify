@@ -3,7 +3,7 @@ package Gui;
 import Files.AllPlaylist;
 import Files.AllSongsAdresses;
 import Files.ChangePlaylist;
-import Files.changePlaylist;
+import Files.ChangePlaylist;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -541,7 +541,9 @@ public class WestPanel extends JPanel {
                                 change.addActionListener(new ActionListener() {
                                     @Override
                                     public void actionPerformed(ActionEvent e) {
-
+                                        AllSongsAdresses allSongsAdresses=new AllSongsAdresses("allSongs");
+                                        ChangePlaylist changePlaylist=new ChangePlaylist(newButton.getText(),allSongsAdresses.getAllSongs());
+                                        frame1.dispose();
                                     }
                                 });
 
@@ -759,7 +761,9 @@ public class WestPanel extends JPanel {
                                         change.addActionListener(new ActionListener() {
                                             @Override
                                             public void actionPerformed(ActionEvent e) {
-                                                ChangePlaylist changePlaylist=new ChangePlaylist();
+                                                AllSongsAdresses allSongsAdresses=new AllSongsAdresses("allSongs");
+                                                ChangePlaylist changePlaylist=new ChangePlaylist(newButton.getText(),allSongsAdresses.getAllSongs());
+                                                frame1.dispose();
                                             }
                                         });
 
