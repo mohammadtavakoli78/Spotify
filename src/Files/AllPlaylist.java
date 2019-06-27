@@ -15,7 +15,6 @@ public class AllPlaylist implements Serializable
     ObjectInputStream objectInputStream = null;
 
     public AllPlaylist()
-
     {
         file = new File("PlayLists");
         if ( !file.exists() )
@@ -74,7 +73,14 @@ public class AllPlaylist implements Serializable
         return arrayList;
     }
 
-    public void addNewPlayList(String playlistName )
+    public ArrayList<String> getSongsOfaPlaylist(String name)
+    {
+        ArrayList<String > out = playlists.get(name);
+        return out;
+
+    }
+    
+    public void addNewPlayList(String playlistName)
     {
         playlists.put(playlistName,new ArrayList<String>());
         file.delete();
