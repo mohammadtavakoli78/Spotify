@@ -2,6 +2,9 @@ package Gui;
 
 import Files.AllPlaylist;
 import Files.AllSongsAdresses;
+import Files.ChangePlaylist;
+import Files.changePlaylist;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -756,7 +759,7 @@ public class WestPanel extends JPanel {
                                         change.addActionListener(new ActionListener() {
                                             @Override
                                             public void actionPerformed(ActionEvent e) {
-                                                
+                                                ChangePlaylist changePlaylist=new ChangePlaylist();
                                             }
                                         });
 

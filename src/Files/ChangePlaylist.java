@@ -1,4 +1,4 @@
-package Logic;
+package Files;
 
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class changePlaylist extends JFrame {
+public class ChangePlaylist extends JFrame {
 
     private String nameOfPlayList;
 
@@ -35,7 +35,7 @@ public class changePlaylist extends JFrame {
     ObjectInputStream objectInputStream = null;
 
 
-    public changePlaylist(String name , ArrayList<String> allSongs) {
+    public ChangePlaylist(String name,ArrayList<String> allSongs) {
 
 
 
