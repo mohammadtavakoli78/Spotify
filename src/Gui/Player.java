@@ -126,8 +126,13 @@ public class Player implements Runnable{
 //                    seekTo(5000);
 //                }
 //            });
-            System.out.println(SouthPanel.musicSlider.getMaximum());
-            System.out.println(framse);
+            Mp3File finalMp3File1 = mp3File;
+//            SouthPanel.musicSlider.addChangeListener(new ChangeListener() {
+//                @Override
+//                public void stateChanged(ChangeEvent e) {
+//                    seekTo(SouthPanel.musicSlider.getValue()*finalMp3File1.getFrameCount()/(int) finalMp3File1.getLengthInSeconds());
+//                }
+//            });
             ToDigital toDigital=new ToDigital();
             SouthPanel.l1.setText(toDigital.toDigital((int)mp3File.getLengthInSeconds()));
 //            SouthPanel.musicSlider.setMinorTickSpacing(1);
@@ -156,19 +161,6 @@ public class Player implements Runnable{
                     break;
                 }
                 try {
-                    new Thread(){
-                        int counter=0;
-                        @Override
-                        public void run(){
-                            SouthPanel.l2.setText(toDigital.toDigital(counter));
-                            try {
-                                sleep(1000);
-                                ++counter;
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }.start();
                     if (!player.play(1)) break;
                 } catch (JavaLayerException e) {
                     e.printStackTrace();

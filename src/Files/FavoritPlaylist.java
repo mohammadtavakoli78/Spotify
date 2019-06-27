@@ -71,14 +71,16 @@ public class FavoritPlaylist {
 
         int i = 0;
 
-        for (String s: favoritePlaylist) {
-
-            if( !s.equals(songPath)) i++;
-
-            else favoritePlaylist.remove(i);
-
+        for (String s : favoritePlaylist) {
+            if(s.equals(songPath)){
+                break;
+            }
+            else{
+                ++i;
+            }
         }
 
+        favoritePlaylist.remove(i);
 
         file.delete();
 

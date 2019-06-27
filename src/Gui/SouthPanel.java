@@ -1,5 +1,6 @@
 package Gui;
 
+import Files.FavoritPlaylist;
 import javazoom.jl.decoder.JavaLayerException;
 
 import javax.imageio.ImageIO;
@@ -11,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.locks.LockSupport;
 
 public class SouthPanel extends JPanel {
@@ -225,9 +227,53 @@ public class SouthPanel extends JPanel {
                     Image img = null;
                     if(heartButtonCounter%2==0){
                         img = ImageIO.read(getClass().getResource("Icons\\like1.png")).getScaledInstance(30,30,Image.SCALE_SMOOTH);
+                        if(CenterPanel.t1!=null && CenterPanel.player!=null){
+                            int counter=0;
+                            String song="";
+                            int counter1=CenterPanel.player.getCounter();
+                            ArrayList<String> songs=CenterPanel.player.getSongsAdresses();
+                            for(String i : songs){
+                                if(counter==counter1){
+                                    song=i;
+                                    break;
+                                }
+                                else{
+                                    ++counter;
+                                }
+                            }
+                            try {
+                                FavoritPlaylist favoritPlaylist=new FavoritPlaylist();
+                                favoritPlaylist.removeSong(song);
+                            } catch (ClassNotFoundException e1) {
+                                e1.printStackTrace();
+                            }
+
+                        }
                     }
                     else{
                         img = ImageIO.read(getClass().getResource("Icons\\like.png")).getScaledInstance(30,30,Image.SCALE_SMOOTH);
+                        if(CenterPanel.t1!=null && CenterPanel.player!=null){
+                            int counter=0;
+                            String song="";
+                            int counter1=CenterPanel.player.getCounter();
+                            ArrayList<String> songs=CenterPanel.player.getSongsAdresses();
+                            for(String i : songs){
+                                if(counter==counter1){
+                                    song=i;
+                                    break;
+                                }
+                                else{
+                                    ++counter;
+                                }
+                            }
+                            try {
+                                FavoritPlaylist favoritPlaylist=new FavoritPlaylist();
+                                favoritPlaylist.addsong(song);
+                            } catch (ClassNotFoundException e1) {
+                                e1.printStackTrace();
+                            }
+
+                        }
                     }
                     heartButton.setIcon(new ImageIcon(img));
 //                    GuiController.gui.setVisible(true);

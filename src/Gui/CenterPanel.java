@@ -237,7 +237,6 @@ public class CenterPanel extends JPanel {
                 favourite=favoritPlaylist.getFavoritePlaylist();
                 int size=favourite.size();
                 panel=new JPanel();
-                panel.setOpaque(true);
                 panel.setBackground(Color.DARK_GRAY);
                 panel.setLayout(new WrapLayout(WrapLayout.LEFT));
                 for(int i=0; i<=size-1; ++i){
@@ -305,11 +304,12 @@ public class CenterPanel extends JPanel {
                             }
                         }
                     });
-                    panel1.add(button);
-                    panel1.add(label);
+                    panel1.add(button,BorderLayout.NORTH);
+                    panel1.add(label,BorderLayout.SOUTH);
                     panel.add(panel1);
                 }
                 add(panel);
+                Gui.frame.setVisible(true);
             }
         }
         if(choose==4){
