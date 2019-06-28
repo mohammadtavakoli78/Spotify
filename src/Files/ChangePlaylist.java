@@ -4,7 +4,6 @@ import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -111,7 +110,6 @@ public class ChangePlaylist extends JFrame {
 
         add(jScrollPane,BorderLayout.CENTER);
         add(button,BorderLayout.SOUTH);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
     public ArrayList<String > readPreviosSongs()
