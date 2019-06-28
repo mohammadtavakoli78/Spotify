@@ -12,7 +12,13 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
+/**
+ * This class is for changing playlist like add and remove a song
+ *
+ *
+ * @author Mohammad tavakoli & Amir saadatmand
+ *
+ */
 public class ChangePlaylist extends JFrame {
 
     private String nameOfPlayList;
@@ -25,6 +31,9 @@ public class ChangePlaylist extends JFrame {
     ObjectOutputStream objectOutputStream = null;
     ObjectInputStream objectInputStream = null;
 
+    /**
+     * Constructor for ChangePlaylist
+     */
     public ChangePlaylist(String name,ArrayList<String> allSongs) {
 
         super();
@@ -112,6 +121,12 @@ public class ChangePlaylist extends JFrame {
         add(button,BorderLayout.SOUTH);
         setVisible(true);
     }
+
+    /**
+     * get arraylist of extist song
+     *
+     * @return Arraylist of String
+     */
     public ArrayList<String > readPreviosSongs()
     {
         File file = new File("PlayLists");
@@ -134,6 +149,12 @@ public class ChangePlaylist extends JFrame {
             e.printStackTrace();
         }       return playlists.get(nameOfPlayList);
     }
+
+    /**
+     * get selected songs
+     *
+     * @return void
+     */
     public void selectedSongsf ()
     {
         for (int i = 0; i <jCheckBoxes.size() ; i++)
@@ -143,6 +164,12 @@ public class ChangePlaylist extends JFrame {
             }
         }
     }
+
+    /**
+     * get arraylist of selected songs
+     *
+     * @return Arraylist of String
+     */
     public ArrayList<String > getSelectedSongs()
     {
         return selectedSongs;

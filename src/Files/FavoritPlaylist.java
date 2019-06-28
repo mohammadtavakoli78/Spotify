@@ -3,6 +3,13 @@ package Files;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * This class is for saving favorite playlists in a file
+ *
+ *
+ * @author Mohammad tavakoli & Amir saadatmand
+ *
+ */
 public class FavoritPlaylist {
 
     private ArrayList<String > favoritePlaylist;
@@ -20,6 +27,9 @@ public class FavoritPlaylist {
 
     ObjectInputStream objectInputStream = null;
 
+    /**
+     * Constructor for FavoritePlaylist
+     */
     public FavoritPlaylist() throws IOException, ClassNotFoundException {
 
         file = new File("FavoritePlaylist");
@@ -46,10 +56,22 @@ public class FavoritPlaylist {
 
     }
 
+    /**
+     * get favorite songs
+     *
+     *
+     * @return Arraylist of string
+     */
     public ArrayList<String> getFavoritePlaylist() {
         return favoritePlaylist;
     }
 
+    /**
+     * add a new song to favorite playlist
+     *
+     * @Param songPath String
+     * @return void
+     */
     public void addsong(String songPath) throws IOException {
 
         favoritePlaylist.add(songPath);
@@ -67,6 +89,12 @@ public class FavoritPlaylist {
 
     }
 
+    /**
+     * remove a song from all playlists
+     *
+     * @Param songPath
+     * @return void
+     */
     public void removeSong(String songPath) throws IOException {
 
         int i = 0;
