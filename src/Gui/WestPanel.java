@@ -3,12 +3,10 @@ package Gui;
 import Files.AllPlaylist;
 import Files.AllSongsAdresses;
 import Files.ChangePlaylist;
-import Files.ChangePlaylist;
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +15,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class WestPanel extends JPanel {
 

@@ -94,8 +94,6 @@ public class Player implements Runnable{
     public void run() {
 
         for (int i = start; i < songsAdresses.size(); i++) {
-            System.out.println(shuffle);
-            System.out.println(repeat);
             if(shuffle){
                 Random r1=new Random();
                 int random=r1.nextInt(songsAdresses.size()-1);
@@ -131,7 +129,7 @@ public class Player implements Runnable{
             });
             Player.framse=mp3File.getFrameCount();
             SouthPanel.musicButton.setIcon(new ImageIcon(newimg));
-            SouthPanel.albumName.setText(id3v2Tag.getAlbumArtist());
+            SouthPanel.albumName.setText(id3v2Tag.getAlbum());
             SouthPanel.artist.setText(id3v2Tag.getArtist());
             SouthPanel.songName.setText(id3v2Tag.getTitle());
             SouthPanel.musicImage.add(SouthPanel.heartButton);
