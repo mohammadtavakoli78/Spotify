@@ -8,6 +8,13 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.util.*;
 
+/**
+ * This class is for conserving all songs
+ * This class manage all songs.
+ *
+ * @author Mohammad tavakoli & Amir saadatmand
+ *
+ */
 public class AllSongsAdresses implements Serializable {
 
     static ArrayList< String > songsAdress ;
@@ -18,6 +25,9 @@ public class AllSongsAdresses implements Serializable {
     ObjectOutputStream objectOutputStream = null;
     ObjectInputStream objectInputStream = null;
 
+    /**
+     * Constructor for AllSongsAdresses
+     */
     public AllSongsAdresses (String filename)
     {
         this.filename = filename;
@@ -66,6 +76,11 @@ public class AllSongsAdresses implements Serializable {
         }
     }
 
+    /**
+     * get name of file
+     *
+     * @return String
+     */
     public String getFilename() {
         return filename;
     }
@@ -78,6 +93,11 @@ public class AllSongsAdresses implements Serializable {
         this.songsAdress = songsAdress;
     }
 
+    /**
+     * get all songs
+     *
+     * @return Arraylist of String
+     */
     public ArrayList<String> getSongsAdress()
     {
         try {
@@ -89,6 +109,11 @@ public class AllSongsAdresses implements Serializable {
         return songsAdress;
     }
 
+    /**
+     * get all songs
+     *
+     * @return Arraylist of String
+     */
     public ArrayList<String> getAllSongs(){
         try {
             File file=new File("allSongs");
@@ -112,6 +137,12 @@ public class AllSongsAdresses implements Serializable {
         return songsAdress;
     }
 
+    /**
+     * add a new song
+     *
+     * @Param filePath
+     * @return void
+     */
     public void addSong(String filePath)
     {
         songsAdress.add(filePath);
@@ -146,6 +177,11 @@ public class AllSongsAdresses implements Serializable {
         }
     }
 
+    /**
+     * sort all songs according to last access to the file
+     *
+     * @return void
+     */
     public void lastAccessSorting() {
         Collections.sort(songsAdress, new Comparator<String>() {
             @Override

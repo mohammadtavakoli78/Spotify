@@ -76,7 +76,7 @@ public class AllPlaylist implements Serializable
     /**
      *
      *
-     * @return Arraylist of
+     * @return Arraylist of String
      */
     public  ArrayList<String> playlistNames ()
     {
@@ -88,19 +88,32 @@ public class AllPlaylist implements Serializable
         return arrayList;
     }
 
-
+    /**
+     * get songs of a playlist
+     * @param name name of a playlist
+     * @return Arraylist of String
+     */
     public ArrayList<String> getSongsOfaPlaylist(String name)
     {
         ArrayList<String > out = playlists.get(name);
         return out;
     }
 
+    /**
+     * add new Playlist
+     * @param playlistName add new playlist
+     * @return void
+     */
     public void addNewPlayList(String playlistName)
     {
         playlists.put(playlistName,new ArrayList<String>());
         changeFile();
     }
-
+    /**
+     * removes a playlist from all playlists
+     * @param playlistname remove a playlist
+     * @return void
+     */
     public void removePlaylist(String playlistname)
     {
         for (String s: playlists.keySet())
@@ -113,12 +126,22 @@ public class AllPlaylist implements Serializable
             }
         }
     }
+    /**
+     * changes songs of a playlist
+     * @param playListname & newsongs
+     * @return void
+     */
     public void changePlaylistSongs(String playListname,ArrayList<String > newsongs)
     {
         playlists.replace(playListname,newsongs);
         changeFile();
     }
 
+    /**
+     * change a playlist name
+     * @param newName & oldname
+     * @return void
+     */
     public void changePlaylistName(String newName,String oldName)
     {
         ArrayList<String > arr = playlists.get(oldName);
@@ -127,6 +150,11 @@ public class AllPlaylist implements Serializable
         changeFile();
     }
 
+    /**
+     * arrange a file according to last access
+     *
+     * @return void
+     */
     public void changeFile()
     {
         file.delete();
