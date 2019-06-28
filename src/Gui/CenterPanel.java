@@ -20,6 +20,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * This class is for showing centerPanel
+ *
+ *
+ * @author Mohammad tavakoli & Amir saadatmand
+ *
+ */
 public class CenterPanel extends JPanel {
     private int temp;
     private int choose;
@@ -31,8 +38,17 @@ public class CenterPanel extends JPanel {
     static Player player;
     static Thread t1;
     static JPanel panel;
+
+    /**
+     *
+     * constructor for CenterPanel class
+     */
     public CenterPanel(int choose) throws IOException, ClassNotFoundException {
         this.choose=choose;
+        /**
+         *
+         * shows all songs
+         */
         if(choose==1){
             File file=new File("allSongs");
             setBackground(Color.DARK_GRAY);
@@ -123,6 +139,11 @@ public class CenterPanel extends JPanel {
                 Gui.frame.setVisible(true);
             }
         }
+
+        /**
+         *
+         * shows all albums
+         */
         if(choose==2){
             File file=new File("allSongs");
             setBackground(Color.DARK_GRAY);
@@ -237,6 +258,11 @@ public class CenterPanel extends JPanel {
                 Gui.frame.setVisible(true);
             }
         }
+
+        /**
+         *
+         * shows all favorite playlist
+         */
         if(choose==3){
             File file=new File("FavoritePlaylist");
             setBackground(Color.DARK_GRAY);
@@ -324,6 +350,11 @@ public class CenterPanel extends JPanel {
                 Gui.frame.setVisible(true);
             }
         }
+
+        /**
+         *
+         * shows all playlists
+         */
         if(choose==4){
             File file=new File("PlayLists");
             setBackground(Color.DARK_GRAY);

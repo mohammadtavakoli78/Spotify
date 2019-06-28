@@ -15,7 +15,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+/**
+ * This class is for showing southPanel and showing play music button artworks and....
+ *
+ *
+ * @author Mohammad tavakoli & Amir saadatmand
+ *
+ */
 public class SouthPanel extends JPanel {
 
     private int shuffleCounter=0;

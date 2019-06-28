@@ -3,11 +3,23 @@ package Gui;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This class is for showing main frame
+ *
+ *
+ * @author Mohammad tavakoli & Amir saadatmand
+ *
+ */
 public class Gui extends JFrame {
     static CenterPanel centerPanel;
     static int choice;
     static JFrame frame;
     static JScrollPane jScrollPane;
+
+    /**
+     *
+     * constructor for gui class
+     */
     public Gui(){
         super();
         frame=new JFrame();
@@ -31,12 +43,23 @@ public class Gui extends JFrame {
         frame.setVisible(true);
     }
 
+    /**
+     * remove centerPanel and update it
+     *
+     * @return void
+     */
     static void removeCenter(){
         if(centerPanel!=null){
             frame.remove(centerPanel);
         }
     }
 
+    /**
+     * add a new component
+     *
+     * @Param component
+     * @return void
+     */
     static void addComponent(Component component){
         removeCenter();
         centerPanel.add(component);
@@ -44,6 +67,11 @@ public class Gui extends JFrame {
         frame.setVisible(true);
     }
 
+    /**
+     * update centerPanel
+     *
+     * @return void
+     */
     static void update(){
         if(jScrollPane!=null){
             frame.remove(jScrollPane);
@@ -51,6 +79,7 @@ public class Gui extends JFrame {
         jScrollPane = new JScrollPane(centerPanel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         frame.add(jScrollPane,BorderLayout.CENTER);
     }
+
     public static void main(String[] args) {
         Gui gui=new Gui();
     }

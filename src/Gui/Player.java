@@ -17,6 +17,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * This class is for playing songs
+ *
+ *
+ * @author Mohammad tavakoli & Amir saadatmand
+ *
+ */
 public class Player implements Runnable{
 
     static ArrayList<String> songsAdresses = new ArrayList<String>();
@@ -34,39 +41,102 @@ public class Player implements Runnable{
     boolean repeat;
     boolean shuffle;
 
+    /**
+     *
+     * constructor for player class
+     */
     public Player(ArrayList<String> songsAdresses) throws JavaLayerException, FileNotFoundException {
         this(songsAdresses, 0);
     }
+
+    /**
+     *
+     * constructor for player class
+     */
     public Player(ArrayList<String> songsAdresses, int start) throws JavaLayerException, FileNotFoundException {
         this.songsAdresses = songsAdresses;
         this.start = start;
         this.repeat=false;
         this.shuffle=false;
     }
+
+    /**
+     * get arrylists of playing songs
+     *
+     * @return Arraylist of String
+     */
     public ArrayList<String> getSongsAdresses() {
         return songsAdresses;
     }
+
+    /**
+     * set arraylist of songs
+     * @param songsAdresses Arraylist String
+     * @return void
+     */
     public void setSongsAdresses(ArrayList<String> songsAdresses) {
         this.songsAdresses = songsAdresses;
     }
+
+    /**
+     * setCounter
+     * @param counter for counting
+     * @return void
+     */
     public void setCounter(int counter) {
         this.counter = counter;
     }
+
+    /**
+     * set isPlayed
+     *
+     * @return void
+     */
     public void setIsPlayed(){
         isPlayed=true;
     }
+
+    /**
+     * get isPlayed boolean
+     *
+     * @return boolean
+     */
     public boolean getIsPlayed(){
         return isPlayed;
     }
+
+    /**
+     * close player
+     *
+     * @return void
+     */
     public void close(){
         player.close();
     }
+
+    /**
+     * notify the threads
+     *
+     * @return void
+     */
     public void set(){
         player.notifyAll();
     }
+
+    /**
+     * get counter
+     *
+     * @return int
+     */
     public int getCounter(){
         return counter;
     }
+
+    /**
+     * plus the counter
+     *
+     * @return void
+     */
     public void counterPlus() {
         new Thread(){
             @Override
@@ -75,6 +145,12 @@ public class Player implements Runnable{
             }
         }.start();
     }
+
+    /**
+     * decrease the counter
+     *
+     * @return void
+     */
     public void counterminus() {
         new Thread(){
             @Override
@@ -83,13 +159,30 @@ public class Player implements Runnable{
             }
         }.start();
     }
+
+    /**
+     * get isPuased boolean
+     *
+     * @return boolean
+     */
     public boolean isPaused() {
         return isPaused;
     }
+
+    /**
+     * set ispuased boolean
+     * @param paused for setting
+     * @return void
+     */
     public void setPaused(boolean paused) {
         isPaused = paused;
     }
 
+    /**
+     * ovverride the runclass
+     *
+     * @return void
+     */
     @Override
     public void run() {
 
@@ -206,10 +299,20 @@ public class Player implements Runnable{
         }
     }
 
+    /**
+     * set ispaused to true
+     *
+     * @return void
+     */
     public void mp3Pause() {
         Player.isPaused = true;
     }
 
+    /**
+     * for puasing the player
+     *
+     * @return void
+     */
     public void mp3Resume() {
         Player.isPaused = false;
         synchronized (player) {
@@ -217,16 +320,39 @@ public class Player implements Runnable{
         }
     }
 
+    /**
+     * for seeking the player
+     *
+     * @return void
+     */
     public void seekTo(int frame) {
         this.seek=true;
         this.frame=frame;
     }
+
+    /**
+     * for setting seek boolean
+     *
+     * @return void
+     */
     public void setSeek(boolean b){
         seek=b;
     }
+
+    /**
+     * for setting repeat for songs
+     *
+     * @return void
+     */
     public void setRepeat(boolean repeat){
         this.repeat=repeat;
     }
+
+    /**
+     * for setting shuffle
+     *
+     * @return void
+     */
     public void setShuffle(boolean shuffle){
         this.shuffle=shuffle;
     }

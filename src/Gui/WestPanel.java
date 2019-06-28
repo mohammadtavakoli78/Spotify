@@ -16,6 +16,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * This class is for showing westPanel
+ *
+ *
+ * @author Mohammad tavakoli & Amir saadatmand
+ *
+ */
 public class WestPanel extends JPanel {
 
     private JFileChooser jFileChooser = new JFileChooser();
@@ -1037,8 +1044,19 @@ public class WestPanel extends JPanel {
 
 }
 
+/**
+ * This class is for creating a defualt button
+ *
+ *
+ * @author Mohammad tavakoli & Amir saadatmand
+ *
+ */
 class MyButton extends JButton {
 
+    /**
+     *
+     * constructor for myButton class
+     */
     public MyButton(String name, Color color, String tipPoint, Image image) {
 
 

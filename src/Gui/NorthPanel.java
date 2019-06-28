@@ -7,10 +7,15 @@ import javax.swing.undo.UndoManager;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.IOException;
 
+/**
+ * This class is for showing northPanel
+ *
+ *
+ * @author Mohammad tavakoli & Amir saadatmand
+ *
+ */
 public class NorthPanel extends JPanel
 {
     private String name = null;
@@ -36,6 +41,10 @@ public class NorthPanel extends JPanel
   private   JPanel eastPanel ;
  private    JLabel namebar;
 
+    /**
+     *
+     * constructor for NorthPanel class
+     */
     public NorthPanel()
     {
 
@@ -174,47 +183,103 @@ public class NorthPanel extends JPanel
         add(namebar,BorderLayout.EAST);
 
     }
+
+    /**
+     * setName of the user
+     *
+     * @return void
+     */
     public void setName(String name)
     {
         this.name = name;
     }
 
+    /**
+     * getController panel
+     *
+     * @return JPanel
+     */
     public JPanel getControlpanel() {
         return controlpanel;
     }
 
+    /**
+     * get InnerPanel
+     *
+     * @return JPanel
+     */
     public JPanel getInnerPanel() {
         return innerPanel;
     }
 
+    /**
+     * get EastPanel
+     *
+     * @return JPanel
+     */
     public JPanel getEastPanel() {
         return eastPanel;
     }
 
+    /**
+     * setName of the user
+     *
+     * @return UndoManager
+     */
     public UndoManager getUndoManager() {
         return undoManager;
     }
 
+    /**
+     * get FielMenu
+     *
+     * @return JMenu
+     */
     public JMenu getFileMenu() {
         return fileMenu;
     }
 
+    /**
+     * get UndoButton
+     *
+     * @return JButton
+     */
     public JButton getUndoButton() {
         return undoButton;
     }
 
+    /**
+     * get RedoButton
+     *
+     * @return JButton
+     */
     public JButton getRedoButton() {
         return redoButton;
     }
 
+    /**
+     * get SearchButton
+     *
+     * @return JButton
+     */
     public JButton getSearchButton() {
         return searchButton;
     }
 
+    /**
+     * get searchField
+     *
+     * @return JTextField
+     */
     public JTextField getSearchField() {
         return searchField;
     }
 
+    /**
+     * get Namebar
+     *
+     * @return JLabel
+     */
     public JLabel getNamebar() {
         return namebar;
     }
