@@ -4,6 +4,8 @@ import Files.FavoritPlaylist;
 import javazoom.jl.decoder.JavaLayerException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +17,9 @@ import java.util.ArrayList;
 
 
 public class SouthPanel extends JPanel {
+
+    private int shuffleCounter=0;
+    private int repeatCounter=0;
     private int heartButtonCounter=0;
     static int max;
     static int playButton=0;
@@ -53,7 +58,7 @@ public class SouthPanel extends JPanel {
         buttons.setOpaque(true);
         buttons.setBackground(Color.gray);
         buttons.setLayout(new FlowLayout(FlowLayout.CENTER));
-        playMusic=new JButton(); 
+        playMusic=new JButton();
         nextMusic=new JButton();
         previousMusic=new JButton();
         shuffle=new JButton();  ///////////
@@ -198,6 +203,28 @@ public class SouthPanel extends JPanel {
         JSlider volumeSlider=new JSlider(JSlider.HORIZONTAL,0,100,0);
         volumeSlider.setOpaque(true);
         volumeSlider.setBackground(Color.gray);
+        Audio.setMasterOutputMute(false);
+        volumeSlider.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int mouseX = e.getX();
+                int jsliderBarVal = (int)Math.round(((double)mouseX / (double)volumeSlider.getWidth()) * volumeSlider.getMaximum());
+                volumeSlider.setValue(jsliderBarVal);
+                Audio.setMasterOutputVolume(jsliderBarVal/100f);
+            }
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
         sound.add(queue);
         sound.add(devices);
         sound.add(music);
@@ -392,6 +419,30 @@ public class SouthPanel extends JPanel {
                         playMusic.setIcon(new ImageIcon(img));
                         CenterPanel.player.mp3Pause();
                     }
+                }
+            }
+        });
+        repeatMusic.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ++repeatCounter;
+                if(repeatCounter%2==0){
+                    CenterPanel.player.setRepeat(false);
+                }
+                else{
+                    CenterPanel.player.setRepeat(true);
+                }
+            }
+        });
+        shuffle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ++shuffleCounter;
+                if(shuffleCounter%2==0){
+                    CenterPanel.player.setShuffle(false);
+                }
+                else{
+                    CenterPanel.player.setShuffle(true);
                 }
             }
         });

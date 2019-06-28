@@ -1,6 +1,5 @@
 package Files;
 
-import Gui.Gui;
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
@@ -51,7 +50,7 @@ public class ChangePlaylist extends JFrame {
         for (int i = 0; i <allSongs.size() ; i++)
         {
             JPanel jPanel = new JPanel();
-            jPanel.setLayout(new FlowLayout());
+            jPanel.setLayout(new GridLayout(1,2));
             Mp3File mp3File = null;
             try {
                  mp3File = new Mp3File(allSongs.get(i));

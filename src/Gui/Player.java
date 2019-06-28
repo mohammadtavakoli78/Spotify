@@ -8,9 +8,6 @@ import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.plaf.SpinnerUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +15,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Player implements Runnable{
 
@@ -33,6 +31,8 @@ public class Player implements Runnable{
     static int framse;
     static boolean isPlayed=false;
     static  javax.swing.Timer t;
+    boolean repeat;
+    boolean shuffle;
 
     public Player(ArrayList<String> songsAdresses) throws JavaLayerException, FileNotFoundException {
         this(songsAdresses, 0);
@@ -40,6 +40,8 @@ public class Player implements Runnable{
     public Player(ArrayList<String> songsAdresses, int start) throws JavaLayerException, FileNotFoundException {
         this.songsAdresses = songsAdresses;
         this.start = start;
+        this.repeat=false;
+        this.shuffle=false;
     }
     public ArrayList<String> getSongsAdresses() {
         return songsAdresses;
@@ -92,6 +94,13 @@ public class Player implements Runnable{
     public void run() {
 
         for (int i = start; i < songsAdresses.size(); i++) {
+            System.out.println(shuffle);
+            System.out.println(repeat);
+            if(shuffle){
+                Random r1=new Random();
+                int random=r1.nextInt(songsAdresses.size()-1);
+                i=random;
+            }
             Mp3File mp3File= null;
             try {
                 mp3File = new Mp3File(songsAdresses.get(i));
@@ -193,6 +202,9 @@ public class Player implements Runnable{
             if (counter == i && i == songsAdresses.size()) {
                 i = -1;
             }
+            if(repeat){
+                i-=1;
+            }
         }
     }
 
@@ -213,5 +225,11 @@ public class Player implements Runnable{
     }
     public void setSeek(boolean b){
         seek=b;
+    }
+    public void setRepeat(boolean repeat){
+        this.repeat=repeat;
+    }
+    public void setShuffle(boolean shuffle){
+        this.shuffle=shuffle;
     }
 }
