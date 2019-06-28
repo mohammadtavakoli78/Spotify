@@ -4,6 +4,13 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * This class is for creating file of all playlist
+ * This class manage all playlist.
+ *
+ * @author Mohammad tavakoli & Amir saadatmand
+ *
+ */
 public class AllPlaylist implements Serializable
 {
 
@@ -14,6 +21,9 @@ public class AllPlaylist implements Serializable
     ObjectOutputStream objectOutputStream = null;
     ObjectInputStream objectInputStream = null;
 
+    /**
+     * Constructor for AllPlaylist
+     */
     public AllPlaylist()
     {
         file = new File("PlayLists");
@@ -63,6 +73,11 @@ public class AllPlaylist implements Serializable
         }
     }
 
+    /**
+     *
+     *
+     * @return Arraylist of
+     */
     public  ArrayList<String> playlistNames ()
     {
         ArrayList<String> arrayList = new ArrayList<>();
@@ -72,6 +87,7 @@ public class AllPlaylist implements Serializable
         }
         return arrayList;
     }
+
 
     public ArrayList<String> getSongsOfaPlaylist(String name)
     {
