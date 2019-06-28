@@ -58,7 +58,7 @@ public class CenterPanel extends JPanel {
                 int size=song.size();
                 panel=new JPanel();
                 panel.setBackground(Color.DARK_GRAY);
-                panel.setLayout(new WrapLayout(WrapLayout.LEFT));
+                panel.setLayout(new GridLayout(size/4+1,4));
                 for(int i=0; i<=size-1; ++i){
                     int counter=i;
                     JPanel panel1=new JPanel();
@@ -155,7 +155,7 @@ public class CenterPanel extends JPanel {
                 int size=albums.size();
                 panel=new JPanel();
                 panel.setBackground(Color.DARK_GRAY);
-                panel.setLayout(new WrapLayout(WrapLayout.LEFT));
+                panel.setLayout(new GridLayout(size/4+1,4));
                 for(int i=0; i<=size-1; ++i){
                     int counterString=0;
                     String albumString="";
@@ -272,7 +272,7 @@ public class CenterPanel extends JPanel {
                 int size=favourite.size();
                 panel=new JPanel();
                 panel.setBackground(Color.DARK_GRAY);
-                panel.setLayout(new WrapLayout(WrapLayout.LEFT));
+                panel.setLayout(new GridLayout(size/4+1,4));
                 for(int i=0; i<=size-1; ++i){
                     int counter=i;
                     JPanel panel1=new JPanel();
@@ -362,7 +362,7 @@ public class CenterPanel extends JPanel {
                 int size=playLists.size();
                 panel=new JPanel();
                 panel.setBackground(Color.DARK_GRAY);
-                panel.setLayout(new WrapLayout(WrapLayout.LEFT));
+                panel.setLayout(new GridLayout(size/4+1,4));
                 for(int i=0; i<=size-1; ++i){
                     int counter=i;
                     JPanel panel1=new JPanel();

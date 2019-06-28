@@ -84,7 +84,6 @@ public class NorthPanel extends JPanel
         }
         searchField = new JTextField();
         searchField.setLayout(new FlowLayout());
-
         searchField.setColumns(10);
         searchField.setEditable(true);
         searchField.setFont(new Font("Italic",Font.BOLD,12));
