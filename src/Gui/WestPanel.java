@@ -84,6 +84,13 @@ public class WestPanel extends JPanel {
             e.printStackTrace();
         }
 
+        Image radio = null;
+        try {
+            radio = ImageIO.read(getClass().getResource("Icons\\radio.png")).getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
         JPanel playListPanel = new JPanel();
         JPanel albumPanel = new JPanel();
         JPanel homePanel = new JPanel();
@@ -92,6 +99,7 @@ public class WestPanel extends JPanel {
         JButton addPlayListButton = new MyButton("add playlist  ", Color.BLACK, "click to add a new playlist", addimg);
         JButton homeButton = new MyButton("HOME                 ", Color.BLACK, "Click to go home", homeimage);
         JButton browseButton = new MyButton("Browse              ", Color.BLACK, "Browse", browse);
+        JButton radioButton = new MyButton("Radio              ", Color.BLACK, "Radio", radio);
         JButton favoritButton = new MyButton("Favorit playlist        ",Color.BLACK,"Favorit",favorite);
         JButton sharedPlaylist = new MyButton("Shared playlist        ",Color.BLACK,"Shared",shared);
         JButton addLibraryButton = new MyButton("Add to Library          ",Color.BLACK,"Library",null);
@@ -145,6 +153,34 @@ public class WestPanel extends JPanel {
             @Override
             public void mouseExited(MouseEvent e) {
                 browseButton.setForeground(color);
+            }
+        });
+
+        radioButton.addMouseListener(new MouseListener() {
+            Color color=radioButton.getForeground();
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                radioButton.setForeground(Color.green);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                radioButton.setForeground(color);
             }
         });
 
@@ -214,10 +250,17 @@ public class WestPanel extends JPanel {
             }
         });
 
+        radioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //////////////////////
+            }
+        });
+
         sharedPlaylist.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                //////////////////////
             }
         });
 
@@ -407,12 +450,13 @@ public class WestPanel extends JPanel {
 
         ///  home panel
 
-        homePanel.setLayout(new GridLayout(2,1));
+        homePanel.setLayout(new GridLayout(3,1));
 
         homePanel.add(homeButton);
 
         homePanel.add(browseButton);
 
+        homePanel.add(radioButton);
 
 /////////////////////////////////////////////////
         //// album panel
