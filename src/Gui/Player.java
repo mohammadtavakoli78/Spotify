@@ -187,6 +187,9 @@ public class Player implements Runnable{
     public void run() {
 
         for (int i = start; i < songsAdresses.size(); i++) {
+            if(i<0 || i>=songsAdresses.size()){
+                i=0;
+            }
             if(shuffle){
                 Random r1=new Random();
                 int random=r1.nextInt(songsAdresses.size()-1);
@@ -284,13 +287,13 @@ public class Player implements Runnable{
                     }
                 }
             }
-            if (counter != i && counter >= 0) {
-                i = counter - 1;
+            if (counter != i && counter < 0) {
+                i = counter + 1;
             }
-            if (counter != i && counter > songsAdresses.size()) {
+            if (counter != i && counter >= songsAdresses.size()) {
                 i = -1;
             }
-            if (counter == i && i == songsAdresses.size()) {
+            if (counter == i && i == songsAdresses.size()-1) {
                 i = -1;
             }
             if(repeat){
