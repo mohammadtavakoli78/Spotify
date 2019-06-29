@@ -9,8 +9,8 @@ import java.awt.event.KeyListener;
 
 /**
  * This class is for showing main frame
- *
- *
+ * This class showing all component like five most important panel
+ * like : southPanel,northPanel,WestPanel,....
  * @author Mohammad tavakoli & Amir saadatmand
  *
  */

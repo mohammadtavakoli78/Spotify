@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 /**
  * This class is for saving favorite playlists in a file
- *
- *
+ * This class is for when user tap to the heart button.
+ * and can remove it again with again tap to the heart button.
  * @author Mohammad tavakoli & Amir saadatmand
  *
  */

@@ -13,7 +13,7 @@ import java.util.HashMap;
 /**
  * This class is for creating albums.
  * This class also arrange the songs according to last access to the file.
- *
+ * This class uses mp3agic library.
  * @author Mohammad tavakoli & Amir saadatmand
  *
  */

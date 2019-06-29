@@ -14,8 +14,8 @@ import java.util.HashMap;
 
 /**
  * This class is for changing playlist like add and remove a song
- *
- *
+ * This class show all song with jcheck box format for editting.
+ * This class uses mp3agic library.
  * @author Mohammad tavakoli & Amir saadatmand
  *
  */

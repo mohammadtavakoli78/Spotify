@@ -18,8 +18,10 @@ import java.util.HashMap;
 
 /**
  * This class is for showing westPanel
- *
- *
+ * This class manages song,albums,favorite playlist,
+ * share playlist and making a new playlist and remove,delete and change it.
+ * you also can add a new song to your library with jfilechooser and this music add
+ * to your library and you can add it to your wanted playlist later.
  * @author Mohammad tavakoli & Amir saadatmand
  *
  */
@@ -215,7 +217,7 @@ public class WestPanel extends JPanel {
         sharedPlaylist.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
             }
         });
 

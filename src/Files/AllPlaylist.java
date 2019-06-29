@@ -7,7 +7,7 @@ import java.util.HashMap;
 /**
  * This class is for creating file of all playlist
  * This class manage all playlist.
- *
+ * This class is very useful for the centerPanel and playlist panel.
  * @author Mohammad tavakoli & Amir saadatmand
  *
  */

@@ -2,8 +2,8 @@ package Gui;
 
 /**
  * This class is for converting the time to a string
- *
- *
+ * This class is useful for when we want to show the remaining
+ * and all time of a mp3file and we should show it in String object.
  * @author Mohammad tavakoli & Amir saadatmand
  *
  */

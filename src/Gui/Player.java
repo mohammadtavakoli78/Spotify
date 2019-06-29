@@ -19,8 +19,12 @@ import java.util.Random;
 
 /**
  * This class is for playing songs
- *
- *
+ * This class plays mp3 files with using javazoom(jlayer) library and
+ * have the facilities to play music,stop it , seek it to a wanted frame
+ * and also next music and previous music.
+ * This class handel this options with a thread.
+ * thread starts and read mp3files frame per frame and continues it until the end of file.
+ * and read mp3files form arraylist of String that is address of wanted song.
  * @author Mohammad tavakoli & Amir saadatmand
  *
  */

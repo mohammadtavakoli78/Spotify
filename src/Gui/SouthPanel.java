@@ -17,8 +17,8 @@ import java.util.ArrayList;
 
 /**
  * This class is for showing southPanel and showing play music button artworks and....
- *
- *
+ * This class is for managing play,pause,next,previous and seek the music.
+ *  uses jlayer library.
  * @author Mohammad tavakoli & Amir saadatmand
  *
  */

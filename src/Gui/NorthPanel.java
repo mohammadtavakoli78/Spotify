@@ -10,8 +10,8 @@ import java.io.IOException;
 
 /**
  * This class is for showing northPanel
- *
- *
+ * This class include menubar,search bar and
+ * also the name of the user.
  * @author Mohammad tavakoli & Amir saadatmand
  *
  */

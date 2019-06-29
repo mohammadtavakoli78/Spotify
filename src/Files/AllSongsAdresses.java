@@ -11,7 +11,7 @@ import java.util.*;
 /**
  * This class is for conserving all songs
  * This class manage all songs.
- *
+ * This class arranges all songs according to last access.
  * @author Mohammad tavakoli & Amir saadatmand
  *
  */

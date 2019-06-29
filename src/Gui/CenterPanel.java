@@ -8,7 +8,6 @@ import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 import javazoom.jl.decoder.JavaLayerException;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -22,8 +21,8 @@ import java.util.HashMap;
 
 /**
  * This class is for showing centerPanel
- *
- *
+ * This class shows all songs,albums,playlists,favorite playlist and ...
+ * This class uses mp3agic library.
  * @author Mohammad tavakoli & Amir saadatmand
  *
  */
