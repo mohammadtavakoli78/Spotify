@@ -10,7 +10,7 @@ import java.util.HashMap;
 /**
  * server class
  *
- * @author  mohammad &amir
+ * @author  mohammad & amir
  */
 public class Server implements Serializable {
     private ServerSocket serverSocket;

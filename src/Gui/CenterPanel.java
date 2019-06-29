@@ -13,9 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -33,6 +31,7 @@ public class CenterPanel extends JPanel {
     private ArrayList<String> song;
     private ArrayList<String> favourite;
     static ArrayList<String> playLists;
+    private ArrayList<Mp3File> mp3Files;
     private HashMap<String,ArrayList<String>> albums;
     static Player player;
     static Thread t1;
@@ -440,7 +439,57 @@ public class CenterPanel extends JPanel {
             }
         }
         if(choose==5){
+            File file=new File("download");
+            setBackground(Color.DARK_GRAY);
+            if(file.exists()){
+                FileInputStream fileInputStream=new FileInputStream(file);
+                try {
+                    ObjectInputStream objectInputStream=new ObjectInputStream(fileInputStream);
+                    try {
+                        mp3Files =(ArrayList<Mp3File>) objectInputStream.readObject();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                int size=mp3Files.size();
+                panel=new JPanel();
+                panel.setBackground(Color.DARK_GRAY);
+                panel.setLayout(new GridLayout(size/4+1,4));
+                for(int i=0; i<=size-1; ++i){
+                    int counter=i;
+                    JPanel panel1=new JPanel();
+                    panel1.setPreferredSize(new Dimension(300,300));
+                    panel1.setBackground(Color.DARK_GRAY);
+                    panel1.setLayout(new BorderLayout());
+                    JButton button=new JButton();
+                    button.setContentAreaFilled(false);
+                    button.setFocusPainted(false);
+                    button.setBorderPainted(false);
+                    button.setLayout(new BorderLayout());
+                    button.setBackground(Color.darkGray);
+                    JLabel label=new JLabel();
+                    ID3v2 id3v2Tag = mp3Files.get(i).getId3v2Tag();
+                    byte[] songImage=id3v2Tag.getAlbumImage();
+                    ImageIcon imageIcon = new ImageIcon(songImage);
+                    Image image = imageIcon.getImage();
+                    Image newimg = image.getScaledInstance(280, 280,  java.awt.Image.SCALE_SMOOTH);
+                    button.setIcon(new ImageIcon(newimg));
+                    label.setText("            "+id3v2Tag.getTitle());
+                    button.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
 
+                        }
+                    });
+                    panel1.add(button,BorderLayout.NORTH);
+                    panel1.add(label,BorderLayout.CENTER);
+                    this.panel.add(panel1);
+                }
+                add(panel);
+                Gui.frame.setVisible(true);
+            }
         }
     }
 }
