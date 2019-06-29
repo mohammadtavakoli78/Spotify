@@ -18,27 +18,20 @@ import java.io.IOException;
 public class NorthPanel extends JPanel
 {
     static String name;
-    UndoManager undoManager = new UndoManager();
-
-  private   JMenu fileMenu ;
-
-  private JMenuItem helpMenuItem;
-  private JMenuItem exitMenuItem;
-
-   private JButton undoButton ;
-  private   JButton redoButton ;
-
-  private   JButton searchButton;
-
-
-
-  private   JTextField searchField ;
-
-  private   JPanel controlpanel ;
-
-  private  JPanel innerPanel;
-  private   JPanel eastPanel ;
- private    JLabel namebar;
+    private UndoManager undoManager = new UndoManager();
+    private JMenu fileMenu ;
+    private JMenuItem helpMenuItem;
+    private JMenuItem exitMenuItem;
+    private JButton undoButton ;
+    private JButton redoButton ;
+    private JButton searchButton;
+    private JTextField searchField ;
+    private JPanel controlpanel ;
+    private JPanel innerPanel;
+    private JPanel eastPanel ;
+    private JLabel namebar;
+    private JMenuBar menuBar;
+    private JPanel inpanel;
 
     /**
      *
@@ -125,7 +118,7 @@ public class NorthPanel extends JPanel
         fileMenu.add(helpMenuItem);
         fileMenu.add(exitMenuItem);
 
-        JMenuBar menuBar=new JMenuBar();
+        menuBar=new JMenuBar();
         menuBar.setOpaque(true);
         menuBar.setBackground(Color.gray);
         menuBar.add(fileMenu);
@@ -164,7 +157,7 @@ public class NorthPanel extends JPanel
         innerPanel.add(redoButton);
         innerPanel.add(searchButton);
 
-        JPanel inpanel = new JPanel();
+        inpanel = new JPanel();
         inpanel.setLayout(new GridLayout(1,2));
         inpanel.setOpaque(true);
         inpanel.setBackground(Color.black);

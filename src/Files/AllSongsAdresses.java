@@ -17,13 +17,13 @@ import java.util.*;
  */
 public class AllSongsAdresses implements Serializable {
 
-    static ArrayList< String > songsAdress ;
     private String filename;
-    File file;
-    FileInputStream fileInputStream = null;
-    FileOutputStream fileOutputStream = null;
-    ObjectOutputStream objectOutputStream = null;
-    ObjectInputStream objectInputStream = null;
+    private File file;
+    static ArrayList< String > songsAdress ;
+    private FileInputStream fileInputStream = null;
+    private FileOutputStream fileOutputStream = null;
+    private ObjectOutputStream objectOutputStream = null;
+    private ObjectInputStream objectInputStream = null;
 
     /**
      * Constructor for AllSongsAdresses

@@ -15,18 +15,24 @@ import java.awt.event.KeyListener;
  *
  */
 public class Gui extends JFrame {
+    private EastPanel eastPanel;
     static CenterPanel centerPanel;
     static int choice;
     static JFrame frame;
     static JScrollPane jScrollPane;
-
+    private JFrame frame1;
+    private JTextField textField1;
+    private JButton ok1;
+    private WestPanel westPanel;
+    private NorthPanel northPanel;
+    private SouthPanel southPanel;
     /**
      *
      * constructor for gui class
      */
     public Gui(){
         super();
-        JFrame frame1=new JFrame();
+        frame1=new JFrame();
         frame1.setSize(400,200);
         frame1.setLayout(new GridLayout(2,1));
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -37,7 +43,7 @@ public class Gui extends JFrame {
         Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("Icons\\spotify.png"));
         frame1.setIconImage(icon);
 
-        JTextField textField1=new JTextField();
+        textField1=new JTextField();
         textField1.setText("Enter your name");
         textField1.setFont(new Font("Italic",Font.ITALIC,25));
         textField1.setBackground(Color.DARK_GRAY);
@@ -60,7 +66,7 @@ public class Gui extends JFrame {
             public void keyReleased(KeyEvent e) {
             }
         });
-        JButton ok1=new JButton();
+        ok1=new JButton();
         ok1.setContentAreaFilled(false);
         ok1.setBorderPainted(false);
         ok1.setFocusPainted(false);
@@ -84,12 +90,14 @@ public class Gui extends JFrame {
                 int height=(int)screenSize.getHeight();
                 frame.setLocation(width/2-800,height/2-500);
                 frame.getContentPane().setBackground(Color.DARK_GRAY);
-                SouthPanel southPanel=new SouthPanel();
-                WestPanel westPanel=new WestPanel();
-                NorthPanel northPanel=new NorthPanel();
+                southPanel=new SouthPanel();
+                westPanel=new WestPanel();
+                northPanel=new NorthPanel();
+                eastPanel=new EastPanel();
                 frame.add(southPanel,BorderLayout.SOUTH);
                 frame.add(westPanel,BorderLayout.WEST);
                 frame.add(northPanel,BorderLayout.NORTH);
+                frame.add(eastPanel,BorderLayout.EAST);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setVisible(true);
             }
@@ -152,7 +160,7 @@ public class Gui extends JFrame {
         if(jScrollPane!=null){
             frame.remove(jScrollPane);
         }
-        jScrollPane = new JScrollPane(centerPanel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane = new JScrollPane(centerPanel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         frame.add(jScrollPane,BorderLayout.CENTER);
     }
 

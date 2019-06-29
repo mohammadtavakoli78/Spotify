@@ -31,10 +31,10 @@ public class SouthPanel extends JPanel {
     static int playButton=0;
     static JButton playMusic;
     static JProgressBar musicSlider;
-    JButton nextMusic;
-    JButton previousMusic;
-    JButton shuffle;
-    JButton repeatMusic;
+    private JButton nextMusic;
+    private JButton previousMusic;
+    private JButton shuffle;
+    private JButton repeatMusic;
     static String artistString=null;
     static String songNameString=null;
     static String albumNameString=null;
@@ -47,6 +47,16 @@ public class SouthPanel extends JPanel {
     static JPanel p1;
     static JLabel l1;
     static JLabel l2;
+    private JPanel playerButtons;
+    private JPanel soundManager;
+    private JPanel buttons;
+    private JPanel sound;
+    private JPanel songNamePanel;
+    private JButton music;
+    private JButton devices;
+    private JButton queue;
+    private JSlider volumeSlider;
+
     public SouthPanel(){
 
         super();
@@ -55,9 +65,9 @@ public class SouthPanel extends JPanel {
         setOpaque(true);
         setBackground(Color.gray);
 
-        JPanel playerButtons=new JPanel();
-        JPanel soundManager=new JPanel();
-        JPanel buttons=new JPanel();
+        playerButtons=new JPanel();
+        soundManager=new JPanel();
+        buttons=new JPanel();
         musicImage=new JPanel();
 
         playerButtons.setLayout(new BorderLayout());
@@ -170,14 +180,14 @@ public class SouthPanel extends JPanel {
         playerButtons.add(p1,BorderLayout.SOUTH);
 
         soundManager.setLayout(new BorderLayout());
-        JPanel sound=new JPanel();
+        sound=new JPanel();
         sound.setOpaque(true);
         sound.setBackground(Color.gray);
         soundManager.setOpaque(true);
         soundManager.setBackground(Color.gray);
-        JButton music=new JButton();
-        JButton devices=new JButton();
-        JButton queue=new JButton();
+        music=new JButton();
+        devices=new JButton();
+        queue=new JButton();
         try {
             img = ImageIO.read(getClass().getResource("Icons\\sound.png")).getScaledInstance(20,20,Image.SCALE_SMOOTH);
         } catch (IOException e) {
@@ -206,7 +216,7 @@ public class SouthPanel extends JPanel {
         queue.setBorderPainted(false);
         queue.setFocusPainted(false);
         queue.setContentAreaFilled(false);
-        JSlider volumeSlider=new JSlider(JSlider.HORIZONTAL,0,100,0);
+        volumeSlider=new JSlider(JSlider.HORIZONTAL,0,100,0);
         volumeSlider.setOpaque(true);
         volumeSlider.setBackground(Color.gray);
         Audio.setMasterOutputMute(false);
@@ -244,7 +254,7 @@ public class SouthPanel extends JPanel {
         musicButton.setContentAreaFilled(false);
         musicButton.setBorderPainted(false);
         musicButton.setFocusPainted(false);
-        JPanel songNamePanel=new JPanel(new BorderLayout());
+        songNamePanel=new JPanel(new BorderLayout());
         songNamePanel.setOpaque(true);
         songNamePanel.setBackground(Color.gray);
         songNamePanel.setLayout(new BorderLayout());

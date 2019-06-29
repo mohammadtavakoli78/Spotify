@@ -36,10 +36,10 @@ public class WestPanel extends JPanel {
     static int counter = 0;
     static Thread t1;
     static Player player;
-    AllSongsAdresses  allSongsAdresses = null;
-    File newSong = null;
+    private AllSongsAdresses  allSongsAdresses = null;
+    private File newSong = null;
     private HashMap<String,JButton> playLists=new HashMap<String,JButton>();
-    AllPlaylist allPlaylist;
+    private AllPlaylist allPlaylist;
 
     public WestPanel() {
         super();
@@ -274,6 +274,7 @@ public class WestPanel extends JPanel {
                         }.start();
                 }
                 else{
+                    RadioConnector.flag=false;
                     RadioConnector.player.close();
                 }
             }

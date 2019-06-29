@@ -15,11 +15,11 @@ public class AllPlaylist implements Serializable
 {
 
     private HashMap <String , ArrayList<String> >  playlists =  null;
-    File file;
-    FileInputStream fileInputStream = null;
-    FileOutputStream fileOutputStream = null;
-    ObjectOutputStream objectOutputStream = null;
-    ObjectInputStream objectInputStream = null;
+    private File file;
+    private FileInputStream fileInputStream = null;
+    private FileOutputStream fileOutputStream = null;
+    private ObjectOutputStream objectOutputStream = null;
+    private ObjectInputStream objectInputStream = null;
 
     /**
      * Constructor for AllPlaylist

@@ -13,19 +13,12 @@ import java.util.ArrayList;
 public class FavoritPlaylist {
 
     private ArrayList<String > favoritePlaylist;
-
-
     private String filename = new String("FavoritePlaylist");
-
-    File file = null;
-
-    FileInputStream fileInputStream = null;
-
-    FileOutputStream fileOutputStream = null;
-
-    ObjectOutputStream objectOutputStream = null;
-
-    ObjectInputStream objectInputStream = null;
+    private File file = null;
+    private FileInputStream fileInputStream = null;
+    private FileOutputStream fileOutputStream = null;
+    private ObjectOutputStream objectOutputStream = null;
+    private ObjectInputStream objectInputStream = null;
 
     /**
      * Constructor for FavoritePlaylist

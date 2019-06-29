@@ -26,10 +26,10 @@ public class ChangePlaylist extends JFrame {
     private ArrayList<String> allSongs;
     private ArrayList<String> selectedSongs;
     private ArrayList<JCheckBox> jCheckBoxes;
-    FileInputStream fileInputStream = null;
-    FileOutputStream fileOutputStream = null;
-    ObjectOutputStream objectOutputStream = null;
-    ObjectInputStream objectInputStream = null;
+    private FileInputStream fileInputStream = null;
+    private FileOutputStream fileOutputStream = null;
+    private ObjectOutputStream objectOutputStream = null;
+    private ObjectInputStream objectInputStream = null;
 
     /**
      * Constructor for ChangePlaylist

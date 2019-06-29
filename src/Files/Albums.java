@@ -57,13 +57,10 @@ public class Albums {
     public HashMap<String, ArrayList<String>> makeAlbums(ArrayList<String> songAdresses) {
 
         Mp3File mp3File = null;
-
         ID3v2 song = null;
-
         HashMap<String, ArrayList<String>> allAlbums = new HashMap<>();
 
         for (String songAdress : songAdresses) {
-
 
             try {
                 mp3File = new Mp3File(songAdress);
@@ -76,46 +73,25 @@ public class Albums {
             }
 
             song = mp3File.getId3v2Tag();
-
             String albumNameOfSong = song.getAlbum();
 
-
-
             if (albumNameOfSong != null) {
-
                 if ( allAlbums.containsKey(albumNameOfSong)) {
-
                     for (String s : allAlbums.keySet()) {
-
-
                         if (s.equals(albumNameOfSong)) {
-
                             allAlbums.get(s).add(songAdress);
                         }
-
-
                     }
                 } else {
-
-
                     allAlbums.put(albumNameOfSong, new ArrayList<>());
-
-
                     for (String s : allAlbums.keySet()) {
                         if (s.equals(albumNameOfSong)) {
                             allAlbums.get(s).add(songAdress);
                         }
-
                     }
-
                 }
-
-
             }
         }
-
         return allAlbums;
-
-
     }
 }
