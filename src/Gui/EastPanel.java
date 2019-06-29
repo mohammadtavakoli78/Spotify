@@ -18,15 +18,19 @@ import java.util.ArrayList;
 public class EastPanel extends JPanel {
     JPanel friendPanel;
     JButton sendButton;
+    JLabel friendLabel;
     public EastPanel(){
         super();
         setLayout(new BorderLayout());
         setOpaque(true);
         setBackground(Color.black);
 
-
+        friendLabel=new JLabel();
         friendPanel=new JPanel();
         sendButton=new JButton();
+
+        friendLabel.setText("         Friends Activity");
+        friendLabel.setFont(new Font("Italic",Font.ITALIC,20));
 
         friendPanel.setOpaque(true);
         friendPanel.setBackground(Color.black);
@@ -165,6 +169,7 @@ public class EastPanel extends JPanel {
             }
         });
 
+        add(friendLabel,BorderLayout.NORTH);
         add(jScrollPane,BorderLayout.CENTER);
         add(sendButton,BorderLayout.SOUTH);
     }
