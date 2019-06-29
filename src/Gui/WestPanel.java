@@ -73,13 +73,14 @@ public class WestPanel extends JPanel {
 
             e.printStackTrace();
         }
-//        Image library = null;
-//        try {
-//            library= ImageIO.read(getClass().getResource("Icons\\library.jpg")).getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-//        } catch (IOException e) {
-//
-//            e.printStackTrace();
-//        }
+
+        Image shared = null;
+        try {
+            shared = ImageIO.read(getClass().getResource("Icons\\share1.png")).getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
 
         JPanel playListPanel = new JPanel();
         JPanel albumPanel = new JPanel();
@@ -90,6 +91,7 @@ public class WestPanel extends JPanel {
         JButton homeButton = new MyButton("HOME                 ", Color.BLACK, "Click to go home", homeimage);
         JButton browseButton = new MyButton("Browse              ", Color.BLACK, "Browse", browse);
         JButton favoritButton = new MyButton("Favorit playlist        ",Color.BLACK,"Favorit",favorite);
+        JButton sharedPlaylist = new MyButton("Shared playlist        ",Color.BLACK,"Shared",shared);
         JButton addLibraryButton = new MyButton("Add to Library          ",Color.BLACK,"Library",null);
         JButton songsButton     = new MyButton("Songs         " , Color.black,"Songs",null);
         JButton albumsButton    = new MyButton("Albums       ",Color.BLACK,"Albums",null);
@@ -169,6 +171,30 @@ public class WestPanel extends JPanel {
             }
         });
 
+        sharedPlaylist.addMouseListener(new MouseListener() {
+            Color color=sharedPlaylist.getForeground();
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                sharedPlaylist.setForeground(Color.green);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                sharedPlaylist.setForeground(color);
+            }
+        });
         favoritButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -183,6 +209,13 @@ public class WestPanel extends JPanel {
                 }
                 Gui.update();
                 Gui.frame.setVisible(true);
+            }
+        });
+
+        sharedPlaylist.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
             }
         });
 
@@ -413,6 +446,8 @@ public class WestPanel extends JPanel {
             playListPanel.add(label, BorderLayout.CENTER);
 
             playListPanel.add(favoritButton);
+
+            playListPanel.add(sharedPlaylist);
 
             allPlaylist=new AllPlaylist();
             ArrayList<String> playlists=allPlaylist.playlistNames();

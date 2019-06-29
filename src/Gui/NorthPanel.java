@@ -17,7 +17,7 @@ import java.io.IOException;
  */
 public class NorthPanel extends JPanel
 {
-    private String name = null;
+    static String name;
     UndoManager undoManager = new UndoManager();
 
   private   JMenu fileMenu ;
