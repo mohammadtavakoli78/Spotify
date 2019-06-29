@@ -1,5 +1,6 @@
 package Gui;
 
+import Client.Client;
 import Files.AllSongsAdresses;
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
@@ -152,7 +153,8 @@ public class EastPanel extends JPanel {
                         Gui.frame.setVisible(true);
                         try {
                             Mp3File mp3File=new Mp3File(selectedSongs.get(0));
-                            ///////////////////////////////////////////////////
+                            Client client=new Client();
+                            client.getClientSender().setMp3Files(mp3File);
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         } catch (UnsupportedTagException e1) {
