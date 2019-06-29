@@ -7,6 +7,8 @@ import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
+import javazoom.jl.decoder.JavaLayerException;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -28,6 +30,9 @@ import java.util.HashMap;
 public class WestPanel extends JPanel {
 
     private JFileChooser jFileChooser = new JFileChooser();
+    private int radioCounter=0;
+    private RadioConnector radioConnector;
+    private Thread t2;
     static int counter = 0;
     static Thread t1;
     static Player player;
@@ -253,7 +258,24 @@ public class WestPanel extends JPanel {
         radioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //////////////////////
+                ++counter;
+                if(counter%2==1){
+                        new Thread(){
+                            @Override
+                            public void run(){
+                                try {
+                                    radioConnector=new RadioConnector();
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                } catch (JavaLayerException e1) {
+                                    e1.printStackTrace();
+                                }
+                            }
+                        }.start();
+                }
+                else{
+                    RadioConnector.player.close();
+                }
             }
         });
 
