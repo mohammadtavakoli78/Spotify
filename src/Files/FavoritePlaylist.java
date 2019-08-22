@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @author Mohammad tavakoli & Amir saadatmand
  *
  */
-public class FavoritPlaylist {
+public class FavoritePlaylist {
 
     private ArrayList<String > favoritePlaylist;
     private String filename = new String("FavoritePlaylist");
@@ -23,7 +23,7 @@ public class FavoritPlaylist {
     /**
      * Constructor for FavoritePlaylist
      */
-    public FavoritPlaylist() throws IOException, ClassNotFoundException {
+    public FavoritePlaylist() throws IOException, ClassNotFoundException {
 
         file = new File("FavoritePlaylist");
 

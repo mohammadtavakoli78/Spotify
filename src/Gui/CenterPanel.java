@@ -2,7 +2,7 @@ package Gui;
 
 import Files.Albums;
 import Files.AllSongsAdresses;
-import Files.FavoritPlaylist;
+import Files.FavoritePlaylist;
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
@@ -35,7 +35,7 @@ public class CenterPanel extends JPanel {
     private HashMap<String,ArrayList<String>> albums;
     static Player player;
     static Thread t1;
-    static JPanel panel;
+    private static JPanel panel;
 
     /**
      *
@@ -79,7 +79,7 @@ public class CenterPanel extends JPanel {
                         Image image = imageIcon.getImage();
                         Image newimg = image.getScaledInstance(280, 280,  java.awt.Image.SCALE_SMOOTH);
                         button.setIcon(new ImageIcon(newimg));
-                        label.setText("            "+id3v2Tag.getTitle());
+                        label.setText("            "+id3v2Tag.getTitle()+id3v2Tag.getLyrics());
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (UnsupportedTagException e) {
@@ -186,7 +186,7 @@ public class CenterPanel extends JPanel {
                         Image image = imageIcon.getImage();
                         Image newimg = image.getScaledInstance(260, 260,  java.awt.Image.SCALE_SMOOTH);
                         button.setIcon(new ImageIcon(newimg));
-                        label.setText("            "+id3v2Tag.getAlbum());
+                        label.setText("            "+id3v2Tag.getAlbum()+id3v2Tag.getLyrics());
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (UnsupportedTagException e) {
@@ -265,8 +265,8 @@ public class CenterPanel extends JPanel {
             File file=new File("FavoritePlaylist");
             setBackground(Color.DARK_GRAY);
             if(file.exists()){
-                FavoritPlaylist favoritPlaylist=new FavoritPlaylist();
-                favourite=favoritPlaylist.getFavoritePlaylist();
+                FavoritePlaylist favoritePlaylist =new FavoritePlaylist();
+                favourite= favoritePlaylist.getFavoritePlaylist();
                 int size=favourite.size();
                 panel=new JPanel();
                 panel.setBackground(Color.DARK_GRAY);
@@ -290,7 +290,7 @@ public class CenterPanel extends JPanel {
                         Image image = imageIcon.getImage();
                         Image newimg = image.getScaledInstance(260, 260,  java.awt.Image.SCALE_SMOOTH);
                         button.setIcon(new ImageIcon(newimg));
-                        label.setText("            "+id3v2Tag.getTitle());
+                        label.setText("            "+id3v2Tag.getTitle()+id3v2Tag.getLyrics());
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (UnsupportedTagException e) {
@@ -380,7 +380,7 @@ public class CenterPanel extends JPanel {
                         Image image = imageIcon.getImage();
                         Image newimg = image.getScaledInstance(260, 260,  java.awt.Image.SCALE_SMOOTH);
                         button.setIcon(new ImageIcon(newimg));
-                        label.setText("            "+id3v2Tag.getTitle());
+                        label.setText("            "+id3v2Tag.getTitle()+id3v2Tag.getLyrics());
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (UnsupportedTagException e) {

@@ -87,16 +87,16 @@ public class ClientHandler implements Runnable {
 
 
 
-//                try {
-//                    mp3File = (MyMp3Files) objectInputStream.readObject();
-//                } catch (ClassNotFoundException e) {
-//                    e.printStackTrace();
-//                }
+                try {
+                    mp3File = (MyMp3Files) objectInputStream.readObject();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
 
-//                for (ClientHandler c : clientHandlers)
-//                {
-//                    c.send(mp3File);
-//                }
+                for (ClientHandler c : clientHandlers)
+                {
+                    c.send(mp3File);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }

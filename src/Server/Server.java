@@ -15,13 +15,13 @@ import java.util.HashMap;
 public class Server implements Serializable {
     private ServerSocket serverSocket;
 
-    ArrayList<Socket> sockets;
+    private ArrayList<Socket> sockets;
 
-    ArrayList<ClientHandler> clientHandlers;
+    private ArrayList<ClientHandler> clientHandlers;
 
-    static final int PORT = 1337;
+    private static final int PORT = 1337;
 
-    File file;
+    private File file;
 
     /**
      *
@@ -98,5 +98,14 @@ public class Server implements Serializable {
 
     }
 
+    public static void main(String[] args) {
+        Server s = null;
+        try {
+           s= new Server();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        s.runServer();
+    }
 
 }

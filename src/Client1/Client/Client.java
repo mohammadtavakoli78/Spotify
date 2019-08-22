@@ -1,13 +1,11 @@
-package Client;
+package Client1.Client;
 
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 
-import java.io.*;
+import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  *  client class is here
@@ -79,7 +77,7 @@ public class Client implements Runnable{
         Thread t = new Thread(c);
         t.start();
         try {
-            Mp3File mp3File = new Mp3File("C:\\Users\\Win 1809 UEFI\\Desktop\\a.mp3");
+            Mp3File mp3File = new Mp3File("C:\\Users\\Win 1809 UEFI\\Downloads\\Music\\b.mp3");
             c.clientSender.setMp3Files(mp3File);
         } catch (IOException e) {
             e.printStackTrace();

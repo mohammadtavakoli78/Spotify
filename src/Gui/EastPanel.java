@@ -17,9 +17,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class EastPanel extends JPanel {
-    JPanel friendPanel;
-    JButton sendButton;
-    JLabel friendLabel;
+    private JPanel friendPanel;
+    private JButton sendButton;
+    private JLabel friendLabel;
     public EastPanel(){
         super();
         setLayout(new BorderLayout());

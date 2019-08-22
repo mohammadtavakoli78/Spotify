@@ -1,11 +1,9 @@
 package Gui;
 
-import Files.FavoritPlaylist;
+import Files.FavoritePlaylist;
 import javazoom.jl.decoder.JavaLayerException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -307,8 +305,8 @@ public class SouthPanel extends JPanel {
                                 }
                             }
                             try {
-                                FavoritPlaylist favoritPlaylist=new FavoritPlaylist();
-                                favoritPlaylist.removeSong(song);
+                                FavoritePlaylist favoritePlaylist =new FavoritePlaylist();
+                                favoritePlaylist.removeSong(song);
                                 Gui.frame.setVisible(true);
                             } catch (ClassNotFoundException e1) {
                                 e1.printStackTrace();
@@ -333,8 +331,8 @@ public class SouthPanel extends JPanel {
                                 }
                             }
                             try {
-                                FavoritPlaylist favoritPlaylist=new FavoritPlaylist();
-                                favoritPlaylist.addsong(song);
+                                FavoritePlaylist favoritePlaylist =new FavoritePlaylist();
+                                favoritePlaylist.addsong(song);
                                 Gui.frame.setVisible(true);
                             } catch (ClassNotFoundException e1) {
                                 e1.printStackTrace();
