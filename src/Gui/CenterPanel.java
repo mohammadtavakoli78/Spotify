@@ -39,6 +39,7 @@ public class CenterPanel extends JPanel {
 
     /**
      *
+     *
      * constructor for CenterPanel class
      */
     public CenterPanel(int choose) throws IOException, ClassNotFoundException {
