@@ -358,6 +358,7 @@ public class Player implements Runnable{
     /**
      * for setting shuffle
      *
+     *
      * @return void
      */
     public void setShuffle(boolean shuffle){
